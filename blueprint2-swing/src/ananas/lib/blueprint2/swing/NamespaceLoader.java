@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JToolBar;
 import javax.swing.JTree;
 
 import ananas.lib.blueprint2.dom.helper.IImplementation;
@@ -95,6 +96,8 @@ public class NamespaceLoader implements INamespaceLoader {
 
 			h.reg("JTextArea", JTextAreaWrapper.class, JTextArea.class);
 			h.reg("JTextField", JTextFieldWrapper.class, JTextField.class);
+
+			h.reg("JToolBar", JToolBarWrapper.class, JToolBar.class);
 
 			h.reg("JTree", JTreeWrapper.class, JTree.class);
 		}
