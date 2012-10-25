@@ -17,6 +17,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
@@ -63,6 +64,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("dividerLocation", BaseAttr.class, Double.class);
 			h.reg("dividerSize", BaseAttr.class, Integer.class);
 			h.reg("editable", BaseAttr.class, Boolean.class);
+			h.reg("floatable", BaseAttr.class, Boolean.class);
 			h.reg("id", BaseAttr.class, String.class);
 			h.reg("label", BaseAttr.class, String.class);
 			h.reg("orientation", BaseAttr.class, String.class);
@@ -100,6 +102,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("JScrollPane", JScrollPaneWrapper.class, JScrollPane.class);
 			h.reg("JSplitPane", JSplitPaneWrapper.class, JSplitPane.class);
 
+			h.reg("JTable", JTableWrapper.class, JTable.class);
 			h.reg("JTextArea", JTextAreaWrapper.class, JTextArea.class);
 			h.reg("JTextField", JTextFieldWrapper.class, JTextField.class);
 

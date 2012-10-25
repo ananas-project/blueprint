@@ -52,8 +52,13 @@ public class MainFrame extends Bp2Ctrl {
 			String cmd = e.getActionCommand();
 			if (cmd == null) {
 				return IResponseChainNode.GOTO_NEXT;
+
 			} else if (cmd.equals(R.command.show_tree_view)) {
 				MainFrame.this.showTreeView();
+
+			} else if (cmd.equals(R.command.show_table_view)) {
+				MainFrame.this.showTableView();
+
 			} else {
 				return IResponseChainNode.GOTO_NEXT;
 			}
@@ -63,6 +68,11 @@ public class MainFrame extends Bp2Ctrl {
 
 	public void show() {
 		this.mFrame.setVisible(true);
+	}
+
+	protected void showTableView() {
+		TableView tv = new TableView();
+		this._addView(tv);
 	}
 
 	protected void showTreeView() {

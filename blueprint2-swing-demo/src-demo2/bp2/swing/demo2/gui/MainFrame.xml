@@ -25,25 +25,36 @@
 				<JMenu label="View">
 					<JMenuItem label="TreeView" command="show_tree_view" />
 					<JMenuItem label="ToolbarView" />
+					<JMenuItem label="TableView" command="show_table_view" />
 				</JMenu>
 				<JMenu label="Help">
 					<JMenuItem label="About" />
 				</JMenu>
 			</JMenuBar>
 
+
 			<JPanel>
 				<awt:BorderLayout />
 
+
+				<position value="north" />
+				<JToolBar>
+					<JButton text="haha" />
+					<JLabel text="haha" />
+				</JToolBar>
+
+
 				<position value="center" />
-				<JScrollPane>
-					<JDesktopPane id="main_client">
-					</JDesktopPane>
-				</JScrollPane>
-				
+
+				<JDesktopPane id="main_client" background="#999999">
+				</JDesktopPane>
+
+
 				<position value="south" />
-				<JPanel background="#159951">
+				<JToolBar floatable="false">
 					<JLabel text="status bar" />
-				</JPanel>
+				</JToolBar>
+
 
 			</JPanel>
 

@@ -1,5 +1,5 @@
 package bp2.swing.demo2.gui;
-// This file is generate by {ananas.lib.blueprint2.tools.ResourceIdGen$ResultSet@26d4f1} tool.
+// This file is generate by {ananas.lib.blueprint2.tools.ResourceIdGen$ResultSet@1386000} tool.
 // Don't modify it !
 class R {
     public static class id {
@@ -10,10 +10,12 @@ class R {
     }
     public static class file {
         public static final String childframe_xml = "resource:///bp2/swing/demo2/gui/ChildFrame.xml";
+        public static final String tableview_xml = "resource:///bp2/swing/demo2/gui/TableView.xml";
         public static final String mainframe_xml = "resource:///bp2/swing/demo2/gui/MainFrame.xml";
         public static final String treeview_xml = "resource:///bp2/swing/demo2/gui/TreeView.xml";
     }
     public static class command {
+        public static final String show_table_view = "show_table_view";
         public static final String show_tree_view = "show_tree_view";
     }
 }
