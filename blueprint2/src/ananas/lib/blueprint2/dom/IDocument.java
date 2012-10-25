@@ -26,4 +26,6 @@ public interface IDocument extends INode {
 
 	IText createText(String data);
 
+	Object findTargetByURI(String uri);
+
 }

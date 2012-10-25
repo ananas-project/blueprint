@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns:bp="xmlns:ananas:blueprint:base" xmlns:awt="xmlns:ananas:blueprint:awt"
+	xmlns:swing="xmlns:ananas:blueprint:swing" xmlns="xmlns:ananas:blueprint:base">
+	<Head>
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.swing.NamespaceLoader" />
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.awt.NamespaceLoader" />
+
+	</Head>
+	<Body>
+
+		<JInternalFrame id="root" xmlns="xmlns:ananas:blueprint:swing"
+			title="untitle" x="10" y="10" height="240" width="320">
+
+
+		</JInternalFrame>
+	</Body>
+</Blueprint>

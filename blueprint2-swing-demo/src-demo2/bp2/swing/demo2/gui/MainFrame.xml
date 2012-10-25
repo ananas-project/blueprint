@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns:bp="xmlns:ananas:blueprint:base" xmlns:awt="xmlns:ananas:blueprint:awt"
+	xmlns:swing="xmlns:ananas:blueprint:swing" xmlns="xmlns:ananas:blueprint:base">
+	<Head>
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.swing.NamespaceLoader" />
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.awt.NamespaceLoader" />
+
+
+	</Head>
+	<Body>
+
+		<awt:responseChain id="resp_chain">
+			<awt:responseChainNode />
+			<awt:responseChainNode />
+			<awt:responseChainNode id="resp_chain_node_3" />
+		</awt:responseChain>
+
+		<JFrame id="root" xmlns="xmlns:ananas:blueprint:swing" title="Demo2_mdi"
+			x="100" y="100" height="480" width="640">
+
+			<JMenuBar actionListener="#resp_chain">
+				<JMenu label="File">
+					<JMenuItem label="Exit" />
+				</JMenu>
+				<JMenu label="View">
+					<JMenuItem label="TreeView" command="show_tree_view" />
+					<JMenuItem label="ToolbarView" />
+				</JMenu>
+				<JMenu label="Help">
+					<JMenuItem label="About" />
+				</JMenu>
+			</JMenuBar>
+
+			<JPanel>
+				<awt:BorderLayout />
+
+				<position value="center" />
+				<JScrollPane>
+					<JDesktopPane id="main_client">
+					</JDesktopPane>
+				</JScrollPane>
+				
+				<position value="south" />
+				<JPanel background="#159951">
+					<JLabel text="status bar" />
+				</JPanel>
+
+			</JPanel>
+
+		</JFrame>
+	</Body>
+</Blueprint>

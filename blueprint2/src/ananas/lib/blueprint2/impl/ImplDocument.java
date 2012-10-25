@@ -1,5 +1,6 @@
 package ananas.lib.blueprint2.impl;
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,7 +91,7 @@ final class ImplDocument implements IDocument {
 				throw new BlueprintException("no class");
 			IAttr attr = (IAttr) this._safe_newInstance(cls.getWrapperClass());
 			attr.bindBlueprintClass(cls);
-					return attr;
+			return attr;
 		} catch (Exception e) {
 			System.err.println("cannot create attribute:");
 			System.err.println("    " + "      uri = " + uri);
@@ -154,6 +155,13 @@ final class ImplDocument implements IDocument {
 	@Override
 	public IText createText(String data) {
 		return new ImplText(data);
+	}
+
+	@Override
+	public Object findTargetByURI(String uri) {
+		URI ref = URI.create(uri);
+		String id = ref.getFragment();
+		return this.findTargetById(id);
 	}
 
 }

@@ -9,6 +9,9 @@ import java.awt.Menu;
 import java.awt.MenuBar;
 import java.awt.MenuItem;
 
+import ananas.lib.blueprint2.awt.util.Awt_position;
+import ananas.lib.blueprint2.awt.util.Awt_responseChain;
+import ananas.lib.blueprint2.awt.util.Awt_responseChainNode;
 import ananas.lib.blueprint2.dom.helper.IImplementation;
 import ananas.lib.blueprint2.dom.helper.INamespace;
 import ananas.lib.blueprint2.dom.helper.INamespaceLoader;
@@ -56,6 +59,10 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("Container", ContainerWrapper.class, Container.class);
 
 			h.reg("position", Awt_positionWrapper.class, Awt_position.class);
+			h.reg("responseChain", Awt_responseChainWrapper.class,
+					Awt_responseChain.class);
+			h.reg("responseChainNode", Awt_responseChainNodeWrapper.class,
+					Awt_responseChainNode.class);
 
 			h.reg("FlowLayout", FlowLayoutWrapper.class, FlowLayout.class);
 			h.reg("GridLayout", GridLayoutWrapper.class, GridLayout.class);

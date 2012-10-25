@@ -3,7 +3,9 @@ package ananas.lib.blueprint2.swing;
 import java.awt.Color;
 
 import javax.swing.JButton;
+import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JMenu;
@@ -55,6 +57,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			// attribute
 
 			h.reg("actionCommand", BaseAttr.class, String.class);
+			h.reg("actionListener", BaseAttr.class, String.class);
 			h.reg("background", BaseAttr.class, Color.class);
 			h.reg("command", BaseAttr.class, String.class);
 			h.reg("dividerLocation", BaseAttr.class, Double.class);
@@ -85,7 +88,10 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("JSeparator", JSeparatorWrapper.class, JSeparator.class);
 
 			h.reg("JButton", JButtonWrapper.class, JButton.class);
+			h.reg("JDesktopPane", JDesktopPaneWrapper.class, JDesktopPane.class);
 			h.reg("JFrame", JFrameWrapper.class, JFrame.class);
+			h.reg("JInternalFrame", JInternalFrameWrapper.class,
+					JInternalFrame.class);
 			h.reg("JLabel", JLabelWrapper.class, JLabel.class);
 			h.reg("JList", JListWrapper.class, JList.class);
 			h.reg("JPanel", JPanelWrapper.class, JPanel.class);
