@@ -1,8 +1,10 @@
 package ananas.lib.blueprint2.swing;
 
 import javax.swing.AbstractButton;
+import javax.swing.Icon;
 
 import ananas.lib.blueprint2.dom.IAttr;
+import ananas.lib.blueprint2.dom.INode;
 
 public class AbstractButtonWrapper extends JComponentWrapper {
 
@@ -42,4 +44,22 @@ public class AbstractButtonWrapper extends JComponentWrapper {
 			btn.setActionCommand(s);
 		}
 	}
+
+	@Override
+	public boolean appendChild(INode child) {
+
+		if (child == null) {
+			return false;
+
+		} else if (child instanceof IconWrapper) {
+			Icon icon = ((IconWrapper) child).getIcon();
+			AbstractButton btn = (AbstractButton) this.getTarget(true);
+			btn.setIcon(icon);
+			return true;
+
+		} else {
+			return super.appendChild(child);
+		}
+	}
+
 }

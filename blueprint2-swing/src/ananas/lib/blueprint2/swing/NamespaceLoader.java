@@ -2,6 +2,7 @@ package ananas.lib.blueprint2.swing;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
@@ -65,23 +66,26 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("dividerSize", BaseAttr.class, Integer.class);
 			h.reg("editable", BaseAttr.class, Boolean.class);
 			h.reg("floatable", BaseAttr.class, Boolean.class);
+			h.reg("height", BaseAttr.class, Integer.class);
 			h.reg("id", BaseAttr.class, String.class);
 			h.reg("label", BaseAttr.class, String.class);
 			h.reg("orientation", BaseAttr.class, String.class);
 			h.reg("resizeWeight", BaseAttr.class, Double.class);
 			h.reg("title", BaseAttr.class, String.class);
+			h.reg("src", BaseAttr.class, String.class);
 			h.reg("text", BaseAttr.class, String.class);
+			h.reg("value", BaseAttr.class, String.class);
+			h.reg("width", BaseAttr.class, Integer.class);
 			h.reg("x", BaseAttr.class, Integer.class);
 			h.reg("y", BaseAttr.class, Integer.class);
-			h.reg("width", BaseAttr.class, Integer.class);
-			h.reg("height", BaseAttr.class, Integer.class);
-			h.reg("value", BaseAttr.class, String.class);
 
 		}
 		{
 			// element
 
 			h.reg("position", Swing_positionWrapper.class, Swing_position.class);
+
+			h.reg("ImageIcon", ImageIconWrapper.class, ImageIcon.class);
 
 			h.reg("JMenu", JMenuWrapper.class, JMenu.class);
 			h.reg("JMenuBar", JMenuBarWrapper.class, JMenuBar.class);

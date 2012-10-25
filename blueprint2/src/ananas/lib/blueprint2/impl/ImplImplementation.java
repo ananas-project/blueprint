@@ -1,6 +1,7 @@
 package ananas.lib.blueprint2.impl;
 
 import ananas.lib.blueprint2.dom.IDocument;
+import ananas.lib.blueprint2.dom.helper.IBlueprintContext;
 import ananas.lib.blueprint2.dom.helper.IClass;
 import ananas.lib.blueprint2.dom.helper.IClassRegistrar;
 import ananas.lib.blueprint2.dom.helper.IImplementation;
@@ -11,10 +12,12 @@ final class ImplImplementation implements IImplementation {
 
 	private final INamespaceRegistrar mNsReg;
 	private final IClassRegistrar mClassReg;
+	private final IBlueprintContext mBpContext;
 
-	public ImplImplementation() {
+	public ImplImplementation(IBlueprintContext context) {
 		this.mNsReg = new ImplNamespaceRegistrar(this);
 		this.mClassReg = new ImplClassRegistrar();
+		this.mBpContext = context;
 
 		// init load
 		String classpath = "ananas.lib.blueprint2.element.base.NamespaceLoader";
@@ -72,6 +75,11 @@ final class ImplImplementation implements IImplementation {
 	@Override
 	public void setDefaultClass(IClass defaultClass) {
 		this.mClassReg.setDefaultClass(defaultClass);
+	}
+
+	@Override
+	public IBlueprintContext getBlueprintContext() {
+		return this.mBpContext;
 	}
 
 }

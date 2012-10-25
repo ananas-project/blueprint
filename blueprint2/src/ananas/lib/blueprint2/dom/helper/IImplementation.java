@@ -10,4 +10,6 @@ public interface IImplementation extends IClassRegistrar {
 
 	INamespace newNamespace(String nsURI, String defaultPrefix);
 
+	IBlueprintContext getBlueprintContext();
+
 }

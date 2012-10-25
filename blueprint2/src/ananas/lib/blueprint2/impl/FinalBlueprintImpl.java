@@ -30,7 +30,8 @@ public class FinalBlueprintImpl extends Blueprint2 {
 	}
 
 	@Override
-	public IDocument loadDocument(InputStream is, String docURI) throws IOException {
+	public IDocument loadDocument(InputStream is, String docURI)
+			throws IOException {
 		IDocumentBuilder builder = this._getBuilder();
 		return builder.build(is, docURI);
 	}
@@ -50,7 +51,7 @@ public class FinalBlueprintImpl extends Blueprint2 {
 	@Override
 	public IImplementation getImplementation() {
 		if (this.mImpl == null) {
-			this.mImpl = new ImplImplementation();
+			this.mImpl = new ImplImplementation(this);
 		}
 		return this.mImpl;
 	}

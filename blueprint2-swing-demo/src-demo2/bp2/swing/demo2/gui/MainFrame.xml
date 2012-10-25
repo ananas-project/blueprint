@@ -24,7 +24,6 @@
 				</JMenu>
 				<JMenu label="View">
 					<JMenuItem label="TreeView" command="show_tree_view" />
-					<JMenuItem label="ToolbarView" />
 					<JMenuItem label="TableView" command="show_table_view" />
 				</JMenu>
 				<JMenu label="Help">
@@ -38,7 +37,7 @@
 
 
 				<position value="north" />
-				<JToolBar>
+				<JToolBar floatable="false">
 					<JButton text="haha" />
 					<JLabel text="haha" />
 				</JToolBar>
