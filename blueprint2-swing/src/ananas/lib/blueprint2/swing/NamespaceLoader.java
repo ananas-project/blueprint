@@ -2,6 +2,7 @@ package ananas.lib.blueprint2.swing;
 
 import java.awt.Color;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDesktopPane;
@@ -23,6 +24,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToolBar;
 import javax.swing.JTree;
+import javax.swing.border.Border;
 
 import ananas.lib.blueprint2.dom.helper.IImplementation;
 import ananas.lib.blueprint2.dom.helper.INamespace;
@@ -85,6 +87,9 @@ public class NamespaceLoader implements INamespaceLoader {
 
 			h.reg("position", Swing_positionWrapper.class, Swing_position.class);
 
+			h.reg("Border", BorderWrapper.class, Border.class);
+			h.reg("BorderFactory", BorderFactoryWrapper.class,
+					BorderFactory.class);
 			h.reg("ImageIcon", ImageIconWrapper.class, ImageIcon.class);
 
 			h.reg("JMenu", JMenuWrapper.class, JMenu.class);

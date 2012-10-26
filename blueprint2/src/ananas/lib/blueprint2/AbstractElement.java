@@ -7,6 +7,7 @@ import ananas.lib.blueprint2.dom.IDocument;
 import ananas.lib.blueprint2.dom.IElement;
 import ananas.lib.blueprint2.dom.INode;
 import ananas.lib.blueprint2.dom.helper.IClass;
+import ananas.lib.blueprint2.dom.helper.IInvokeable;
 
 public class AbstractElement extends AbstractNode implements IElement {
 
@@ -106,6 +107,9 @@ public class AbstractElement extends AbstractNode implements IElement {
 		this.mIsTagEnd = true;
 	}
 
+	protected void onInvokeReturn(Object ret) {
+	}
+
 	@Override
 	public IElement getParent() {
 		return this.mParent;
@@ -126,8 +130,16 @@ public class AbstractElement extends AbstractNode implements IElement {
 
 	@Override
 	public boolean appendChild(INode child) {
-		// TODO Auto-generated method stub
-		return false;
+		if (child == null) {
+			return false;
+		} else if (child instanceof IInvokeable) {
+			IInvokeable iv = (IInvokeable) child;
+			Object rlt = iv.play((IElement) this);
+			this.onInvokeReturn(rlt);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	@Override

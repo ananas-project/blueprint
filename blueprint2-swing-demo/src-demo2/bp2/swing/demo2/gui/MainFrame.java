@@ -25,6 +25,8 @@ public class MainFrame extends Bp2Ctrl {
 
 		this.mMainClient = (JDesktopPane) doc.findTargetById(R.id.main_client);
 
+		this.showWidgetsView();
+
 	}
 
 	private final IResponseChainNode mRespChainHook = new IResponseChainNode() {
@@ -59,15 +61,25 @@ public class MainFrame extends Bp2Ctrl {
 			} else if (cmd.equals(R.command.show_table_view)) {
 				MainFrame.this.showTableView();
 
+			} else if (cmd.equals(R.command.show_widgets_view)) {
+				MainFrame.this.showWidgetsView();
+
 			} else {
 				return IResponseChainNode.GOTO_NEXT;
 			}
 			return IResponseChainNode.DONE;
 		}
 	};
+	private int mIFrameY;
+	private int mIFrameX;
 
 	public void show() {
 		this.mFrame.setVisible(true);
+	}
+
+	protected void showWidgetsView() {
+		IView tv = new WidgetsView();
+		this._addView(tv);
 	}
 
 	protected void showTableView() {
@@ -91,6 +103,13 @@ public class MainFrame extends Bp2Ctrl {
 		iframe.setClosable(true);
 		iframe.setMaximizable(true);
 		iframe.setIconifiable(true);
+
+		int w, h, x, y;
+		x = ((this.mIFrameX++) % 10) * 24;
+		y = ((this.mIFrameY++) % 10) * 24;
+		w = 480;
+		h = 320;
+		iframe.setBounds(x, y, w, h);
 	}
 
 }

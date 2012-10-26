@@ -35,6 +35,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			// h.reg("xmlns", BaseAttr.class, URI.class);
 
 			h.reg("id", BaseAttr.class, String.class);
+			h.reg("method", BaseAttr.class, String.class);
 			h.reg("type", BaseAttr.class, String.class);
 			h.reg("value", BaseAttr.class, String.class);
 
@@ -42,10 +43,12 @@ public class NamespaceLoader implements INamespaceLoader {
 		{
 			// element
 			h.reg("Blueprint", BpBlueprintElement.class, BpBlueprint.class);
-			h.reg("Import", BpImportElement.class, BpImport.class);
-			h.reg("Link", BpLinkElement.class, BpLink.class);
-			h.reg("Head", BpHeadElement.class, BpHead.class);
 			h.reg("Body", BpBodyElement.class, BpBody.class);
+			h.reg("Head", BpHeadElement.class, BpHead.class);
+			h.reg("Import", BpImportElement.class, BpImport.class);
+			h.reg("Invoke", BpInvokeElement.class, BpInvoke.class);
+			h.reg("Link", BpLinkElement.class, BpLink.class);
+			h.reg("Parameter", BpParameterElement.class, BpParameter.class);
 		}
 		return ns;
 	}

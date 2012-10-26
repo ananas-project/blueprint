@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns:bp="xmlns:ananas:blueprint:base" xmlns:awt="xmlns:ananas:blueprint:awt"
+	xmlns:swing="xmlns:ananas:blueprint:swing" xmlns="xmlns:ananas:blueprint:base">
+	<Head>
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.swing.NamespaceLoader" />
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.awt.NamespaceLoader" />
+
+
+	</Head>
+	<bp:Body xmlns="xmlns:ananas:blueprint:swing">
+
+		<JPanel id="root">
+
+			<JPanel id="root">
+
+				<!-- ane.setBorder( BorderFactory.createCompoundBorder( BorderFactory.createTitledBorder("Text 
+					Fields"), BorderFactory.createEmptyBorder(5,5,5,5))); -->
+
+				<BorderFactory>
+					<bp:Invoke method="createCompoundBorder">
+						<bp:Parameter type="javax.swing.border.Border">
+							<BorderFactory>
+								<bp:Invoke method="createTitledBorder">
+									<bp:Parameter type="string"> this is a title </bp:Parameter>
+								</bp:Invoke>
+							</BorderFactory>
+						</bp:Parameter>
+						<bp:Parameter type="javax.swing.border.Border">
+							<BorderFactory>
+								<bp:Invoke method="createEmptyBorder">
+									<bp:Parameter type="int">20</bp:Parameter>
+									<bp:Parameter type="int">20</bp:Parameter>
+									<bp:Parameter type="int">20</bp:Parameter>
+									<bp:Parameter type="int">20</bp:Parameter>
+								</bp:Invoke>
+							</BorderFactory>
+						</bp:Parameter>
+					</bp:Invoke>
+				</BorderFactory>
+
+
+
+
+				<awt:BorderLayout />
+
+				<JButton text="hello" />
+
+			</JPanel>
+
+		</JPanel>
+
+	</bp:Body>
+</Blueprint>
