@@ -8,7 +8,7 @@ import ananas.lib.blueprint2.dom.INode;
 public class MenuWrapper extends MenuItemWrapper {
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child instanceof MenuItemWrapper) {
 			MenuItem item = (MenuItem) ((MenuItemWrapper) child)
@@ -17,7 +17,7 @@ public class MenuWrapper extends MenuItemWrapper {
 			menu.add(item);
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 		return true;
 	}

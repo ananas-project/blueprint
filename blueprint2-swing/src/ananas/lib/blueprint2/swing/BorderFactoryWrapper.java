@@ -1,5 +1,6 @@
 package ananas.lib.blueprint2.swing;
 
+import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 import ananas.lib.blueprint2.awt.ObjectWrapper;
@@ -18,14 +19,17 @@ public class BorderFactoryWrapper extends ObjectWrapper implements
 		return this.mBorder;
 	}
 
-	@Override
-	protected void onInvokeReturn(Object ret) {
+	public void createTitledBorder(String title) {
+		this.mBorder = BorderFactory.createTitledBorder(title);
+	}
 
-		super.onInvokeReturn(ret);
+	public void createEmptyBorder(int top, int left, int bottom, int right) {
+		this.mBorder = BorderFactory
+				.createEmptyBorder(top, left, bottom, right);
+	}
 
-		if (ret instanceof Border)
-			this.mBorder = (Border) ret;
-
+	public void createCompoundBorder(Border b1, Border b2) {
+		this.mBorder = BorderFactory.createCompoundBorder(b1, b2);
 	}
 
 }

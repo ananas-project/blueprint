@@ -9,7 +9,7 @@ import ananas.lib.blueprint2.dom.INode;
 public class JFrameWrapper extends FrameWrapper {
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -21,7 +21,7 @@ public class JFrameWrapper extends FrameWrapper {
 			frame.setJMenuBar(menubar);
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 
 		}
 		return true;

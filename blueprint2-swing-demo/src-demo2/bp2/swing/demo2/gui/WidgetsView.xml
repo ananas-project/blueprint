@@ -17,21 +17,22 @@
 					Fields"), BorderFactory.createEmptyBorder(5,5,5,5))); -->
 
 				<BorderFactory>
-					<bp:Invoke method="createCompoundBorder">
+					<bp:Invoke object="element" class="null" method="createCompoundBorder">
 						<bp:Parameter type="javax.swing.border.Border">
 							<BorderFactory>
-								<bp:Invoke method="createTitledBorder">
+								<bp:Invoke object="element" class="null" method="createTitledBorder">
 									<bp:Parameter type="string"> this is a title </bp:Parameter>
 								</bp:Invoke>
 							</BorderFactory>
 						</bp:Parameter>
-						<bp:Parameter type="javax.swing.border.Border">
+						<bp:Parameter type="javax.swing.border.Border"
+							object="target">
 							<BorderFactory>
-								<bp:Invoke method="createEmptyBorder">
-									<bp:Parameter type="int">20</bp:Parameter>
-									<bp:Parameter type="int">20</bp:Parameter>
-									<bp:Parameter type="int">20</bp:Parameter>
-									<bp:Parameter type="int">20</bp:Parameter>
+								<bp:Invoke object="element" class="null" method="createEmptyBorder">
+									<bp:Parameter type="int">10</bp:Parameter>
+									<bp:Parameter type="int">10</bp:Parameter>
+									<bp:Parameter type="int">10</bp:Parameter>
+									<bp:Parameter type="int">10</bp:Parameter>
 								</bp:Invoke>
 							</BorderFactory>
 						</bp:Parameter>

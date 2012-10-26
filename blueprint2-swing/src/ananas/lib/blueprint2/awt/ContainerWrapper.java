@@ -12,7 +12,7 @@ public class ContainerWrapper extends ComponentWrapper {
 	private String mCurrentPosition;
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -33,7 +33,7 @@ public class ContainerWrapper extends ComponentWrapper {
 			cont.setLayout(layout);
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 		return true;
 	}

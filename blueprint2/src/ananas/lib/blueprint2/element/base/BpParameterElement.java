@@ -7,37 +7,51 @@ import ananas.lib.blueprint2.dom.IText;
 
 public class BpParameterElement extends BaseElement {
 
-	private IAttr m_attr_type;
 	private INode m_value;
+	private String m_attr_type;
+	private String m_attr_object;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
 		String name = attr.getBlueprintClass().getLocalName();
 		if (name == null) {
 			return false;
-		} else if (name.equals("type")) {
-			this.m_attr_type = attr;
+
+		} else if (name.equals("object")) {
+			this.m_attr_object = attr.getValue();
 			return true;
+
+		} else if (name.equals("class")) {
+			this.m_attr_type = attr.getValue();
+			return true;
+		} else if (name.equals("type")) {
+			this.m_attr_type = attr.getValue();
+			return true;
+
 		} else {
 			return super.setAttribute(attr);
 		}
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 		this.m_value = child;
 		return true;
 	}
 
 	public Class<?> getParameterClass() {
+		return this._getParameterClass();
+	}
+
+	private Class<?> _getParameterClass() {
 
 		try {
-			IAttr attrType = this.m_attr_type;
-			if (attrType == null) {
+			String type = this.m_attr_type;
+			if (type == null) {
 				return String.class;
 			}
 
-			String classpath = attrType.getValue();
+			String classpath = type;
 			if (classpath.contains(".")) {
 				return Class.forName(classpath);
 
@@ -68,6 +82,12 @@ public class BpParameterElement extends BaseElement {
 	}
 
 	public Object getParameterObject() {
+
+		return this._getParameterObject();
+
+	}
+
+	private Object _getParameterObject() {
 		INode value = this.m_value;
 		if (value == null) {
 			return null;
@@ -77,43 +97,46 @@ public class BpParameterElement extends BaseElement {
 
 		} else if (value instanceof IElement) {
 			IElement element = (IElement) value;
-			return element.getTarget(true);
-
+			if ("element".equals(this.m_attr_object)) {
+				return element;
+			} else {
+				return element.getTarget(true);
+			}
 		} else {
 			return null;
 		}
 	}
 
 	private Object _textToObject(IText value) {
-		IAttr attrType = this.m_attr_type;
+
 		String str = value.getData();
-		if (attrType != null) {
-			String type = attrType.getValue();
-			if (type == null) {
 
-			} else if (type.equals("int")) {
-				return Integer.parseInt(str);
+		String type = this.m_attr_type;
+		if (type == null) {
+			// default
 
-			} else if (type.equals("long")) {
-				return Long.parseLong(str);
+		} else if (type.equals("int")) {
+			return Integer.parseInt(str);
 
-			} else if (type.equals("short")) {
-				return Short.parseShort(str);
+		} else if (type.equals("long")) {
+			return Long.parseLong(str);
 
-			} else if (type.equals("byte")) {
-				return Byte.parseByte(str);
+		} else if (type.equals("short")) {
+			return Short.parseShort(str);
 
-			} else if (type.equals("char")) {
-				return ((char) str.indexOf(0));
+		} else if (type.equals("byte")) {
+			return Byte.parseByte(str);
 
-			} else if (type.equals("double")) {
-				return Double.parseDouble(str);
+		} else if (type.equals("char")) {
+			return ((char) str.indexOf(0));
 
-			} else if (type.equals("float")) {
-				return Float.parseFloat(str);
+		} else if (type.equals("double")) {
+			return Double.parseDouble(str);
 
-			} else {
-			}
+		} else if (type.equals("float")) {
+			return Float.parseFloat(str);
+
+		} else {
 		}
 		return str;
 	}

@@ -34,8 +34,10 @@ public class NamespaceLoader implements INamespaceLoader {
 			// attribute
 			// h.reg("xmlns", BaseAttr.class, URI.class);
 
+			h.reg("class", BaseAttr.class, Class.class);
 			h.reg("id", BaseAttr.class, String.class);
 			h.reg("method", BaseAttr.class, String.class);
+			h.reg("object", BaseAttr.class, String.class);
 			h.reg("type", BaseAttr.class, String.class);
 			h.reg("value", BaseAttr.class, String.class);
 

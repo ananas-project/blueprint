@@ -34,7 +34,7 @@ public class FrameWrapper extends WindowWrapper {
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child instanceof MenuBarWrapper) {
 			MenuBar menubar = (MenuBar) ((MenuBarWrapper) child)
@@ -43,7 +43,7 @@ public class FrameWrapper extends WindowWrapper {
 			frame.setMenuBar(menubar);
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 		return true;
 	}

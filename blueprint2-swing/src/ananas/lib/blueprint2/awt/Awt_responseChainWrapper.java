@@ -7,7 +7,7 @@ import ananas.lib.blueprint2.dom.INode;
 public class Awt_responseChainWrapper extends ObjectWrapper {
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -17,7 +17,7 @@ public class Awt_responseChainWrapper extends ObjectWrapper {
 			return true;
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 

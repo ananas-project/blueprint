@@ -18,7 +18,7 @@ public class JSplitPaneWrapper extends JComponentWrapper {
 	private IAttr mDividerSize;
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -32,7 +32,7 @@ public class JSplitPaneWrapper extends JComponentWrapper {
 			this.mCurrentPosition = pos.getValue();
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 		return true;
 	}

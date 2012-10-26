@@ -9,7 +9,7 @@ import ananas.lib.blueprint2.dom.INode;
 
 public class JScrollPaneWrapper extends JComponentWrapper {
 
-	public boolean appendChild(INode ch) {
+	public boolean onAppendChild(INode ch) {
 		if (ch == null) {
 			return false;
 		} else if (ch instanceof ComponentWrapper) {
@@ -18,7 +18,7 @@ public class JScrollPaneWrapper extends JComponentWrapper {
 			JScrollPane sp = this.getJScrollPane(true);
 			sp.setViewportView(comp);
 		} else {
-			return super.appendChild(ch);
+			return super.onAppendChild(ch);
 		}
 		return true;
 	}

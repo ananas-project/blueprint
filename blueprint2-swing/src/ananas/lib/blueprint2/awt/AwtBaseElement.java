@@ -10,8 +10,8 @@ import ananas.lib.blueprint2.dom.INode;
 public class AwtBaseElement extends AbstractElement {
 
 	@Override
-	public boolean appendChild(INode child) {
-		return super.appendChild(child);
+	public boolean onAppendChild(INode child) {
+		return super.onAppendChild(child);
 	}
 
 	private String _strFromAttr(IAttr attr) {

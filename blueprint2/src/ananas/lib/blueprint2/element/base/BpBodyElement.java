@@ -10,7 +10,7 @@ public class BpBodyElement extends BaseElement {
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -28,7 +28,7 @@ public class BpBodyElement extends BaseElement {
 			return true;
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 }

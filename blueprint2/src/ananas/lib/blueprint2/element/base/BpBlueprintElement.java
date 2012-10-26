@@ -6,7 +6,7 @@ import ananas.lib.blueprint2.dom.IText;
 public class BpBlueprintElement extends BaseElement {
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -24,7 +24,7 @@ public class BpBlueprintElement extends BaseElement {
 			bp.setHead(head);
 
 		} else {
-			return false;
+			return super.onAppendChild(child);
 		}
 		return true;
 	}

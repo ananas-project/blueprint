@@ -6,8 +6,8 @@ import ananas.lib.blueprint2.dom.INode;
 public class BaseElement extends AbstractElement {
 
 	@Override
-	public boolean appendChild(INode child) {
-		return super.appendChild(child);
+	public boolean onAppendChild(INode child) {
+		return super.onAppendChild(child);
 	}
 
 }

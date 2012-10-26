@@ -28,12 +28,12 @@ public class JTextComponentWrapper extends JComponentWrapper {
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 		if (child instanceof IText) {
 			this.appendText((IText) child);
 			return true;
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 

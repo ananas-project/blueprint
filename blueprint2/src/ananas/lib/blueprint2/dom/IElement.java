@@ -26,6 +26,8 @@ public interface IElement extends INode {
 
 	boolean appendChild(INode child);
 
+	boolean removeChild(INode child);
+
 	void tagBegin();
 
 	void tagEnd();

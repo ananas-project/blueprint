@@ -46,7 +46,7 @@ public class AbstractButtonWrapper extends JComponentWrapper {
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 
 		if (child == null) {
 			return false;
@@ -58,7 +58,7 @@ public class AbstractButtonWrapper extends JComponentWrapper {
 			return true;
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 

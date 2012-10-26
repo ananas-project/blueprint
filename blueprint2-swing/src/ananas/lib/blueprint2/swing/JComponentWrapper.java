@@ -36,7 +36,7 @@ public class JComponentWrapper extends ContainerWrapper {
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 		if (child == null) {
 			return false;
 
@@ -45,7 +45,7 @@ public class JComponentWrapper extends ContainerWrapper {
 			return true;
 
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 

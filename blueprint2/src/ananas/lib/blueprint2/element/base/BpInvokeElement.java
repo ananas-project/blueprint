@@ -12,7 +12,9 @@ import ananas.lib.blueprint2.dom.helper.IInvokeable;
 public class BpInvokeElement extends BaseElement implements IInvokeable {
 
 	private final List<BpParameterElement> mParamList;
-	private IAttr m_attr_method;
+	private String m_attr_method;// [method-name]
+	private String m_attr_class;// [class-name|"null"|"default"]
+	private String m_attr_object;// ["element"|"target"|"null"|"default"]
 
 	public BpInvokeElement() {
 		this.mParamList = new ArrayList<BpParameterElement>();
@@ -23,41 +25,90 @@ public class BpInvokeElement extends BaseElement implements IInvokeable {
 		String name = attr.getBlueprintClass().getLocalName();
 		if (name == null) {
 			return false;
-		} else if (name.equals("method")) {
-			this.m_attr_method = attr;
+
+		} else if (name.equals("object")) {
+			this.m_attr_object = attr.getValue();
 			return true;
+		} else if (name.equals("class")) {
+			this.m_attr_class = attr.getValue();
+			return true;
+		} else if (name.equals("type")) {
+			this.m_attr_class = attr.getValue();
+			return true;
+		} else if (name.equals("method")) {
+			this.m_attr_method = attr.getValue();
+			return true;
+
 		} else {
 			return super.setAttribute(attr);
 		}
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 		if (child instanceof BpParameterElement) {
 			BpParameterElement param = (BpParameterElement) child;
 			this.mParamList.add(param);
 			return true;
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 	}
 
 	@Override
 	public Object play(IElement element) {
 		try {
-			String methodName = this.m_attr_method.getValue();
-			Class<?> targetClass = element.getBlueprintClass().getTargetClass();
+			String methodName = this._getMethodName();
+			Class<?> aClass = this._getClass(element);
+			Object obj = this._getObject(element);
 
 			Class<?>[] argsClass = this._getArgsClass();
 			Object[] argsObject = this._getArgsObject();
 
-			Method method = this._getMethod(targetClass, methodName, argsClass);
-			Object obj = element.getTarget(true);
+			Method method = this._getMethod(aClass, methodName, argsClass);
 			return this._invoke(method, obj, argsObject);
 
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	private Object _getObject(IElement parent) {
+		String attr = this.m_attr_object;
+		if (attr == null) {
+			// default
+		} else if (attr.equals("element")) {
+			return parent;
+		} else if (attr.equals("target")) {
+			return parent.getTarget(true);
+		} else if (attr.equals("null")) {
+			return null;
+		} else if (attr.equals("default")) {
+			// default
+		} else {
+			// default
+		}
+		return parent.getTarget(true);
+	}
+
+	private Class<?> _getClass(IElement parent) {
+		String attr = this.m_attr_class;
+		if (attr == null) {
+			// default
+		} else if (attr.contains(".")) {
+			try {
+				return Class.forName(attr);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		// default
+		Object obj = this._getObject(parent);
+		return obj.getClass();
+	}
+
+	private String _getMethodName() {
+		return this.m_attr_method;
 	}
 
 	private Object _invoke(Method method, Object obj, Object[] arg) {
@@ -139,6 +190,16 @@ public class BpInvokeElement extends BaseElement implements IInvokeable {
 			v.add(cls);
 		}
 		return v.toArray(new Class<?>[v.size()]);
+	}
+
+	@Override
+	protected void onParentChanged(IElement oldParent, IElement newParent) {
+
+		super.onParentChanged(oldParent, newParent);
+
+		if (newParent != null) {
+			this.play(newParent);
+		}
 	}
 
 }

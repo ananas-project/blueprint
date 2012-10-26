@@ -107,9 +107,6 @@ public class AbstractElement extends AbstractNode implements IElement {
 		this.mIsTagEnd = true;
 	}
 
-	protected void onInvokeReturn(Object ret) {
-	}
-
 	@Override
 	public IElement getParent() {
 		return this.mParent;
@@ -121,21 +118,55 @@ public class AbstractElement extends AbstractNode implements IElement {
 		return null;
 	}
 
-	@Override
-	public final IElement setParent(IElement parent) {
-		IElement old = this.mParent;
-		this.mParent = parent;
-		return old;
+	private final IElement _setParent(IElement newParent) {
+		IElement oldParent;
+		synchronized (this) {
+			oldParent = this.mParent;
+			this.mParent = newParent;
+		}
+		if (newParent == oldParent) {
+			return oldParent;
+		}
+		if (oldParent != null) {
+			oldParent.removeChild(this);
+		}
+		if (newParent != null) {
+			newParent.appendChild(this);
+		}
+		this.onParentChanged(oldParent, newParent);
+		return oldParent;
 	}
 
 	@Override
-	public boolean appendChild(INode child) {
+	public final IElement setParent(IElement newParent) {
+		return this._setParent(newParent);
+	}
+
+	protected void onParentChanged(IElement oldParent, IElement newParent) {
+	}
+
+	@Override
+	public final boolean appendChild(INode child) {
+		if (child instanceof IElement) {
+			IElement che = (IElement) child;
+			IElement old = che.getParent();
+			if (old == this) {
+				return false;
+			}
+			boolean rlt = this.onAppendChild(child);
+			if (rlt) {
+				che.setParent(this);
+			}
+			return rlt;
+		} else {
+			return this.onAppendChild(child);
+		}
+	}
+
+	protected boolean onAppendChild(INode child) {
 		if (child == null) {
 			return false;
 		} else if (child instanceof IInvokeable) {
-			IInvokeable iv = (IInvokeable) child;
-			Object rlt = iv.play((IElement) this);
-			this.onInvokeReturn(rlt);
 			return true;
 		} else {
 			return false;
@@ -155,6 +186,19 @@ public class AbstractElement extends AbstractNode implements IElement {
 			this.mTarget = t = this.createTarget();
 		}
 		return t;
+	}
+
+	@Override
+	public boolean removeChild(INode child) {
+		if (child instanceof IElement) {
+			IElement che = (IElement) child;
+			IElement old = che.getParent();
+			if (old == this) {
+				che.setParent(null);
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
