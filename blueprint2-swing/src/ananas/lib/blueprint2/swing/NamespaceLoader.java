@@ -5,10 +5,15 @@ import java.awt.Color;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
+import javax.swing.JEditorPane;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -16,14 +21,24 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JPopupMenu;
+import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
+import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.JToggleButton;
 import javax.swing.JToolBar;
+import javax.swing.JToolTip;
 import javax.swing.JTree;
+import javax.swing.JViewport;
 import javax.swing.border.Border;
 
 import ananas.lib.blueprint2.dom.helper.IImplementation;
@@ -96,28 +111,46 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("JMenuBar", JMenuBarWrapper.class, JMenuBar.class);
 			h.reg("JMenuItem", JMenuItemWrapper.class, JMenuItem.class);
 			h.reg("JPopupMenu", JPopupMenuWrapper.class, JPopupMenu.class);
-			h.reg("JSeparator", JSeparatorWrapper.class, JSeparator.class);
 
 			h.reg("JButton", JButtonWrapper.class, JButton.class);
+			h.reg("JCheckBox", JCheckBoxWrapper.class, JCheckBox.class);
+			h.reg("JComboBox", JComboBoxWrapper.class, JComboBox.class);
 			h.reg("JDesktopPane", JDesktopPaneWrapper.class, JDesktopPane.class);
+			h.reg("JEditorPane", JEditorPaneWrapper.class, JEditorPane.class);
+			h.reg("JFormattedTextField", JFormattedTextFieldWrapper.class,
+					JFormattedTextField.class);
 			h.reg("JFrame", JFrameWrapper.class, JFrame.class);
 			h.reg("JInternalFrame", JInternalFrameWrapper.class,
 					JInternalFrame.class);
 			h.reg("JLabel", JLabelWrapper.class, JLabel.class);
+			h.reg("JLayeredPane", JLayeredPaneWrapper.class, JLayeredPane.class);
 			h.reg("JList", JListWrapper.class, JList.class);
 			h.reg("JPanel", JPanelWrapper.class, JPanel.class);
 			h.reg("JPasswordField", JPasswordFieldWrapper.class,
 					JPasswordField.class);
+			h.reg("JProgressBar", JProgressBarWrapper.class, JProgressBar.class);
+			h.reg("JRadioButton", JRadioButtonWrapper.class, JRadioButton.class);
+			h.reg("JScrollBar", JScrollBarWrapper.class, JScrollBar.class);
 			h.reg("JScrollPane", JScrollPaneWrapper.class, JScrollPane.class);
+			h.reg("JSeparator", JSeparatorWrapper.class, JSeparator.class);
+			h.reg("JSlider", JSliderWrapper.class, JSlider.class);
 			h.reg("JSplitPane", JSplitPaneWrapper.class, JSplitPane.class);
+			h.reg("JSpinner", JSpinnerWrapper.class, JSpinner.class);
 
+			h.reg("JTabbedPane", JTabbedPaneWrapper.class, JTabbedPane.class);
 			h.reg("JTable", JTableWrapper.class, JTable.class);
 			h.reg("JTextArea", JTextAreaWrapper.class, JTextArea.class);
 			h.reg("JTextField", JTextFieldWrapper.class, JTextField.class);
+			h.reg("JTextPane", JTextPaneWrapper.class, JTextPane.class);
 
+			h.reg("JToggleButton", JToggleButtonWrapper.class,
+					JToggleButton.class);
 			h.reg("JToolBar", JToolBarWrapper.class, JToolBar.class);
-
+			h.reg("JToolTip", JToolTipWrapper.class, JToolTip.class);
 			h.reg("JTree", JTreeWrapper.class, JTree.class);
+
+			h.reg("JViewport", JViewportWrapper.class, JViewport.class);
+
 		}
 		return ns;
 	}

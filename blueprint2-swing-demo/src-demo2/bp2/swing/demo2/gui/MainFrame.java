@@ -25,7 +25,7 @@ public class MainFrame extends Bp2Ctrl {
 
 		this.mMainClient = (JDesktopPane) doc.findTargetById(R.id.main_client);
 
-		this.showWidgetsView();
+		this.showWidgets2View();
 
 	}
 
@@ -63,6 +63,8 @@ public class MainFrame extends Bp2Ctrl {
 
 			} else if (cmd.equals(R.command.show_widgets_view)) {
 				MainFrame.this.showWidgetsView();
+			} else if (cmd.equals(R.command.show_widgets2_view)) {
+				MainFrame.this.showWidgets2View();
 
 			} else {
 				return IResponseChainNode.GOTO_NEXT;
@@ -75,6 +77,11 @@ public class MainFrame extends Bp2Ctrl {
 
 	public void show() {
 		this.mFrame.setVisible(true);
+	}
+
+	protected void showWidgets2View() {
+		IView tv = new WidgetsView2();
+		this._addView(tv);
 	}
 
 	protected void showWidgetsView() {
