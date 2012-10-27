@@ -26,9 +26,10 @@ public class ContainerWrapper extends ComponentWrapper {
 			this.mCurrentPosition = pos.getValue();
 
 		} else if (child instanceof LayoutManagerWrapper) {
+			Container cont = (Container) this.getTarget(true);
 			LayoutManagerWrapper layoutW = (LayoutManagerWrapper) child;
 			this.mLayoutManager = layoutW;
-			Container cont = (Container) this.getTarget(true);
+			layoutW.setContainer(cont);
 			LayoutManager layout = layoutW.getLayoutManager(true);
 			cont.setLayout(layout);
 

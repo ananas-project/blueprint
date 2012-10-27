@@ -3,6 +3,7 @@ package ananas.lib.blueprint2.swing;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -77,6 +78,7 @@ public class NamespaceLoader implements INamespaceLoader {
 
 			h.reg("actionCommand", BaseAttr.class, String.class);
 			h.reg("actionListener", BaseAttr.class, String.class);
+			h.reg("axis", BaseAttr.class, String.class);
 			h.reg("background", BaseAttr.class, Color.class);
 			h.reg("command", BaseAttr.class, String.class);
 			h.reg("dividerLocation", BaseAttr.class, Double.class);
@@ -105,6 +107,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("Border", BorderWrapper.class, Border.class);
 			h.reg("BorderFactory", BorderFactoryWrapper.class,
 					BorderFactory.class);
+			h.reg("BoxLayout", BoxLayoutWrapper.class, BoxLayout.class);
 			h.reg("ImageIcon", ImageIconWrapper.class, ImageIcon.class);
 
 			h.reg("JMenu", JMenuWrapper.class, JMenu.class);

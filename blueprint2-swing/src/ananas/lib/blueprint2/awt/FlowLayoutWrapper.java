@@ -72,4 +72,9 @@ public class FlowLayoutWrapper extends ObjectWrapper implements
 		return ret;
 	}
 
+	@Override
+	public boolean setContainer(Container container) {
+		return false;
+	}
+
 }

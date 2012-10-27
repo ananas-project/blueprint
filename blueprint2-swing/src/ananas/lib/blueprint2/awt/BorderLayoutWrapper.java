@@ -102,4 +102,9 @@ public class BorderLayoutWrapper extends ObjectWrapper implements
 		}
 	}
 
+	@Override
+	public boolean setContainer(Container container) {
+		return false;
+	}
+
 }

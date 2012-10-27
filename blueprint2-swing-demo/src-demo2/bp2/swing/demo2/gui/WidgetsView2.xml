@@ -14,78 +14,79 @@
 			<JPanel id="root">
 				<awt:BorderLayout />
 
-				<JPanel>
+				<JScrollPane>
+					<JPanel>
 
-					<awt:FlowLayout align="LEADING" />
+						<BoxLayout axis="Y_AXIS" />
 
-					<JLabel text="JCheckBox" />
-					<JCheckBox />
+						<JLabel text="JCheckBox" />
+						<JCheckBox />
 
-					<JLabel text="JComboBox" />
-					<JComboBox />
+						<JLabel text="JComboBox" />
+						<JComboBox />
 
-					<JLabel text="JEditorPane" />
-					<JEditorPane />
+						<JLabel text="JEditorPane" />
+						<JEditorPane />
 
-					<JLabel text="JFormattedTextField" />
-					<JFormattedTextField />
+						<JLabel text="JFormattedTextField" />
+						<JFormattedTextField />
 
-					<JLabel text="JLayeredPane" />
-					<JLayeredPane />
+						<JLabel text="JLayeredPane" />
+						<JLayeredPane />
 
-					<JLabel text="JList" />
-					<JList />
+						<JLabel text="JList" />
+						<JList />
 
-					<JLabel text="JPasswordField" />
-					<JPasswordField />
+						<JLabel text="JPasswordField" />
+						<JPasswordField />
 
-					<JLabel text="JProgressBar" />
-					<JProgressBar />
+						<JLabel text="JProgressBar" />
+						<JProgressBar />
 
-					<JLabel text="JRadioButton" />
-					<JRadioButton />
+						<JLabel text="JRadioButton" />
+						<JRadioButton />
 
-					<JLabel text="JScrollBar" />
-					<JScrollBar />
+						<JLabel text="JScrollBar" />
+						<JScrollBar />
 
-					<JLabel text="JSeparator" />
-					<JSeparator />
+						<JLabel text="JSeparator" />
+						<JSeparator />
 
-					<JLabel text="JSlider" />
-					<JSlider />
+						<JLabel text="JSlider" />
+						<JSlider />
 
-					<JLabel text="JSpinner" />
-					<JSpinner />
+						<JLabel text="JSpinner" />
+						<JSpinner />
 
-					<JLabel text="JTabbedPane" />
-					<JTabbedPane />
+						<JLabel text="JTabbedPane" />
+						<JTabbedPane />
 
-					<JLabel text="JTable" />
-					<JTable />
+						<JLabel text="JTable" />
+						<JTable />
 
-					<JLabel text="JTextArea" />
-					<JTextArea />
+						<JLabel text="JTextArea" />
+						<JTextArea />
 
-					<JLabel text="JTextField" />
-					<JTextField />
+						<JLabel text="JTextField" />
+						<JTextField />
 
-					<JLabel text="JTextPane" />
-					<JTextPane />
+						<JLabel text="JTextPane" />
+						<JTextPane />
 
-					<JLabel text="JToggleButton" />
-					<JToggleButton />
+						<JLabel text="JToggleButton" />
+						<JToggleButton />
 
-					<JLabel text="JToolTip" />
-					<JToolTip />
+						<JLabel text="JToolTip" />
+						<JToolTip />
 
-					<JLabel text="JTree" />
-					<JTree />
+						<JLabel text="JTree" />
+						<JTree />
 
-					<JLabel text="JViewport" />
-					<JViewport />
+						<JLabel text="JViewport" />
+						<JViewport />
 
-				</JPanel>
-
+					</JPanel>
+				</JScrollPane>
 			</JPanel>
 
 		</JPanel>

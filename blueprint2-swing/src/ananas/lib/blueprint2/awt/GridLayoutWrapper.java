@@ -51,4 +51,9 @@ public class GridLayoutWrapper extends ObjectWrapper implements
 		container.add(component);
 	}
 
+	@Override
+	public boolean setContainer(Container container) {
+		return false;
+	}
+
 }
