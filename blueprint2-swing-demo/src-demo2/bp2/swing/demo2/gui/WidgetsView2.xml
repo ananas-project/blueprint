@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns:bp="xmlns:ananas:blueprint:base" xmlns:awt="xmlns:ananas:blueprint:awt"
+	xmlns:swing="xmlns:ananas:blueprint:swing" xmlns="xmlns:ananas:blueprint:base">
+	<Head>
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.swing.NamespaceLoader" />
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.awt.NamespaceLoader" />
+
+
+	</Head>
+	<bp:Body xmlns="xmlns:ananas:blueprint:swing">
+
+		<JPanel id="root">
+
+			<JPanel id="root">
+				<awt:BorderLayout />
+
+				<JScrollPane>
+					<JPanel>
+
+						<BoxLayout axis="Y_AXIS" />
+
+						<JLabel text="JCheckBox" />
+						<JCheckBox />
+
+						<JLabel text="JComboBox" />
+						<JComboBox />
+
+						<JLabel text="JEditorPane" />
+						<JEditorPane />
+
+						<JLabel text="JFormattedTextField" />
+						<JFormattedTextField />
+
+						<JLabel text="JLayeredPane" />
+						<JLayeredPane />
+
+						<JLabel text="JList" />
+						<JList />
+
+						<JLabel text="JPasswordField" />
+						<JPasswordField />
+
+						<JLabel text="JProgressBar" />
+						<JProgressBar />
+
+						<JLabel text="JRadioButton" />
+						<JRadioButton />
+
+						<JLabel text="JScrollBar" />
+						<JScrollBar />
+
+						<JLabel text="JSeparator" />
+						<JSeparator />
+
+						<JLabel text="JSlider" />
+						<JSlider />
+
+						<JLabel text="JSpinner" />
+						<JSpinner />
+
+						<JLabel text="JTabbedPane" />
+						<JTabbedPane />
+
+						<JLabel text="JTable" />
+						<JTable />
+
+						<JLabel text="JTextArea" />
+						<JTextArea />
+
+						<JLabel text="JTextField" />
+						<JTextField />
+
+						<JLabel text="JTextPane" />
+						<JTextPane />
+
+						<JLabel text="JToggleButton" />
+						<JToggleButton />
+
+						<JLabel text="JToolTip" />
+						<JToolTip />
+
+						<JLabel text="JTree" />
+						<JTree />
+
+						<JLabel text="JViewport" />
+						<JViewport />
+
+					</JPanel>
+				</JScrollPane>
+			</JPanel>
+
+		</JPanel>
+
+	</bp:Body>
+</Blueprint>

@@ -26,7 +26,8 @@
 					<JMenuItem label="TableView" command="show_table_view" />
 					<JMenuItem label="TreeView" command="show_tree_view" />
 					<JMenuItem label="WidgetsView" command="show_widgets_view" />
-				</JMenu>
+					<JMenuItem label="WidgetsView2" command="show_widgets2_view" />
+									</JMenu>
 				<JMenu label="Help">
 					<JMenuItem label="About" />
 				</JMenu>

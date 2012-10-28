@@ -8,6 +8,11 @@ public interface LayoutManagerWrapper {
 
 	LayoutManager getLayoutManager(boolean create);
 
+	/**
+	 * @return true if success , otherwise is false.
+	 * */
+	boolean setContainer(Container container);
+
 	void addComponentToContainer(Component component, Container container,
 			String position);
 
