@@ -39,8 +39,8 @@
 
 				<position value="north" />
 				<JToolBar floatable="false">
-					<JButton text="haha" />
-					<JLabel text="haha" />
+					<JLabel text="(this is a toolbar)" />
+					<JButton text="(this is a button)" />
 				</JToolBar>
 
 
