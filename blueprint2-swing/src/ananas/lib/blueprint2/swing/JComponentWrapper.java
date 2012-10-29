@@ -12,14 +12,24 @@ import ananas.lib.blueprint2.dom.INode;
 public class JComponentWrapper extends ContainerWrapper {
 
 	private IAttr mBackground;
+	private String m_attr_alignmentX;
+	private String m_attr_alignmentY;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
 		String name = attr.getBlueprintClass().getLocalName();
 		if (name == null) {
 			return false;
+
+		} else if (name.equals("alignmentX")) {
+			this.m_attr_alignmentX = attr.getValue();
+
+		} else if (name.equals("alignmentY")) {
+			this.m_attr_alignmentY = attr.getValue();
+
 		} else if (name.equals("background")) {
 			this.mBackground = attr;
+
 		} else {
 			return super.setAttribute(attr);
 		}
@@ -32,6 +42,11 @@ public class JComponentWrapper extends ContainerWrapper {
 		if (this.mBackground != null) {
 			Color color = this.colorFromAttr(this.mBackground);
 			comp.setBackground(color);
+		}
+
+		if (this.m_attr_alignmentX != null) {
+		}
+		if (this.m_attr_alignmentY != null) {
 		}
 	}
 

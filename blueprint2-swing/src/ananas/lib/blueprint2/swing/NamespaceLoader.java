@@ -86,6 +86,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("editable", BaseAttr.class, Boolean.class);
 			h.reg("floatable", BaseAttr.class, Boolean.class);
 			h.reg("height", BaseAttr.class, Integer.class);
+			h.reg("horizontalAlignment", BaseAttr.class, String.class);
 			h.reg("id", BaseAttr.class, String.class);
 			h.reg("label", BaseAttr.class, String.class);
 			h.reg("orientation", BaseAttr.class, String.class);
@@ -94,6 +95,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("src", BaseAttr.class, String.class);
 			h.reg("text", BaseAttr.class, String.class);
 			h.reg("value", BaseAttr.class, String.class);
+			h.reg("verticalAlignment", BaseAttr.class, String.class);
 			h.reg("width", BaseAttr.class, Integer.class);
 			h.reg("x", BaseAttr.class, Integer.class);
 			h.reg("y", BaseAttr.class, Integer.class);

@@ -1,6 +1,8 @@
 package ananas.lib.blueprint2.swing;
 
+import javax.swing.Icon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import ananas.lib.blueprint2.dom.IAttr;
 import ananas.lib.blueprint2.dom.INode;
@@ -10,14 +12,25 @@ public class JLabelWrapper extends JComponentWrapper {
 
 	private IAttr mText;
 	private StringBuilder mStringBuilder;
+	private String m_attr_horizontalAlignment;
+	private String m_attr_verticalAlignment;
+	private Icon mIcon;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
 		String name = attr.getBlueprintClass().getLocalName();
 		if (name == null) {
 			return false;
+
 		} else if (name.equals("text")) {
 			this.mText = attr;
+
+		} else if (name.equals("horizontalAlignment")) {
+			this.m_attr_horizontalAlignment = attr.getValue();
+
+		} else if (name.equals("verticalAlignment")) {
+			this.m_attr_verticalAlignment = attr.getValue();
+
 		} else {
 			return super.setAttribute(attr);
 		}
@@ -43,9 +56,17 @@ public class JLabelWrapper extends JComponentWrapper {
 		if (child instanceof IText) {
 			this.appendText((IText) child);
 			return true;
+		} else if (child instanceof IconWrapper) {
+			this._setIcon((IconWrapper) child);
+			return true;
 		} else {
 			return super.onAppendChild(child);
 		}
+	}
+
+	private void _setIcon(IconWrapper child) {
+		Icon icon = child.getIcon();
+		this.mIcon = icon;
 	}
 
 	private void appendText(IText txt) {
@@ -73,6 +94,45 @@ public class JLabelWrapper extends JComponentWrapper {
 			String s = sb.toString();
 			label.setText(s);
 		}
-	}
 
+		if (this.m_attr_horizontalAlignment != null) {
+			String str = this.m_attr_horizontalAlignment;
+			int n;
+			if (str == null)
+				n = 0;
+
+			else if (str.equals("LEFT"))
+				n = SwingConstants.LEFT;
+			else if (str.equals("CENTER"))
+				n = SwingConstants.CENTER;
+			else if (str.equals("RIGHT"))
+				n = SwingConstants.RIGHT;
+
+			else
+				n = 0;
+			label.setHorizontalAlignment(n);
+		}
+
+		if (this.m_attr_verticalAlignment != null) {
+			String str = this.m_attr_verticalAlignment;
+			int n;
+			if (str == null)
+				n = 0;
+
+			else if (str.equals("TOP"))
+				n = SwingConstants.TOP;
+			else if (str.equals("CENTER"))
+				n = SwingConstants.CENTER;
+			else if (str.equals("BOTTOM"))
+				n = SwingConstants.BOTTOM;
+
+			else
+				n = 0;
+			label.setVerticalAlignment(n);
+		}
+
+		if (this.mIcon != null) {
+			label.setIcon(this.mIcon);
+		}
+	}
 }
