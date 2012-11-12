@@ -1,0 +1,21 @@
+<ojm xmlns="xmlns:ananas:blueprint:ojm">
+
+	<mapping>
+
+		<object class="test.bp2.ojm.objects.TestingObject1">
+
+			<field name="a_int">
+			</field>
+
+			<field name="a_string">
+			</field>
+
+			<field name="a_array">
+			</field>
+
+			<field name="a_object">
+			</field>
+		</object>
+	</mapping>
+
+</ojm>

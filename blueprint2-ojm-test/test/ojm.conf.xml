@@ -1,0 +1,11 @@
+<ojm xmlns="xmlns:ananas:blueprint:ojm">
+
+	<configuration>
+
+		<import path="/test/bp2/ojm/objects/TestingObject1.xml" />
+		<import path="/test/bp2/ojm/objects/TestingObject2.xml" />
+		<import path="/test/bp2/ojm/objects/TestingObject3.xml" />
+
+	</configuration>
+
+</ojm>
