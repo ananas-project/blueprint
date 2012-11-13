@@ -1,14 +1,15 @@
 package test.bp2.ojm;
 
 import test.bp2.ojm.objects.TestingObject1;
-import ananas.lib.blueprint2.ojm.DefaultOJMapperFactory;
+import ananas.lib.blueprint2.ojm.DefaultOJMapperConfiguration;
 import ananas.lib.blueprint2.ojm.OJMapper;
 import ananas.lib.blueprint2.ojm.OJMapperFactory;
 
 public class Main {
 
 	public static void main(String[] args) {
-		OJMapperFactory cvtf = new DefaultOJMapperFactory();
+		OJMapperFactory cvtf = (new DefaultOJMapperConfiguration())
+				.getMapperFactory();
 		OJMapper cvt = cvtf.createMapper();
 		final TestingObject1 obj1 = new TestingObject1();
 		final String json1 = cvt.convertObjectToJSONString(obj1);
