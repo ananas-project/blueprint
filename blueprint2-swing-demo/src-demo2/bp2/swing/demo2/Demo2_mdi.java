@@ -1,5 +1,7 @@
 package bp2.swing.demo2;
 
+import javax.swing.UIManager;
+
 import bp2.swing.demo2.gui.MainFrame;
 
 public class Demo2_mdi {
@@ -10,9 +12,16 @@ public class Demo2_mdi {
 
 			@Override
 			public void run() {
-				
-				MainFrame mf =new MainFrame() ;
-				mf.show() ;
+
+				try {
+					UIManager.setLookAndFeel(UIManager
+							.getSystemLookAndFeelClassName());
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+				MainFrame mf = new MainFrame();
+				mf.show();
 			}
 		});
 
