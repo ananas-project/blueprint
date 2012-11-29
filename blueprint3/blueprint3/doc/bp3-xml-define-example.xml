@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns="xmlns:ananas:blueprint:bp3">
+
+	<Namespace defaultPackage="example.main"
+		defaultTargetPackage="example.main" defaultWrapperPackage="example.main"
+		defaultPrefix="example" defaultWrapperSuffix="Wrapper" url="http://xxx.xxx/xmlns">
+
+		<!-- mapping -->
+		<Mapping>
+			<Element localName="Shape" targetClass="CShape" wrapperClass="CShapeWrapper" />
+			<Element localName="Shape" targetClass="CShape" wrapperClass="CShapeWrapper" />
+		</Mapping>
+
+		<!-- relationship -->
+
+		<Element type="abstract|interface|normal" extends="abstract|normal"
+			implements="interface1|interface2|interface3" localName="Shape">
+
+			<Attribute localName="abc" />
+
+			<Attribute localName="*" />
+			<Child class="*" />
+
+		</Element>
+	</Namespace>
+
+
+</Blueprint>
