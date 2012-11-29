@@ -1,17 +1,17 @@
-<ojm xmlns="xmlns:ananas:blueprint:ojm">
+<OJM xmlns="xmlns:ananas:blueprint:ojm">
 
-	<mapping>
+	<Mapping>
 
-		<object class="test.bp2.ojm.objects.TestingObject2">
+		<Object class="test.bp2.ojm.objects.TestingObject2">
 
-			<field name="name">
-			</field>
+			<Field name="name">
+			</Field>
 
-			<field name="time">
-			</field>
+			<Field name="time">
+			</Field>
 
 
-		</object>
-	</mapping>
+		</Object>
+	</Mapping>
 
-</ojm>
+</OJM>

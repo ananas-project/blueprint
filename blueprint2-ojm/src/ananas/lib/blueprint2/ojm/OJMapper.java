@@ -2,8 +2,8 @@ package ananas.lib.blueprint2.ojm;
 
 public interface OJMapper {
 
-	String convertObjectToJSONString(Object obj);
+	String convert(Object obj);
 
-	Object convertJSONStringToObject(Class<?> aClass, String json);
+	Object convert(Class<?> aClass, String json);
 
 }

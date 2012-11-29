@@ -6,10 +6,11 @@ import ananas.lib.blueprint2.Blueprint2;
 import ananas.lib.blueprint2.dom.IDocument;
 import ananas.lib.blueprint2.ojm.OJMapperConfiguration;
 import ananas.lib.blueprint2.ojm.OJMapperFactory;
+import ananas.lib.blueprint2.ojm.elements.OJMNamespaceLoader;
 
 public class DefaultOJMapperConfigurationImpl implements OJMapperConfiguration {
 
-	private final static String default_conf = "ojm.conf.xml";
+	private final static String default_conf = "/ojm.conf.xml";
 
 	public DefaultOJMapperConfigurationImpl() {
 	}

@@ -12,10 +12,10 @@ public class Main {
 				.getMapperFactory();
 		OJMapper cvt = cvtf.createMapper();
 		final TestingObject1 obj1 = new TestingObject1();
-		final String json1 = cvt.convertObjectToJSONString(obj1);
+		final String json1 = cvt.convert(obj1);
 		final TestingObject1 obj2 = (TestingObject1) cvt
-				.convertJSONStringToObject(TestingObject1.class, json1);
-		final String json2 = cvt.convertObjectToJSONString(obj2);
+				.convert(TestingObject1.class, json1);
+		final String json2 = cvt.convert(obj2);
 		System.out.println("info:json1=" + json1);
 		System.out.println("info:json2=" + json2);
 		if (json1.equals(json2)) {

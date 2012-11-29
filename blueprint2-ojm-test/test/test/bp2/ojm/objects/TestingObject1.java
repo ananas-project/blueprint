@@ -1,6 +1,7 @@
 package test.bp2.ojm.objects;
 
 import java.util.List;
+import java.util.Map;
 
 public class TestingObject1 {
 
@@ -12,6 +13,7 @@ public class TestingObject1 {
 	private boolean a_bool;
 	private TestingObject2 a_object;
 	private List<TestingObject3> a_array;
+	private Map<String, TestingObject3> a_dict;
 
 	public TestingObject1() {
 	}
