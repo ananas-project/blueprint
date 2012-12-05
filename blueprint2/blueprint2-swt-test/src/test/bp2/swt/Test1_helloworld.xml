@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Blueprint xmlns:bp="xmlns:ananas:blueprint:base" xmlns:awt="xmlns:ananas:blueprint:awt"
+	xmlns:swing="xmlns:ananas:blueprint:swing" xmlns="xmlns:ananas:blueprint:base">
+	<Head>
+		<Import type="class:NamespaceLoader" value="ananas.lib.blueprint2.swt.NamespaceLoader" />
+	</Head>
+	<Body>
+		<Display xmlns="xmlns:ananas:blueprint:swt">
+		</Display>
+	</Body>
+</Blueprint>
