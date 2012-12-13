@@ -46,10 +46,11 @@ public class JMenuBarWrapper extends JComponentWrapper {
 		int cnt = menu.getItemCount();
 		for (int i = cnt - 1; i >= 0; i--) {
 			JMenuItem item = menu.getItem(i);
-			if (item instanceof JMenu) {
+			if (item == null) {
+			} else if (item instanceof JMenu) {
 				JMenu menu2 = (JMenu) item;
 				this._listenMenuTree(listener, menu2);
-			} else {
+			} else if (item instanceof JMenuItem) {
 				item.addActionListener(listener);
 			}
 		}
