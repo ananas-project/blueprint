@@ -6,7 +6,7 @@ import ananas.lib.blueprint2.dom.INode;
 public class KmlBaseElement extends AbstractElement {
 
 	@Override
-	public boolean appendChild(INode child) {
+	public boolean onAppendChild(INode child) {
 		return super.appendChild(child);
 	}
 
