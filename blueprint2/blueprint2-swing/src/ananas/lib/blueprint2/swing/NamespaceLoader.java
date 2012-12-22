@@ -99,6 +99,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("width", BaseAttr.class, Integer.class);
 			h.reg("x", BaseAttr.class, Integer.class);
 			h.reg("y", BaseAttr.class, Integer.class);
+			h.reg("font", BaseAttr.class, Integer.class);
 
 		}
 		{

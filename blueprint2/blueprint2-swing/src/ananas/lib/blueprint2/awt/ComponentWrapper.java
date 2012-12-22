@@ -11,6 +11,7 @@ public class ComponentWrapper extends ObjectWrapper {
 	private IAttr mWidth;
 	private IAttr mHeight;
 	private IAttr mName;
+	private IAttr mFont;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
@@ -33,6 +34,9 @@ public class ComponentWrapper extends ObjectWrapper {
 			this.mHeight = attr;
 		} else if (name.equals("width")) {
 			this.mWidth = attr;
+
+		} else if (name.equals("font")) {
+			this.mFont = attr;
 
 		} else {
 			return super.setAttribute(attr);
@@ -57,6 +61,10 @@ public class ComponentWrapper extends ObjectWrapper {
 
 		if (this.mName != null) {
 			comp.setName(this.mName.getValue());
+		}
+
+		if (this.mFont != null) {
+			comp.setFont(this.fontFromAttr(this.mFont));
 		}
 	}
 

@@ -51,6 +51,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("rows", AwtBaseAttr.class, Integer.class);
 			h.reg("columns", AwtBaseAttr.class, Integer.class);
 			h.reg("value", AwtBaseAttr.class, String.class);
+			h.reg("font", AwtBaseAttr.class, String.class);
 		}
 		{
 			// element
