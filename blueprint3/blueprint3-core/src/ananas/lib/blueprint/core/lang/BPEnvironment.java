@@ -5,6 +5,7 @@ import ananas.lib.blueprint.core.util.BPBuilderFactory;
 import ananas.lib.blueprint.core.util.BPVisitorFactory;
 import ananas.lib.blueprint.core.util.BPXmlParserFactory;
 import ananas.lib.blueprint.core.util.BPXmlSerializerFactory;
+import ananas.lib.io.IConnector;
 
 public interface BPEnvironment {
 
@@ -19,5 +20,7 @@ public interface BPEnvironment {
 	BPBuilderFactory getBuilderFactory();
 
 	BPVisitorFactory getVisitorFactory();
+
+	IConnector getConnector();
 
 }
