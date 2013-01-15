@@ -1,6 +1,7 @@
 package ananas.lib.blueprint2.awt;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 import ananas.lib.blueprint2.dom.IAttr;
 
@@ -12,6 +13,8 @@ public class ComponentWrapper extends ObjectWrapper {
 	private IAttr mHeight;
 	private IAttr mName;
 	private IAttr mFont;
+	private IAttr mPreferredSizeX;
+	private IAttr mPreferredSizeY;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
@@ -37,6 +40,11 @@ public class ComponentWrapper extends ObjectWrapper {
 
 		} else if (name.equals("font")) {
 			this.mFont = attr;
+
+		} else if (name.equals("preferredSizeX")) {
+			this.mPreferredSizeX = attr;
+		} else if (name.equals("preferredSizeY")) {
+			this.mPreferredSizeY = attr;
 
 		} else {
 			return super.setAttribute(attr);
@@ -66,6 +74,20 @@ public class ComponentWrapper extends ObjectWrapper {
 		if (this.mFont != null) {
 			comp.setFont(this.fontFromAttr(this.mFont));
 		}
+
+		{
+			// setPreferredSize
+			IAttr ph, pw;
+			ph = mPreferredSizeY;
+			pw = mPreferredSizeX;
+			if (ph != null || pw != null) {
+				int iph, ipw;
+				iph = this.intFromAttr(ph);
+				ipw = this.intFromAttr(pw);
+				comp.setPreferredSize(new Dimension(ipw, iph));
+			}
+		}
+
 	}
 
 	public Component getComponent(boolean create) {

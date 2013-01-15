@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
+import javax.swing.JDialog;
 import javax.swing.JEditorPane;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
@@ -100,6 +101,8 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("x", BaseAttr.class, Integer.class);
 			h.reg("y", BaseAttr.class, Integer.class);
 			h.reg("font", BaseAttr.class, Integer.class);
+			h.reg("preferredSizeX", BaseAttr.class, Integer.class);
+			h.reg("preferredSizeY", BaseAttr.class, Integer.class);
 
 		}
 		{
@@ -156,6 +159,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("JTree", JTreeWrapper.class, JTree.class);
 
 			h.reg("JViewport", JViewportWrapper.class, JViewport.class);
+			h.reg("JDialog", JDialogWrapper.class, JDialog.class);
 
 		}
 		return ns;

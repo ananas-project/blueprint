@@ -2,6 +2,7 @@ package ananas.lib.blueprint2.awt;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.GridLayout;
@@ -73,6 +74,8 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("MenuBar", MenuBarWrapper.class, MenuBar.class);
 			h.reg("Menu", MenuWrapper.class, Menu.class);
 			h.reg("MenuItem", MenuItemWrapper.class, MenuItem.class);
+
+			h.reg("Dialog", DialogWrapper.class, Dialog.class);
 		}
 		return ns;
 	}
