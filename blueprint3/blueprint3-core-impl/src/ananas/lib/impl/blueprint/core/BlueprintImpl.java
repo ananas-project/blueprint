@@ -6,16 +6,24 @@ import ananas.lib.blueprint.core.lang.BPEnvironment;
 
 public class BlueprintImpl extends Blueprint {
 
+	private BPEnvironment mDefaultEnvironment;
+
 	@Override
 	public BPEnvironment defaultEnvironment() {
-		// TODO Auto-generated method stub
-		return null;
+		BPEnvironment envi = this.mDefaultEnvironment;
+		if (envi == null) {
+			envi = new BPEnvironmentImpl();
+			this.mDefaultEnvironment = envi;
+		}
+		return envi;
 	}
 
 	@Override
 	public BPDocument loadDocumentByURI(String uri) {
-		// TODO Auto-generated method stub
-		return null;
+		final
+		BPEnvironment envi = this.defaultEnvironment() ;
+	 BPDocument	doc = envi.getImplementation().newDocument( envi  ,  uri ) ;
+		return doc;
 	}
 
 }

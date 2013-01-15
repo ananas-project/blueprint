@@ -1,5 +1,5 @@
 package ananas.lib.blueprint.core.dom;
 
-public interface BPElement {
+public interface BPElement extends BPNode {
 
 }
