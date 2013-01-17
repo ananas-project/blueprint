@@ -8,9 +8,9 @@ import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
-import ananas.lib.blueprint.core.util.xmlhelper.BPXmlHandler;
-import ananas.lib.blueprint.core.util.xmlparser.BPXmlParser;
-import ananas.lib.blueprint.core.util.xmlparser.BPXmlParserFactory;
+import ananas.lib.blueprint.core.xml.helper.BPXmlHandler;
+import ananas.lib.blueprint.core.xml.parser.BPXmlParser;
+import ananas.lib.blueprint.core.xml.parser.BPXmlParserFactory;
 import ananas.lib.io.IInputConnection;
 
 public class BlueprintImpl extends Blueprint {

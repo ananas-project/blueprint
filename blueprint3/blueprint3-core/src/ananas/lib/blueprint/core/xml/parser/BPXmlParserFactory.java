@@ -1,4 +1,4 @@
-package ananas.lib.blueprint.core.util.xmlparser;
+package ananas.lib.blueprint.core.xml.parser;
 
 public interface BPXmlParserFactory {
 

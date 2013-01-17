@@ -5,8 +5,8 @@ import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespaceRegistrar;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
 import ananas.lib.blueprint.core.util.BPVisitorFactory;
-import ananas.lib.blueprint.core.util.xmlparser.BPXmlParserFactory;
-import ananas.lib.blueprint.core.util.xmlparser.BPXmlSerializerFactory;
+import ananas.lib.blueprint.core.xml.parser.BPXmlParserFactory;
+import ananas.lib.blueprint.core.xml.serializer.BPXmlSerializerFactory;
 import ananas.lib.io.IConnector;
 
 public class BPEnvironmentImpl implements BPEnvironment {
