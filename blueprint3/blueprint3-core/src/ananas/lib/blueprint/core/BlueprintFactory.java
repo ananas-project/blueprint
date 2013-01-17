@@ -1,6 +1,6 @@
 package ananas.lib.blueprint.core;
 
-public interface IBlueprintFactory {
+public interface BlueprintFactory {
 
 	Blueprint newBlueprint();
 

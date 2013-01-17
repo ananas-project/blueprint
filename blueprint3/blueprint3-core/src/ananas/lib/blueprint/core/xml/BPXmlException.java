@@ -1,8 +1,10 @@
 package ananas.lib.blueprint.core.xml;
 
-import java.io.IOException;
+public class BPXmlException extends Exception {
 
-public class BPXmlException extends IOException {
+	public BPXmlException(Throwable cause) {
+		super(cause);
+	}
 
 	/**
 	 * 

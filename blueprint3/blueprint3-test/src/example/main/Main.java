@@ -11,7 +11,7 @@ public class Main {
 		System.out.println("the Begin");
 
 		try {
-			BPDocument doc = Blueprint.loadDocument("file:///123.txt");
+			BPDocument doc = Blueprint.loadDocument("resource:///test.xml");
 			BPElement element = doc.getRootElement();
 			System.out.println(element);
 		} catch (Exception e) {

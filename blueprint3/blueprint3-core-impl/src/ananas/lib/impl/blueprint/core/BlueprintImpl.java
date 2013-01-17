@@ -8,6 +8,7 @@ import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
+import ananas.lib.blueprint.core.xml.BPXmlException;
 import ananas.lib.blueprint.core.xml.helper.BPXmlHandler;
 import ananas.lib.blueprint.core.xml.parser.BPXmlParser;
 import ananas.lib.blueprint.core.xml.parser.BPXmlParserFactory;
@@ -21,17 +22,18 @@ public class BlueprintImpl extends Blueprint {
 	public BPEnvironment defaultEnvironment() {
 		BPEnvironment envi = this.mDefaultEnvironment;
 		if (envi == null) {
-			envi = new BPEnvironmentImpl();
+			envi = new EnvironmentImpl();
 			this.mDefaultEnvironment = envi;
 		}
 		return envi;
 	}
 
 	@Override
-	public BPDocument loadDocumentByURI(String uri) throws IOException {
+	public BPDocument loadDocumentByURI(String uri) throws IOException,
+			BPXmlException {
 		IInputConnection conn = null;
 		InputStream in = null;
-		IOException ioe = null;
+		Exception ioe = null;
 		BPDocument doc = null;
 		try {
 
@@ -51,7 +53,7 @@ public class BlueprintImpl extends Blueprint {
 			BPXmlHandler hdr = builder.getXmlHandler();
 			parser.parse(in, hdr);
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			ioe = e;
 		}
 		if (in != null) {
@@ -61,7 +63,13 @@ public class BlueprintImpl extends Blueprint {
 			conn.close();
 		}
 		if (ioe != null) {
-			throw ioe;
+			if (ioe instanceof IOException) {
+				throw ((IOException) ioe);
+			} else if (ioe instanceof BPXmlException) {
+				throw ((BPXmlException) ioe);
+			} else {
+				throw new RuntimeException(ioe);
+			}
 		}
 		return doc;
 	}
