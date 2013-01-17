@@ -3,15 +3,16 @@ package ananas.lib.impl.blueprint.core;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
 import ananas.lib.blueprint.core.Blueprint;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
+import ananas.lib.blueprint.core.lang.BPXMLReaderFactory;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
-import ananas.lib.blueprint.core.xml.BPXmlException;
-import ananas.lib.blueprint.core.xml.helper.BPXmlHandler;
-import ananas.lib.blueprint.core.xml.parser.BPXmlParser;
-import ananas.lib.blueprint.core.xml.parser.BPXmlParserFactory;
 import ananas.lib.io.IInputConnection;
 
 public class BlueprintImpl extends Blueprint {
@@ -30,7 +31,8 @@ public class BlueprintImpl extends Blueprint {
 
 	@Override
 	public BPDocument loadDocumentByURI(String uri) throws IOException,
-			BPXmlException {
+			SAXException {
+
 		IInputConnection conn = null;
 		InputStream in = null;
 		Exception ioe = null;
@@ -44,14 +46,15 @@ public class BlueprintImpl extends Blueprint {
 
 			doc = envi.getImplementation().newDocument(envi, uri);
 
-			BPXmlParserFactory parserFactory = envi.getXmlParserFactory();
-			BPXmlParser parser = parserFactory.newParser();
+			BPXMLReaderFactory parserFactory = envi.getXMLReaderFactory();
+			XMLReader reader = parserFactory.newReader();
 
 			BPBuilderFactory builderFactory = envi.getBuilderFactory();
 			BPBuilder builder = builderFactory.newBuilder(doc);
 
-			BPXmlHandler hdr = builder.getXmlHandler();
-			parser.parse(in, hdr);
+			reader.setContentHandler(builder.getContentHandler());
+			reader.setErrorHandler(builder.getErrorHandler());
+			reader.parse(new InputSource(in));
 
 		} catch (Exception e) {
 			ioe = e;
@@ -65,8 +68,8 @@ public class BlueprintImpl extends Blueprint {
 		if (ioe != null) {
 			if (ioe instanceof IOException) {
 				throw ((IOException) ioe);
-			} else if (ioe instanceof BPXmlException) {
-				throw ((BPXmlException) ioe);
+			} else if (ioe instanceof SAXException) {
+				throw ((SAXException) ioe);
 			} else {
 				throw new RuntimeException(ioe);
 			}

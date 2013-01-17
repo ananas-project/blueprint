@@ -1,9 +1,12 @@
 package ananas.lib.blueprint.core.util;
 
-import ananas.lib.blueprint.core.xml.helper.BPXmlHandler;
+import org.xml.sax.ContentHandler;
+import org.xml.sax.ErrorHandler;
 
 public interface BPBuilder {
 
-	BPXmlHandler getXmlHandler();
+	ContentHandler getContentHandler();
+
+	ErrorHandler getErrorHandler();
 
 }

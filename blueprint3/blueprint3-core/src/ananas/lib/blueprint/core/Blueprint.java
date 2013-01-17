@@ -2,8 +2,9 @@ package ananas.lib.blueprint.core;
 
 import java.io.IOException;
 
+import org.xml.sax.SAXException;
+
 import ananas.lib.blueprint.core.dom.BPDocument;
-import ananas.lib.blueprint.core.xml.BPXmlException;
 
 public abstract class Blueprint implements IBlueprint {
 
@@ -19,7 +20,7 @@ public abstract class Blueprint implements IBlueprint {
 	}
 
 	public static BPDocument loadDocument(String uri) throws IOException,
-			BPXmlException {
+			SAXException {
 		IBlueprint bp = Blueprint.getInstance();
 		return bp.loadDocumentByURI(uri);
 	}
