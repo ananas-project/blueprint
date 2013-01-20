@@ -1,5 +1,6 @@
 package ananas.lib.blueprint2.awt;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -15,6 +16,8 @@ public class ComponentWrapper extends ObjectWrapper {
 	private IAttr mFont;
 	private IAttr mPreferredSizeX;
 	private IAttr mPreferredSizeY;
+	private IAttr mBackground;
+	private IAttr mForeground;
 
 	@Override
 	public boolean setAttribute(IAttr attr) {
@@ -40,6 +43,11 @@ public class ComponentWrapper extends ObjectWrapper {
 
 		} else if (name.equals("font")) {
 			this.mFont = attr;
+
+		} else if (name.equals("background")) {
+			this.mBackground = attr;
+		} else if (name.equals("foreground")) {
+			this.mForeground = attr;
 
 		} else if (name.equals("preferredSizeX")) {
 			this.mPreferredSizeX = attr;
@@ -73,6 +81,15 @@ public class ComponentWrapper extends ObjectWrapper {
 
 		if (this.mFont != null) {
 			comp.setFont(this.fontFromAttr(this.mFont));
+		}
+
+		if (this.mBackground != null) {
+			Color color = this.colorFromAttr(this.mBackground);
+			comp.setBackground(color);
+		}
+		if (this.mForeground != null) {
+			Color color = this.colorFromAttr(this.mForeground);
+			comp.setForeground(color);
 		}
 
 		{
