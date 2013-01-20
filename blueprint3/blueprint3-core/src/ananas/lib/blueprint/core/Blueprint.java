@@ -1,14 +1,26 @@
 package ananas.lib.blueprint.core;
 
+import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
 import ananas.lib.blueprint.core.dom.BPDocument;
 
 public abstract class Blueprint implements IBlueprint {
 
+	private static Blueprint s_inst;
+
 	public static Blueprint getInstance() {
-		return BlueprintLoader.loadInstance();
+		Blueprint inst = s_inst;
+		if (inst == null) {
+			inst = BlueprintLoader.loadInstance();
+			s_inst = inst;
+		}
+		return inst;
 	}
 
-	public static BPDocument loadDocument(String uri) {
+	public static BPDocument loadDocument(String uri) throws IOException,
+			SAXException {
 		IBlueprint bp = Blueprint.getInstance();
 		return bp.loadDocumentByURI(uri);
 	}
