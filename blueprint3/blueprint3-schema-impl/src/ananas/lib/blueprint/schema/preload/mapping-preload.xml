@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<preload xmlns="ananas:lib:blueprint:schema:preload" package="ananas.a.b.c.d">
+
+	<element name="abc">
+		<attribute name="def" />
+	</element>
+
+</preload>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<class-mapping xmlns="xmlns:ananas:blueprint:schema:class-mapping"
+
+
+	xmlns:abc="xmlns:ananas:blueprint:schema:class-mapping:abc">
+
+
+ 
+
+</class-mapping>
