@@ -1,7 +1,5 @@
 package ananas.lib.blueprint2.swing;
 
-import java.awt.Color;
-
 import javax.swing.JComponent;
 import javax.swing.border.Border;
 
@@ -11,7 +9,6 @@ import ananas.lib.blueprint2.dom.INode;
 
 public class JComponentWrapper extends ContainerWrapper {
 
-	private IAttr mBackground;
 	private String m_attr_alignmentX;
 	private String m_attr_alignmentY;
 
@@ -27,9 +24,6 @@ public class JComponentWrapper extends ContainerWrapper {
 		} else if (name.equals("alignmentY")) {
 			this.m_attr_alignmentY = attr.getValue();
 
-		} else if (name.equals("background")) {
-			this.mBackground = attr;
-
 		} else {
 			return super.setAttribute(attr);
 		}
@@ -39,14 +33,12 @@ public class JComponentWrapper extends ContainerWrapper {
 	protected void onTagBegin() {
 		super.onTagBegin();
 		JComponent comp = (JComponent) this.getTarget(true);
-		if (this.mBackground != null) {
-			Color color = this.colorFromAttr(this.mBackground);
-			comp.setBackground(color);
-		}
 
 		if (this.m_attr_alignmentX != null) {
+			comp.setAlignmentX(Float.parseFloat(this.m_attr_alignmentX));
 		}
 		if (this.m_attr_alignmentY != null) {
+			comp.setAlignmentY(Float.parseFloat(this.m_attr_alignmentY));
 		}
 	}
 

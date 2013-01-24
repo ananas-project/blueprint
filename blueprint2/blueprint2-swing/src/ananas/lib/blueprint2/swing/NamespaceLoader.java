@@ -103,6 +103,7 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("font", BaseAttr.class, Integer.class);
 			h.reg("preferredSizeX", BaseAttr.class, Integer.class);
 			h.reg("preferredSizeY", BaseAttr.class, Integer.class);
+			h.reg("foreground", BaseAttr.class, Integer.class);
 
 		}
 		{
