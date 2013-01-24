@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.xml.sax.SAXException;
 
 import ananas.lib.blueprint.core.dom.BPDocument;
+import ananas.lib.blueprint.core.lang.BPEnvironment;
 
 public abstract class Blueprint implements IBlueprint {
 
@@ -13,7 +14,7 @@ public abstract class Blueprint implements IBlueprint {
 	public static Blueprint getInstance() {
 		Blueprint inst = s_inst;
 		if (inst == null) {
-			inst = BlueprintLoader.loadInstance();
+			inst = Private_BlueprintLoader.loadInstance();
 			s_inst = inst;
 		}
 		return inst;
@@ -21,8 +22,10 @@ public abstract class Blueprint implements IBlueprint {
 
 	public static BPDocument loadDocument(String uri) throws IOException,
 			SAXException {
-		IBlueprint bp = Blueprint.getInstance();
-		return bp.loadDocumentByURI(uri);
+
+		BPEnvironment envi = Blueprint.getInstance().defaultEnvironment();
+		return envi.getDocumentLoaderFactory().newLoader()
+				.loadDocument(envi, uri);
 	}
 
 }

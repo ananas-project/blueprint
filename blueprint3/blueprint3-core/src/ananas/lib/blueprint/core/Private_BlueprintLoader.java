@@ -3,21 +3,21 @@ package ananas.lib.blueprint.core;
 import java.io.InputStream;
 import java.util.Properties;
 
-class BlueprintLoader {
+class Private_BlueprintLoader {
 
 	private static Blueprint s_inst;
 
 	public static Blueprint loadInstance() {
 		Blueprint inst = s_inst;
 		if (inst == null) {
-			BlueprintLoader impl = new BlueprintLoader();
+			Private_BlueprintLoader impl = new Private_BlueprintLoader();
 			inst = impl.doLoad();
 			s_inst = inst;
 		}
 		return inst;
 	}
 
-	private BlueprintLoader() {
+	private Private_BlueprintLoader() {
 	}
 
 	private Blueprint doLoad() {

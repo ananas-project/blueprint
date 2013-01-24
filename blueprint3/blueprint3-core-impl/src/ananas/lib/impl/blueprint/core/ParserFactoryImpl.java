@@ -4,7 +4,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
 
-import ananas.lib.blueprint.core.lang.BPXMLReaderFactory;
+import ananas.lib.blueprint.core.util.BPXMLReaderFactory;
 
 public class ParserFactoryImpl implements BPXMLReaderFactory {
 

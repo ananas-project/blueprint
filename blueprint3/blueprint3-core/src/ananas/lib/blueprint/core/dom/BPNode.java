@@ -4,8 +4,16 @@ import ananas.lib.blueprint.core.lang.BPController;
 
 public interface BPNode extends BPController {
 
-	BPNode appendChild(BPNode newChild);
+	boolean appendChild(BPNode newChild);
 
-	BPNode setParent(BPNode newParent);
+	boolean removeChild(BPNode theChild);
+
+	void setParent(BPNode newParent);
+
+	BPNode getParent();
+
+	BPDocument getOwnerDocument();
+
+	boolean bindOwnerDocument(BPDocument ownerDoc);
 
 }

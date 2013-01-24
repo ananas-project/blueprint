@@ -1,5 +1,7 @@
 package ananas.lib.impl.blueprint.core;
 
+import java.util.Stack;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.ContentHandler;
 import org.xml.sax.ErrorHandler;
@@ -7,7 +9,9 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
+import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
 
@@ -74,9 +78,13 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 	private class MyContentHandler implements ContentHandler {
 
 		private final MyBuilder mBuilder;
+		private final BPDocument mDoc;
+
+		private final Stack<BPElement> mStack = new Stack<BPElement>();
 
 		public MyContentHandler(MyBuilder myBuilder) {
 			this.mBuilder = myBuilder;
+			this.mDoc = this.mBuilder.mDoc;
 		}
 
 		@Override
@@ -90,15 +98,31 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		public void endDocument() throws SAXException {
 			// TODO Auto-generated method stub
 
+			this.mDoc.appendChild(null);
+
 		}
 
 		@Override
 		public void endElement(String uri, String localName, String qName)
 				throws SAXException {
-			// TODO Auto-generated method stub
 
-			System.out.println(this + ".endElement:" + qName);
+			final BPElement child = this.mStack.pop();
+			final BPElement parent;
+			if (this.mStack.isEmpty()) {
+				parent = null;
+			} else {
+				parent = this.mStack.peek();
+			}
 
+			child.setParent(parent);
+
+			child.tagEnd();
+
+			if (parent == null) {
+				this.mDoc.appendChild(child);
+			} else {
+				parent.appendChild(child);
+			}
 		}
 
 		@Override
@@ -143,8 +167,61 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		public void startElement(String uri, String localName, String qName,
 				Attributes atts) throws SAXException {
 
-			System.out.println(this + ".startElement:" + qName);
+			// System.out.println(this + ".startElement:" + qName);
 
+			BPElement element = this.mDoc.createElement(uri, localName);
+			if (element == null) {
+				SAXException e = this._newException("no element", uri,
+						localName);
+				throw e;
+			}
+			this.mStack.push(element);
+
+			final int cntAttr = atts.getLength();
+			for (int i = 0; i < cntAttr; i++) {
+				String attrURI = atts.getURI(i);
+				String attrLName = atts.getLocalName(i);
+				String attrValue = atts.getValue(i);
+
+				if (attrURI != null) {
+					if (attrURI.isEmpty()) {
+						attrURI = null;
+					}
+				}
+				attrURI = uri;
+
+				BPAttribute attr = this.mDoc.createAttribute(element, attrURI,
+						attrLName, attrValue);
+
+				if (attr == null) {
+					SAXException e = this._newException("no attr", attrURI,
+							attrLName);
+					throw e;
+				}
+
+				boolean rlt = element.setAttribute(attr);
+				rlt=true;
+				if (!rlt) {
+					String msg = "element no accept attr";
+					System.err.println(msg);
+					System.err.println("    eleemnt: " + uri + "#" + localName);
+					System.err.println("       attr: " + attrURI + "#"
+							+ attrLName);
+					SAXException e = this
+							._newException(msg, attrURI, attrLName);
+					throw e;
+				}
+			}
+
+			element.tagBegin();
+
+		}
+
+		private SAXException _newException(String msg, String uri,
+				String localName) {
+
+			String str = msg + " : " + uri + "#" + localName;
+			return new SAXException(str);
 		}
 
 		@Override

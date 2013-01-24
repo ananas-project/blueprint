@@ -1,4 +1,4 @@
-package ananas.lib.blueprint.core.lang;
+package ananas.lib.blueprint.core.util;
 
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
