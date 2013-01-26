@@ -12,9 +12,7 @@ public class PreloadResult {
 	private PE_preload mRoot;
 	private String mDefaultPrefix;
 	private String mNsURI;
-	private String mElementClassNamePattern;
-	private String mAttrClassNamePattern;
-	private String mPackage;
+
 	private String m_target_attr_package;
 	private String m_target_attr_pattern;
 	private String m_target_element_package;

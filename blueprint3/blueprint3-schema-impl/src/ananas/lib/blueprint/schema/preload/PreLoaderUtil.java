@@ -6,6 +6,7 @@ import org.xml.sax.SAXException;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
+import ananas.lib.blueprint.core.lang.BPType;
 import ananas.lib.blueprint.schema.SchemaInfo;
 import ananas.lib.blueprint.schema.impl.FinalSchemaLoader;
 
@@ -25,6 +26,18 @@ public class PreLoaderUtil {
 		IPreLoader ldr = plf.newLoader();
 		BPNamespace ns1 = ldr.loadNamespace(envi, plf, "xsd-preload.xml");
 		BPNamespace ns2 = ldr.loadNamespace(envi, plf, "mapping-preload.xml");
+		{
+			// xml:lang for xs
+			String uri = "http://www.w3.org/XML/1998/namespace";
+			String defaultPrefix = "xml";
+			BPNamespace ns = envi.getImplementation().createNamespace(envi,
+					uri, defaultPrefix);
+			BPType type = envi.getImplementation().createType(ns, "lang",
+					ananas.lib.blueprint.schema.xsd.ctrl.XSACtrl_lang.class,
+					ananas.lib.blueprint.schema.xsd.target.XSA_lang.class);
+			ns.registerType(type);
+			envi.getNamespaceRegistrar().registerNamespace(ns);
+		}
 		envi.getNamespaceRegistrar().registerNamespace(ns1);
 		envi.getNamespaceRegistrar().registerNamespace(ns2);
 

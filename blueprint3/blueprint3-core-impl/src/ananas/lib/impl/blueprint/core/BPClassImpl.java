@@ -31,13 +31,11 @@ public class BPClassImpl implements BPType {
 
 	@Override
 	public BPType getAttributeType(String uri, String localName) {
-		if (uri != null) {
-			if (uri.isEmpty()) {
-				uri = null;
-			}
+		if (uri == null) {
+			uri = "";
 		}
 		BPNamespace ns;
-		if (uri == null) {
+		if (uri.isEmpty()) {
 			ns = this.mNS;
 		} else {
 			ns = this.mNS.getOwnerEnvironment().getNamespaceRegistrar()

@@ -53,8 +53,8 @@
 		<attribute name="ref" />
 		<attribute name="substitutionGroup" />
 	</element>
-	<element name="elementFormDefault">
-	</element>
+
+
 	<element name="enumeration">
 		<attribute name="value" />
 	</element>
@@ -71,8 +71,8 @@
 	</element>
 	<element name="key">
 	</element>
-	<element name="lang">
-	</element>
+
+
 	<element name="list">
 		<attribute name="itemType" />
 	</element>
@@ -86,6 +86,8 @@
 		<attribute name="base" />
 	</element>
 	<element name="schema">
+		<attribute name="elementFormDefault" />
+		<attribute name="lang" />
 		<attribute name="targetNamespace" />
 		<attribute name="version" />
 	</element>

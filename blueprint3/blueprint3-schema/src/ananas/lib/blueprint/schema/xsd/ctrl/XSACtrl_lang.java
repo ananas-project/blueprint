@@ -1,5 +1,5 @@
 package ananas.lib.blueprint.schema.xsd.ctrl;
 
-public class XSECtrl_lang extends XSCAttribute {
+public class XSACtrl_lang extends XSCAttribute {
 
 }

@@ -183,12 +183,9 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 				String attrLName = atts.getLocalName(i);
 				String attrValue = atts.getValue(i);
 
-				if (attrURI != null) {
-					if (attrURI.isEmpty()) {
-						attrURI = null;
-					}
+				if (attrURI == null) {
+					attrURI = "";
 				}
-				attrURI = uri;
 
 				BPAttribute attr = this.mDoc.createAttribute(element, attrURI,
 						attrLName, attrValue);
@@ -200,7 +197,7 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 				}
 
 				boolean rlt = element.setAttribute(attr);
-				rlt=true;
+				// rlt = true;
 				if (!rlt) {
 					String msg = "element no accept attr";
 					System.err.println(msg);

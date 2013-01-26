@@ -2,11 +2,12 @@ package ananas.lib.blueprint.schema.xsd.ctrl;
 
 import ananas.lib.blueprint.core.dom.BPAttribute;
 
-public class XSECtrl_schema extends XSCElement {
+public class XSECtrl_schema extends XSTCtrl_schemaType {
 
 	private BPAttribute m_attr_elementFormDefault;
 	private BPAttribute m_attr_lang;
 	private BPAttribute m_attr_targetNamespace;
+	private BPAttribute m_attr_version;
 
 	@Override
 	public boolean setAttribute(BPAttribute attr) {
@@ -23,6 +24,9 @@ public class XSECtrl_schema extends XSCElement {
 
 		} else if (lname.equals("targetNamespace")) {
 			this.m_attr_targetNamespace = attr;
+
+		} else if (lname.equals("version")) {
+			this.m_attr_version = attr;
 
 		} else {
 			return super.setAttribute(attr);
