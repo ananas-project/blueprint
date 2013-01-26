@@ -11,6 +11,7 @@ public class PreloadResultBuilder implements ContentHandler {
 
 	final Stack<PreloadElement> mStack = new Stack<PreloadElement>();
 	private PreloadElement mRoot;
+	private PreloadResult mResult;
 
 	@Override
 	public void characters(char[] arg0, int arg1, int arg2) throws SAXException {
@@ -20,8 +21,10 @@ public class PreloadResultBuilder implements ContentHandler {
 
 	@Override
 	public void endDocument() throws SAXException {
-		// TODO Auto-generated method stub
 
+		PreloadResult rlt = new PreloadResult();
+		rlt.load(this.mRoot);
+		this.mResult = rlt;
 	}
 
 	@Override
@@ -79,7 +82,7 @@ public class PreloadResultBuilder implements ContentHandler {
 	public void startElement(String uri, String localName, String qName,
 			Attributes atts) throws SAXException {
 
-		System.out.println("" + uri + "#" + localName);
+		// System.out.println("" + uri + "#" + localName);
 		PreloadClassLibrary lib = PreloadClassLibrary.getInstance();
 		PreloadElement ele = lib.createElement(uri, localName);
 
@@ -101,8 +104,7 @@ public class PreloadResultBuilder implements ContentHandler {
 	}
 
 	public PreloadResult getResult() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mResult;
 	}
 
 }

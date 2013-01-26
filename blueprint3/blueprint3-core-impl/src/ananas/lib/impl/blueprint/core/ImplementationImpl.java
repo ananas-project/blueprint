@@ -14,14 +14,14 @@ public class ImplementationImpl implements BPImplementation {
 	}
 
 	@Override
-	public BPType createBPClass(BPNamespace ns, String localName,
+	public BPType createType(BPNamespace ns, String localName,
 			Class<?> ctrlClass, Class<?> targetClass) {
 
 		return new BPClassImpl(ns, localName, ctrlClass, targetClass);
 	}
 
 	@Override
-	public BPNamespace createPackage(BPEnvironment envi, String uri,
+	public BPNamespace createNamespace(BPEnvironment envi, String uri,
 			String defaultPrefix) {
 
 		return new BPNamespaceImpl(envi, uri, defaultPrefix);

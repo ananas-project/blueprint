@@ -32,11 +32,13 @@ public class PreLoaderUtil {
 		FinalSchemaLoader loader;
 		SchemaInfo info;
 		// xsd
-		info = PreLoaderUtil._getInfo(String.class);
+		Class<?> clsXs = ananas.lib.blueprint.schema.xsd.TheSchemaInfo.class;
+		info = PreLoaderUtil._getInfo(clsXs);
 		loader = new FinalSchemaLoader(envi, info);
 		loader.load();
 		// mapping
-		info = PreLoaderUtil._getInfo(String.class);
+		Class<?> clsMapping = ananas.lib.blueprint.schema.mapping.TheSchemaInfo.class;
+		info = PreLoaderUtil._getInfo(clsMapping);
 		loader = new FinalSchemaLoader(envi, info);
 		loader.load();
 

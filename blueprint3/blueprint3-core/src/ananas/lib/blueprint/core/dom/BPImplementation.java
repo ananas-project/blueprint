@@ -8,10 +8,10 @@ public interface BPImplementation {
 
 	BPDocument createDocument(BPEnvironment envi, String uri);
 
-	BPNamespace createPackage(BPEnvironment envi, String uri,
+	BPNamespace createNamespace(BPEnvironment envi, String uri,
 			String defaultPrefix);
 
-	BPType createBPClass(BPNamespace ns, String localName, Class<?> ctrlClass,
+	BPType createType(BPNamespace ns, String localName, Class<?> ctrlClass,
 			Class<?> targetClass);
 
 }

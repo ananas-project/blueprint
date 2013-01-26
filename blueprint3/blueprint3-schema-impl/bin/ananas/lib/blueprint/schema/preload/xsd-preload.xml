@@ -1,15 +1,103 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<preload xmlns="ananas:lib:blueprint:schema:preload" namespace="aaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-	package="ananas.a.b.c.d" elementClass="xxx_$(localName)_zzz"
-	attributeClass="xxx_$(localName)_zzz">
+<preload xmlns="ananas:lib:blueprint:schema:preload">
 
-	<element name="schema">
-		<attribute name="def" />
+	<!-- properties -->
+
+	<property name="namespace" value="http://www.w3.org/2001/XMLSchema" />
+	<property name="defaultPrefix" value="xs" />
+
+	<property name="target_attr_package" value="ananas.lib.blueprint.schema.xsd.target" />
+	<property name="target_attr_pattern" value="XSA_$(localName)" />
+	<property name="target_element_package" value="ananas.lib.blueprint.schema.xsd.target" />
+	<property name="target_element_pattern" value="XSE_$(localName)" />
+
+	<property name="ctrl_attr_package" value="ananas.lib.blueprint.schema.xsd.ctrl" />
+	<property name="ctrl_attr_pattern" value="XSACtrl_$(localName)" />
+	<property name="ctrl_element_package" value="ananas.lib.blueprint.schema.xsd.ctrl" />
+	<property name="ctrl_element_pattern" value="XSECtrl_$(localName)" />
+
+	<!-- elements -->
+
+
+	<element name="annotation">
+
 	</element>
-
-
-	<element name="abc">
-		<attribute name="def" />
+	<element name="any">
+	</element>
+	<element name="anyAttribute">
+		<attribute name="processContents" />
+	</element>
+	<element name="attribute">
+		<attribute name="default" />
+		<attribute name="fixed" />
+		<attribute name="type" />
+		<attribute name="use" />
+	</element>
+	<element name="attributeGroup">
+	</element>
+	<element name="choice">
+	</element>
+	<element name="complexContent">
+		<attribute name="name" />
+	</element>
+	<element name="complexType">
+		<attribute name="abstract" />
+		<attribute name="mixed" />
+	</element>
+	<element name="documentation">
+		<attribute name="source" />
+	</element>
+	<element name="element">
+		<attribute name="id" />
+		<attribute name="minOccurs" />
+		<attribute name="ref" />
+		<attribute name="substitutionGroup" />
+	</element>
+	<element name="elementFormDefault">
+	</element>
+	<element name="enumeration">
+		<attribute name="value" />
+	</element>
+	<element name="extension">
+	</element>
+	<element name="field">
+	</element>
+	<element name="group">
+		<attribute name="maxOccurs" />
+	</element>
+	<element name="import">
+		<attribute name="namespace" />
+		<attribute name="schemaLocation" />
+	</element>
+	<element name="key">
+	</element>
+	<element name="lang">
+	</element>
+	<element name="list">
+		<attribute name="itemType" />
+	</element>
+	<element name="minLength">
+	</element>
+	<element name="notation">
+		<attribute name="public" />
+		<attribute name="system" />
+	</element>
+	<element name="restriction">
+		<attribute name="base" />
+	</element>
+	<element name="schema">
+		<attribute name="targetNamespace" />
+		<attribute name="version" />
+	</element>
+	<element name="selector">
+		<attribute name="xpath" />
+	</element>
+	<element name="sequence">
+	</element>
+	<element name="simpleType">
+	</element>
+	<element name="union">
+		<attribute name="memberTypes" />
 	</element>
 
 

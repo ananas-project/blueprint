@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<preload xmlns="ananas:lib:blueprint:schema:preload" package="ananas.a.b.c.d">
+<preload xmlns="ananas:lib:blueprint:schema:preload">
 
-	<element name="abc">
-		<attribute name="def" />
+
+	<!-- properties -->
+
+	<property name="namespace" value="xmlns:ananas:blueprint:schema:class-mapping" />
+	<property name="defaultPrefix" value="cmap" />
+
+	<property name="target_attr_package" value="ananas.lib.blueprint.schema.mapping.target" />
+	<property name="target_attr_pattern" value="CMA_$(localName)" />
+	<property name="target_element_package" value="ananas.lib.blueprint.schema.mapping.target" />
+	<property name="target_element_pattern" value="CME_$(localName)" />
+
+	<property name="ctrl_attr_package" value="ananas.lib.blueprint.schema.mapping.ctrl" />
+	<property name="ctrl_attr_pattern" value="CMACtrl_$(localName)" />
+	<property name="ctrl_element_package" value="ananas.lib.blueprint.schema.mapping.ctrl" />
+	<property name="ctrl_element_pattern" value="CMECtrl_$(localName)" />
+
+	<!-- elements -->
+
+
+	<element name="class-mapping">
+		<!-- <attribute name="def" /> -->
 	</element>
+
 
 </preload>

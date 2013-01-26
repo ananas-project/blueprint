@@ -25,7 +25,7 @@ class DefaultPreLoader implements IPreLoader {
 		PreloadResult result = builder.getResult();
 		String nsuri = result.getNamespaceURI();
 		String defaultPrefix = result.getDefaultPrefix();
-		BPNamespace ns = envi.getImplementation().createPackage(envi, nsuri,
+		BPNamespace ns = envi.getImplementation().createNamespace(envi, nsuri,
 				defaultPrefix);
 
 		result.regClassesToNamespace(ns);

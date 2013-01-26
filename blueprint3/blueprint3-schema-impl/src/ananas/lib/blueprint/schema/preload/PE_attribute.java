@@ -1,16 +1,15 @@
 package ananas.lib.blueprint.schema.preload;
 
-public class PE_attribute implements PreloadElement {
+public class PE_attribute extends PE_object {
 
 	@Override
 	public void setAttr(String name, String value) {
-		// TODO Auto-generated method stub
-
+		super.setAttr(name, value);
 	}
 
 	@Override
 	public void append(PreloadElement child) {
-		throw new RuntimeException("not accept the child : " + child);
+		super.append(child);
 	}
 
 }
