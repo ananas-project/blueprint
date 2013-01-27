@@ -12,31 +12,94 @@ import org.xml.sax.SAXParseException;
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
+import ananas.lib.blueprint.core.dom.BPNode;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
+import ananas.lib.blueprint.core.util.BPElementProvider;
+import ananas.lib.blueprint.core.util.BPErrorHandler;
+import ananas.lib.blueprint.core.util.BlueprintException;
 
 public class BuilderFactoryImpl implements BPBuilderFactory {
 
 	@Override
 	public BPBuilder newBuilder(BPDocument doc) {
-		return new MyBuilder(doc);
+		return new MyBuilderCore(doc);
 	}
 
-	private class MyBuilder implements BPBuilder {
+	@Override
+	public BPBuilder newBuilder(BPElement element) {
+		return new MyBuilderCore(element);
+	}
+
+	class MyStack extends Stack<BPNode> {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -7054127141543580379L;
+
+		public MyStack(int size) {
+			// TODO Auto-generated constructor stub
+		}
+
+	}
+
+	static class MyExceptionFactory {
+
+		public static Exception _elementNotAcceptAttr(BPElement element,
+				BPAttribute attr) {
+
+			String attrLName = attr.getType().getLocalName();
+
+			return new BlueprintException(
+					"element not accept attribute : [element]=" + element
+							+ " [attr]=" + attrLName);
+		}
+
+		public static Exception _noAttr(BPElement element, String attrURI,
+				String attrLName, String attrValue) {
+
+			return new BlueprintException("no attribute : " + attrURI + "#"
+					+ attrLName);
+		}
+
+		public static Exception _noElement(String uri, String localName) {
+			return new BlueprintException("no element : " + uri + "#"
+					+ localName);
+		}
+
+		public static Exception _parentNotAcceptChild(BPNode parent,
+				BPElement child) {
+			return new BlueprintException("parent not accept child : [parent]="
+					+ parent + "; [child]=" + child);
+		}
+	}
+
+	private class MyBuilderCore implements BPBuilder, ContentHandler {
 
 		private ErrorHandler mErrorHandler;
 		private ContentHandler mContentHandler;
 		private final BPDocument mDoc;
+		private final BPNode mRoot;
+		private BPErrorHandler mBPErrorHdr;
+		private BPElementProvider mBPElementProvider;
+		private final Stack<BPNode> mStack = new MyStack(128);
 
-		public MyBuilder(BPDocument doc) {
-			this.mDoc = doc;
+		public MyBuilderCore(BPNode root) {
+
+			if (root instanceof BPDocument) {
+				this.mDoc = (BPDocument) root;
+			} else {
+				this.mDoc = root.getOwnerDocument();
+			}
+			this.mRoot = root;
 		}
 
 		@Override
 		public ContentHandler getContentHandler() {
 			ContentHandler hdl = this.mContentHandler;
 			if (hdl == null) {
-				hdl = new MyContentHandler(this);
+				hdl = new MyFrontContentHandler(this);
 				this.mContentHandler = hdl;
 			}
 			return hdl;
@@ -46,45 +109,45 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		public ErrorHandler getErrorHandler() {
 			ErrorHandler hdl = this.mErrorHandler;
 			if (hdl == null) {
-				hdl = new MyErrorHandler(this);
+				hdl = new MyFrontErrorHandler(this);
 				this.mErrorHandler = hdl;
 			}
 			return hdl;
 		}
-	}
 
-	private class MyErrorHandler implements ErrorHandler {
-
-		public MyErrorHandler(MyBuilder myBuilder) {
+		@Override
+		public BPElementProvider getBPElementProvider() {
+			BPElementProvider hdr = this.mBPElementProvider;
+			if (hdr == null) {
+				hdr = new MyDefaultBPElementProvider(this);
+				this.mBPElementProvider = hdr;
+			}
+			return hdr;
 		}
 
 		@Override
-		public void error(SAXParseException e) throws SAXException {
-			System.err.println(e);
+		public BPErrorHandler getBPErrorHandler() {
+			BPErrorHandler hdr = this.mBPErrorHdr;
+			if (hdr == null) {
+				hdr = new MyDefaultBPErrorHandler(this);
+				this.mBPErrorHdr = hdr;
+			}
+			return hdr;
 		}
 
 		@Override
-		public void fatalError(SAXParseException e) throws SAXException {
-			System.err.println(e);
+		public BPNode getRootNode() {
+			return this.mRoot;
 		}
 
 		@Override
-		public void warning(SAXParseException e) throws SAXException {
-			System.err.println(e);
+		public void setBPElementProvider(BPElementProvider provider) {
+			this.mBPElementProvider = provider;
 		}
 
-	}
-
-	private class MyContentHandler implements ContentHandler {
-
-		private final MyBuilder mBuilder;
-		private final BPDocument mDoc;
-
-		private final Stack<BPElement> mStack = new Stack<BPElement>();
-
-		public MyContentHandler(MyBuilder myBuilder) {
-			this.mBuilder = myBuilder;
-			this.mDoc = this.mBuilder.mDoc;
+		@Override
+		public void setBPErrorHandler(BPErrorHandler errorHandler) {
+			this.mBPErrorHdr = errorHandler;
 		}
 
 		@Override
@@ -96,9 +159,7 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 
 		@Override
 		public void endDocument() throws SAXException {
-			// TODO Auto-generated method stub
-
-			this.mDoc.appendChild(null);
+			this.mStack.clear();
 
 		}
 
@@ -106,22 +167,23 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		public void endElement(String uri, String localName, String qName)
 				throws SAXException {
 
-			final BPElement child = this.mStack.pop();
-			final BPElement parent;
-			if (this.mStack.isEmpty()) {
-				parent = null;
-			} else {
-				parent = this.mStack.peek();
-			}
-
-			child.setParent(parent);
-
-			child.tagEnd();
+			final BPElement child = (BPElement) this.mStack.pop();
+			final BPNode parent = this.mStack.peek();
 
 			if (parent == null) {
-				this.mDoc.appendChild(child);
-			} else {
-				parent.appendChild(child);
+				return;
+			}
+			if (child == null) {
+				return;
+			}
+			child.setParent(parent);
+			child.tagEnd();
+
+			boolean rlt = parent.appendChild(child);
+			if (!rlt) {
+				Exception e = MyExceptionFactory._parentNotAcceptChild(parent,
+						child);
+				this._onError(e);
 			}
 		}
 
@@ -159,29 +221,32 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 
 		@Override
 		public void startDocument() throws SAXException {
-			// TODO Auto-generated method stub
-
+			this.mStack.clear();
+			this.mStack.push(this.mRoot);
 		}
 
 		@Override
 		public void startElement(String uri, String localName, String qName,
 				Attributes atts) throws SAXException {
 
-			// System.out.println(this + ".startElement:" + qName);
+			// System.out.println("element : " + qName);
 
-			BPElement element = this.mDoc.createElement(uri, localName);
-			if (element == null) {
-				SAXException e = this._newException("no element", uri,
-						localName);
-				throw e;
-			}
+			BPElement element = this.getBPElementProvider().createElement(
+					this.mDoc, uri, localName);
 			this.mStack.push(element);
+			if (element == null) {
+				Exception e = MyExceptionFactory._noElement(uri, localName);
+				this._onError(e);
+				return;
+			}
 
 			final int cntAttr = atts.getLength();
 			for (int i = 0; i < cntAttr; i++) {
 				String attrURI = atts.getURI(i);
 				String attrLName = atts.getLocalName(i);
 				String attrValue = atts.getValue(i);
+
+				// System.out.println("        attr : " + attrLName);
 
 				if (attrURI == null) {
 					attrURI = "";
@@ -191,22 +256,18 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 						attrLName, attrValue);
 
 				if (attr == null) {
-					SAXException e = this._newException("no attr", attrURI,
-							attrLName);
-					throw e;
+					Exception e = MyExceptionFactory._noAttr(element, attrURI,
+							attrLName, attrValue);
+					this._onError(e);
+					continue;
 				}
 
 				boolean rlt = element.setAttribute(attr);
 				// rlt = true;
 				if (!rlt) {
-					String msg = "element no accept attr";
-					System.err.println(msg);
-					System.err.println("    eleemnt: " + uri + "#" + localName);
-					System.err.println("       attr: " + attrURI + "#"
-							+ attrLName);
-					SAXException e = this
-							._newException(msg, attrURI, attrLName);
-					throw e;
+					Exception e = MyExceptionFactory._elementNotAcceptAttr(
+							element, attr);
+					this._onError(e);
 				}
 			}
 
@@ -214,11 +275,12 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 
 		}
 
-		private SAXException _newException(String msg, String uri,
-				String localName) {
-
-			String str = msg + " : " + uri + "#" + localName;
-			return new SAXException(str);
+		private void _onError(Exception e) {
+			try {
+				this.getBPErrorHandler().error(e);
+			} catch (Exception e1) {
+				throw new RuntimeException(e);
+			}
 		}
 
 		@Override
@@ -227,7 +289,219 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 			// TODO Auto-generated method stub
 
 		}
+	}
+
+	private class MyFrontErrorHandler implements ErrorHandler {
+
+		private final MyBuilderCore mCore;
+
+		public MyFrontErrorHandler(MyBuilderCore core) {
+			this.mCore = core;
+		}
+
+		@Override
+		public void error(SAXParseException e) throws SAXException {
+			try {
+				this.mCore.getBPErrorHandler().error(e);
+			} catch (Exception e1) {
+				this._onFatalError(e1);
+				throw e;
+			}
+		}
+
+		@Override
+		public void fatalError(SAXParseException e) throws SAXException {
+			try {
+				this.mCore.getBPErrorHandler().fatalError(e);
+			} catch (Exception e1) {
+				this._onFatalError(e1);
+				throw e;
+			}
+		}
+
+		@Override
+		public void warning(SAXParseException e) throws SAXException {
+			try {
+				this.mCore.getBPErrorHandler().warning(e);
+			} catch (Exception e1) {
+				this._onFatalError(e1);
+				throw e;
+			}
+		}
+
+		private void _onFatalError(Exception e1) {
+			try {
+				this.mCore.getBPErrorHandler().fatalError(e1);
+			} catch (Exception e) {
+				// e.printStackTrace();
+			}
+		}
 
 	}
 
+	private class MyFrontContentHandler implements ContentHandler {
+
+		private final MyBuilderCore mCore;
+
+		public MyFrontContentHandler(MyBuilderCore core) {
+			this.mCore = core;
+		}
+
+		private void _onError(Exception e) {
+			try {
+				this.mCore.getBPErrorHandler().fatalError(e);
+			} catch (Exception e1) {
+				throw new RuntimeException(e1);
+			}
+		}
+
+		@Override
+		public void characters(char[] ch, int start, int length)
+				throws SAXException {
+
+			try {
+				this.mCore.characters(ch, start, length);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void endDocument() throws SAXException {
+			try {
+				this.mCore.endDocument();
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void endElement(String uri, String localName, String qName)
+				throws SAXException {
+
+			try {
+				this.mCore.endElement(uri, localName, qName);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void endPrefixMapping(String prefix) throws SAXException {
+			try {
+				this.mCore.endPrefixMapping(prefix);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void ignorableWhitespace(char[] ch, int start, int length)
+				throws SAXException {
+			try {
+				this.mCore.ignorableWhitespace(ch, start, length);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void processingInstruction(String target, String data)
+				throws SAXException {
+			try {
+				this.mCore.processingInstruction(target, data);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void setDocumentLocator(Locator locator) {
+			try {
+				this.mCore.setDocumentLocator(locator);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void skippedEntity(String name) throws SAXException {
+			try {
+				this.mCore.skippedEntity(name);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void startDocument() throws SAXException {
+			try {
+				this.mCore.startDocument();
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void startElement(String uri, String localName, String qName,
+				Attributes atts) throws SAXException {
+
+			try {
+				this.mCore.startElement(uri, localName, qName, atts);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+		@Override
+		public void startPrefixMapping(String prefix, String uri)
+				throws SAXException {
+			try {
+				this.mCore.startPrefixMapping(prefix, uri);
+			} catch (Exception e) {
+				this._onError(e);
+			}
+		}
+
+	}
+
+	class MyDefaultBPElementProvider implements BPElementProvider {
+
+		// private MyBuilderCore mCore;
+
+		public MyDefaultBPElementProvider(MyBuilderCore core) {
+			// this.mCore = core;
+		}
+
+		@Override
+		public BPElement createElement(BPDocument doc, String uri,
+				String localName) {
+			return doc.createElement(uri, localName);
+		}
+	}
+
+	class MyDefaultBPErrorHandler implements BPErrorHandler {
+
+		public MyDefaultBPErrorHandler(MyBuilderCore myBuilderCore) {
+		}
+
+		@Override
+		public void error(Exception e) {
+			System.err.print("[error] : ");
+			e.printStackTrace(System.err);
+			System.err.flush();
+		}
+
+		@Override
+		public void fatalError(Exception e) throws Exception {
+			System.err.println("[fatalError]!");
+			throw e;
+		}
+
+		@Override
+		public void warning(Exception e) {
+			System.err.println("[warning] : " + e);
+			System.err.flush();
+		}
+	}
 }

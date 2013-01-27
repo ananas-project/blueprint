@@ -16,8 +16,8 @@ public class XSECtrl_schema extends XSTCtrl_schemaType {
 		if (lname == null) {
 			return super.setAttribute(attr);
 
-		} else if (lname.equals("elementFormDefault")) {
-			this.m_attr_elementFormDefault = attr;
+//		} else if (lname.equals("elementFormDefault")) {
+	//		this.m_attr_elementFormDefault = attr;
 
 		} else if (lname.equals("lang")) {
 			this.m_attr_lang = attr;
