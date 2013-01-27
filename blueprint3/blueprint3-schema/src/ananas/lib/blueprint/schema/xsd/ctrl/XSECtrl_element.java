@@ -10,7 +10,7 @@ public class XSECtrl_element extends XSTCtrl_topLevelElement {
 	@Override
 	public boolean setAttribute(BPAttribute attr) {
 
-		String lname = attr.getBPClass().getLocalName();
+		String lname = attr.getType().getLocalName();
 		if (lname == null) {
 			return super.setAttribute(attr);
 

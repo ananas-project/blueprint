@@ -10,7 +10,7 @@ public class XSECtrl_import extends XSTCtrl_importType {
 	@Override
 	public boolean setAttribute(BPAttribute attr) {
 
-		String lname = attr.getBPClass().getLocalName();
+		String lname = attr.getType().getLocalName();
 		if (lname == null) {
 			return super.setAttribute(attr);
 

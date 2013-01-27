@@ -9,7 +9,7 @@ public class XSECtrl_complexType extends XSTCtrl_topLevelComplexType {
 	@Override
 	public boolean setAttribute(BPAttribute attr) {
 
-		String lname = attr.getBPClass().getLocalName();
+		String lname = attr.getType().getLocalName();
 		if (lname == null) {
 			return super.setAttribute(attr);
 

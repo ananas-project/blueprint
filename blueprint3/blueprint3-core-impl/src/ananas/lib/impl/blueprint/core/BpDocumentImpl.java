@@ -63,12 +63,12 @@ public class BpDocumentImpl implements BPDocument {
 	}
 
 	@Override
-	public BPType getBPClass() {
+	public BPType getType() {
 		return null;
 	}
 
 	@Override
-	public boolean bindBPClass(BPType bpClass) {
+	public boolean bindType(BPType bpClass) {
 		return false;
 	}
 
@@ -133,7 +133,7 @@ public class BpDocumentImpl implements BPDocument {
 		Class<?> cls = bpcls.getControllerClass();
 		try {
 			BPNode node = (BPNode) cls.newInstance();
-			node.bindBPClass(bpcls);
+			node.bindType(bpcls);
 			node.bindOwnerDocument(this);
 			return node;
 		} catch (Exception e) {
@@ -210,7 +210,7 @@ public class BpDocumentImpl implements BPDocument {
 	public BPAttribute createAttribute(BPElement element, String uri,
 			String localName, String value) {
 
-		BPType cls = element.getBPClass().getAttributeType(uri, localName);
+		BPType cls = element.getType().getAttributeType(uri, localName);
 		if (cls == null) {
 			System.err.println("No attribute class!");
 			System.err.println("         element:" + element);
@@ -227,7 +227,7 @@ public class BpDocumentImpl implements BPDocument {
 			e.printStackTrace();
 			return null;
 		}
-		attr.bindBPClass(cls);
+		attr.bindType(cls);
 		attr.bindOwnerDocument(this);
 		attr.setValue(value);
 		return attr;

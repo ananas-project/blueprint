@@ -2,9 +2,9 @@ package ananas.lib.blueprint.core.lang;
 
 public interface BPController {
 
-	BPType getBPClass();
+	BPType getType();
 
-	boolean bindBPClass(BPType bpClass);
+	boolean bindType(BPType bpClass);
 
 	Object getTarget();
 

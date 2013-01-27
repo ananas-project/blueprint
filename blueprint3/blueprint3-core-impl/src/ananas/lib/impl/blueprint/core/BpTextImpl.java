@@ -43,12 +43,12 @@ public class BpTextImpl implements BPText {
 	}
 
 	@Override
-	public BPType getBPClass() {
+	public BPType getType() {
 		return null;
 	}
 
 	@Override
-	public boolean bindBPClass(BPType bpClass) {
+	public boolean bindType(BPType bpClass) {
 		return false;
 	}
 

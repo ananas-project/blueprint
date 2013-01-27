@@ -10,7 +10,7 @@ public class AbstractNode implements BPNode {
 	private Object mTarget;
 
 	@Override
-	public BPType getBPClass() {
+	public BPType getType() {
 		return this.mBpClass;
 	}
 
@@ -31,7 +31,7 @@ public class AbstractNode implements BPNode {
 	@Override
 	public Object createTarget() {
 		try {
-			BPType bpcls = this.getBPClass();
+			BPType bpcls = this.getType();
 			Class<?> cls = bpcls.getTargetClass();
 			Object inst = cls.newInstance();
 			return inst;
@@ -79,7 +79,7 @@ public class AbstractNode implements BPNode {
 	}
 
 	@Override
-	public boolean bindBPClass(BPType bpClass) {
+	public boolean bindType(BPType bpClass) {
 		if ((this.mBpClass == null) && (bpClass != null)) {
 			this.mBpClass = bpClass;
 			return true;
