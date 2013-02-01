@@ -486,10 +486,12 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		}
 
 		@Override
-		public void error(Exception e) {
+		public void error(Exception e) throws Exception {
 			System.err.print("[error] : ");
 			e.printStackTrace(System.err);
 			System.err.flush();
+
+			throw e;// debug
 		}
 
 		@Override
@@ -499,9 +501,11 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		}
 
 		@Override
-		public void warning(Exception e) {
+		public void warning(Exception e) throws Exception {
 			System.err.println("[warning] : " + e);
 			System.err.flush();
+
+			throw e;// debug
 		}
 	}
 }
