@@ -1,6 +1,7 @@
 package ananas.lib.blueprint.schema.xsd.ctrl;
 
 import ananas.lib.blueprint.core.dom.BPAttribute;
+import ananas.lib.blueprint.core.dom.BPNode;
 
 public class XSTCtrl_group extends XSTCtrl_annotated {
 
@@ -24,6 +25,25 @@ public class XSTCtrl_group extends XSTCtrl_annotated {
 			return super.setAttribute(attr);
 		}
 		return true;
+	}
+
+	public boolean appendChild(BPNode node) {
+		if (node == null) {
+			return false;
+
+		} else if (node instanceof XSTCtrl_element) {
+			XSTCtrl_element element = (XSTCtrl_element) node;
+			this._addElement(element);
+
+		} else {
+			return super.appendChild(node);
+		}
+		return true;
+	}
+
+	private void _addElement(XSTCtrl_element element) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
