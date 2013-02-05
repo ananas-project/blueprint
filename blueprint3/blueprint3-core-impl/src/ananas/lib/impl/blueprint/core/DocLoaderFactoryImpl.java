@@ -11,6 +11,7 @@ import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPDocumentLoader;
 import ananas.lib.blueprint.core.lang.BPDocumentLoaderFactory;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
+import ananas.lib.blueprint.core.lang.BlueprintException;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
 import ananas.lib.blueprint.core.util.BPXMLReaderFactory;
@@ -31,43 +32,74 @@ public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {
 
 			IInputConnection conn = null;
 			InputStream in = null;
-			Exception ioe = null;
 			BPDocument doc = null;
-			try {
+			Exception ioe = null;
 
+			try {
 				conn = (IInputConnection) envi.getConnector().open(uri);
 				in = conn.getInputStream();
-
-				doc = envi.getImplementation().createDocument(envi, uri);
-
-				BPXMLReaderFactory parserFactory = envi.getXMLReaderFactory();
-				XMLReader reader = parserFactory.newReader();
-
-				BPBuilderFactory builderFactory = envi.getBuilderFactory();
-				BPBuilder builder = builderFactory.newBuilder(doc);
-
-				reader.setContentHandler(builder.getContentHandler());
-				reader.setErrorHandler(builder.getErrorHandler());
-				reader.parse(new InputSource(in));
-
-			} catch (Exception e) {
+				doc = this._loadDoc(envi, in, uri);
+			} catch (SAXException e) {
 				ioe = e;
-			}
-			if (in != null) {
-				in.close();
-			}
-			if (conn != null) {
-				conn.close();
-			}
-			if (ioe != null) {
-				if (ioe instanceof IOException) {
-					throw ((IOException) ioe);
-				} else if (ioe instanceof SAXException) {
-					throw ((SAXException) ioe);
-				} else {
-					throw new RuntimeException(ioe);
+			} catch (BlueprintException e) {
+				ioe = e;
+			} catch (IOException e) {
+				ioe = e;
+			} finally {
+				if (in != null) {
+					in.close();
+				}
+				if (conn != null) {
+					conn.close();
 				}
 			}
+
+			if (ioe == null) {
+				return doc;
+
+			} else if (ioe instanceof IOException) {
+				throw ((IOException) ioe);
+
+			} else if (ioe instanceof BlueprintException) {
+				throw ((BlueprintException) ioe);
+
+			} else if (ioe instanceof SAXException) {
+				throw ((SAXException) ioe);
+
+			} else {
+				throw new RuntimeException(ioe);
+			}
+
+		}
+
+		@Override
+		public BPDocument loadDocument(BPEnvironment envi, InputStream in,
+				String uri) throws IOException, BlueprintException,
+				SAXException {
+
+			return this._loadDoc(envi, in, uri);
+
+		}
+
+		private BPDocument _loadDoc(BPEnvironment envi, InputStream in,
+				String uri) throws SAXException, IOException {
+
+			BPDocument doc = envi.getImplementation().createDocument(envi, uri);
+
+			BPXMLReaderFactory parserFactory = envi.getXMLReaderFactory();
+			XMLReader reader = parserFactory.newReader();
+			reader.setFeature("http://xml.org/sax/features/validation", false);
+			reader.setFeature(
+					"http://apache.org/xml/features/nonvalidating/load-external-dtd",
+					false);
+
+			BPBuilderFactory builderFactory = envi.getBuilderFactory();
+			BPBuilder builder = builderFactory.newBuilder(doc);
+
+			reader.setContentHandler(builder.getContentHandler());
+			reader.setErrorHandler(builder.getErrorHandler());
+			reader.parse(new InputSource(in));
+
 			return doc;
 
 		}

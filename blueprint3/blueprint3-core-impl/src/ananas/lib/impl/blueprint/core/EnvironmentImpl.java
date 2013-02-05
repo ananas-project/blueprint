@@ -4,9 +4,12 @@ import ananas.lib.blueprint.core.dom.BPImplementation;
 import ananas.lib.blueprint.core.lang.BPDocumentLoaderFactory;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespaceRegistrar;
+import ananas.lib.blueprint.core.lang.BlueprintException;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
 import ananas.lib.blueprint.core.util.BPVisitorFactory;
 import ananas.lib.blueprint.core.util.BPXMLReaderFactory;
+import ananas.lib.blueprint.core.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint.core.util.nsloader.BPNamespaceLoaderFactory;
 import ananas.lib.blueprint.core.xml.serializer.BPXmlSerializerFactory;
 import ananas.lib.io.DefaultConnector;
 import ananas.lib.io.IConnector;
@@ -20,7 +23,9 @@ public class EnvironmentImpl implements BPEnvironment {
 	private final BPBuilderFactory mBuilderFactory;
 	private BPVisitorFactory mVisitorFactory;
 	private final IConnector mConnector;
-	private  final BPDocumentLoaderFactory mDocLoaderFactory;
+	private final BPDocumentLoaderFactory mDocLoaderFactory;
+	private NsLoadingManager mNsLoadingManager;
+	private final BPNamespaceLoaderFactory mNsLoaderFactory;
 
 	public EnvironmentImpl() {
 		this.mConnector = new DefaultConnector();
@@ -28,7 +33,8 @@ public class EnvironmentImpl implements BPEnvironment {
 		this.mParserFactory = new ParserFactoryImpl();
 		this.mBuilderFactory = new BuilderFactoryImpl();
 		this.mNsReg = new NamespaceRegImpl();
-		this.mDocLoaderFactory = new  DocLoaderFactoryImpl ()  ;
+		this.mDocLoaderFactory = new DocLoaderFactoryImpl();
+		this.mNsLoaderFactory = new MainNsLoaderFactory();
 	}
 
 	@Override
@@ -68,7 +74,49 @@ public class EnvironmentImpl implements BPEnvironment {
 
 	@Override
 	public BPDocumentLoaderFactory getDocumentLoaderFactory() {
-		return this.mDocLoaderFactory ;
+		return this.mDocLoaderFactory;
+	}
+
+	@Override
+	public void loadNamespace(String aClassName, boolean lazy)
+			throws BlueprintException {
+		try {
+			Class<?> cls = Class.forName(aClassName);
+			this.loadNamespace(cls, lazy);
+		} catch (BlueprintException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new BlueprintException(e);
+		}
+	}
+
+	@Override
+	public void loadNamespace(Class<?> aClass, boolean lazy)
+			throws BlueprintException {
+		try {
+			final BPNamespaceInfo info = (BPNamespaceInfo) aClass.newInstance();
+			this.loadNamespace(info, lazy);
+		} catch (BlueprintException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new BlueprintException(e);
+		}
+	}
+
+	@Override
+	public void loadNamespace(BPNamespaceInfo info, boolean lazy)
+			throws BlueprintException {
+		NsLoadingManager nslm = this.mNsLoadingManager;
+		if (nslm == null) {
+			nslm = new NsLoadingManager();
+			this.mNsLoadingManager = nslm;
+		}
+		nslm.load(this, info, lazy);
+	}
+
+	@Override
+	public BPNamespaceLoaderFactory getNamespaceLoaderFactory() {
+		return this.mNsLoaderFactory;
 	}
 
 }
