@@ -3,7 +3,6 @@ package ananas.lib.impl.blueprint.core;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPNode;
 import ananas.lib.blueprint.core.dom.BPText;
-import ananas.lib.blueprint.core.lang.BPType;
 
 public class BpTextImpl implements BPText {
 
@@ -43,38 +42,18 @@ public class BpTextImpl implements BPText {
 	}
 
 	@Override
-	public BPType getType() {
-		return null;
-	}
-
-	@Override
-	public boolean bindType(BPType bpClass) {
-		return false;
-	}
-
-	@Override
-	public Object getTarget() {
-		return null;
-	}
-
-	@Override
-	public Object getTarget(boolean create) {
-		return null;
-	}
-
-	@Override
-	public Object createTarget() {
-		return null;
-	}
-
-	@Override
-	public boolean bindTarget(Object target) {
-		return false;
-	}
-
-	@Override
 	public String getData() {
 		return this.mData;
+	}
+
+	@Override
+	public String getLocalName() {
+		return null;
+	}
+
+	@Override
+	public String getNamespaceURI() {
+		return null;
 	}
 
 }

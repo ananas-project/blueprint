@@ -1,5 +1,8 @@
 package ananas.lib.impl.blueprint.core;
 
+import ananas.lib.blueprint.core.dom.BPAttribute;
+import ananas.lib.blueprint.core.dom.BPElement;
+import ananas.lib.blueprint.core.dom.BPNode;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPType;
 
@@ -30,25 +33,6 @@ public class BPClassImpl implements BPType {
 	}
 
 	@Override
-	public BPType getAttributeType(String uri, String localName) {
-		if (uri == null) {
-			uri = "";
-		}
-		BPNamespace ns;
-		if (uri.isEmpty()) {
-			ns = this.mNS;
-		} else {
-			ns = this.mNS.getOwnerEnvironment().getNamespaceRegistrar()
-					.getNamespace(uri);
-		}
-		if (ns == null) {
-			return null;
-		} else {
-			return ns.getType(localName);
-		}
-	}
-
-	@Override
 	public String getLocalName() {
 		return this.mLocalName;
 	}
@@ -56,6 +40,18 @@ public class BPClassImpl implements BPType {
 	@Override
 	public BPNamespace getOwnerNamespace() {
 		return this.mNS;
+	}
+
+	@Override
+	public boolean appendChildToParent(BPElement parent, BPNode child) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean setAttributeForParent(BPElement parent, BPAttribute attr) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

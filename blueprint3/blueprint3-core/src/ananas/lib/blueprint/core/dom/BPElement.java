@@ -1,6 +1,8 @@
 package ananas.lib.blueprint.core.dom;
 
-public interface BPElement extends BPNode {
+import ananas.lib.blueprint.core.lang.BPController;
+
+public interface BPElement extends BPNode, BPController {
 
 	boolean setAttribute(BPAttribute attr);
 

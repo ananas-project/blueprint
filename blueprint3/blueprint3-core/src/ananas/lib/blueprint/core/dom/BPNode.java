@@ -1,8 +1,6 @@
 package ananas.lib.blueprint.core.dom;
 
-import ananas.lib.blueprint.core.lang.BPController;
-
-public interface BPNode extends BPController {
+public interface BPNode {
 
 	boolean appendChild(BPNode newChild);
 
@@ -15,5 +13,9 @@ public interface BPNode extends BPController {
 	BPDocument getOwnerDocument();
 
 	boolean bindOwnerDocument(BPDocument ownerDoc);
+
+	String getLocalName();
+
+	String getNamespaceURI();
 
 }

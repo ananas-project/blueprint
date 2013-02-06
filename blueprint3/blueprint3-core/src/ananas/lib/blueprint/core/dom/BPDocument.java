@@ -12,8 +12,7 @@ public interface BPDocument extends BPNode {
 
 	BPText createText(String data);
 
-	BPAttribute createAttribute(BPElement element, String uri,
-			String localName, String value);
+	BPAttribute createAttribute(String uri, String localName, String value);
 
 	BPElement createElement(String uri, String localName);
 

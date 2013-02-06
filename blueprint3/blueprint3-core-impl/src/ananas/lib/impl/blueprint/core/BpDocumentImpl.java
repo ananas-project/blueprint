@@ -63,36 +63,6 @@ public class BpDocumentImpl implements BPDocument {
 	}
 
 	@Override
-	public BPType getType() {
-		return null;
-	}
-
-	@Override
-	public boolean bindType(BPType bpClass) {
-		return false;
-	}
-
-	@Override
-	public Object getTarget() {
-		return null;
-	}
-
-	@Override
-	public Object getTarget(boolean create) {
-		return null;
-	}
-
-	@Override
-	public Object createTarget() {
-		return null;
-	}
-
-	@Override
-	public boolean bindTarget(Object target) {
-		return false;
-	}
-
-	@Override
 	public BPElement getRootElement() {
 		return this.mRoot;
 	}
@@ -112,7 +82,7 @@ public class BpDocumentImpl implements BPDocument {
 		return new BpTextImpl(data);
 	}
 
-	private BPNode _createNode(String uri, String localName) {
+	private BPElement _createElement(String uri, String localName) {
 
 		BPNamespace pkg = this.mEnvironment.getNamespaceRegistrar()
 				.getNamespace(uri);
@@ -132,7 +102,7 @@ public class BpDocumentImpl implements BPDocument {
 		}
 		Class<?> cls = bpcls.getControllerClass();
 		try {
-			BPNode node = (BPNode) cls.newInstance();
+			BPElement node = (BPElement) cls.newInstance();
 			node.bindType(bpcls);
 			node.bindOwnerDocument(this);
 			return node;
@@ -144,13 +114,7 @@ public class BpDocumentImpl implements BPDocument {
 
 	@Override
 	public BPElement createElement(String uri, String localName) {
-		BPNode node = this._createNode(uri, localName);
-		if (node instanceof BPElement) {
-			BPElement ele = (BPElement) node;
-			return ele;
-		} else {
-			return null;
-		}
+		return this._createElement(uri, localName);
 	}
 
 	@Override
@@ -207,31 +171,20 @@ public class BpDocumentImpl implements BPDocument {
 	}
 
 	@Override
-	public BPAttribute createAttribute(BPElement element, String uri,
-			String localName, String value) {
+	public BPAttribute createAttribute(String uri, String localName,
+			String value) {
 
-		BPType cls = element.getType().getAttributeType(uri, localName);
-		if (cls == null) {
-			System.err.println("No attribute class!");
-			System.err.println("         element:" + element);
-			System.err.println("    namespaceURI:" + uri);
-			System.err.println("       loaclName:" + localName);
-			System.err.println("           value:" + value);
-			return null;
-		}
-		Class<?> ctrlClass = cls.getControllerClass();
-		BPAttribute attr;
-		try {
-			attr = (BPAttribute) ctrlClass.newInstance();
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-		attr.bindType(cls);
-		attr.bindOwnerDocument(this);
-		attr.setValue(value);
-		return attr;
+		return new BpAttrImpl(uri, localName, value);
+	}
 
+	@Override
+	public String getLocalName() {
+		return null;
+	}
+
+	@Override
+	public String getNamespaceURI() {
+		return null;
 	}
 
 }

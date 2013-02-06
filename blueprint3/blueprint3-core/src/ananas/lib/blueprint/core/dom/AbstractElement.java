@@ -1,18 +1,91 @@
 package ananas.lib.blueprint.core.dom;
 
+import ananas.lib.blueprint.core.lang.BPType;
+
 public class AbstractElement extends AbstractNode implements BPElement {
 
+	private Object mTarget;
+	private BPType mType;
+
 	@Override
-	public boolean setAttribute(BPAttribute attr) {
-		return false;
+	public final boolean appendChild(BPNode newChild) {
+		return this.onAppendChild(newChild);
 	}
 
 	@Override
-	public void tagBegin() {
+	public final void tagBegin() {
+		this.onTagBegin();
 	}
 
 	@Override
-	public void tagEnd() {
+	public final void tagEnd() {
+		this.onTagEnd();
+	}
+
+	@Override
+	public final boolean setAttribute(BPAttribute attr) {
+		return this.onSetAttribute(attr);
+	}
+
+	protected boolean onAppendChild(BPNode newChild) {
+		boolean rlt = this.getType().appendChildToParent(this, newChild);
+		return rlt;
+	}
+
+	protected void onTagBegin() {
+	}
+
+	protected void onTagEnd() {
+	}
+
+	protected boolean onSetAttribute(BPAttribute attr) {
+		return this.getType().setAttributeForParent(this, attr);
+	}
+
+	@Override
+	public BPType getType() {
+		return this.mType;
+	}
+
+	@Override
+	public boolean bindType(BPType type) {
+		if ((this.mType == null) && (type != null)) {
+			this.mType = type;
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public Object getTarget() {
+		return this.mTarget;
+	}
+
+	@Override
+	public Object getTarget(boolean create) {
+		Object tar = this.mTarget;
+		if ((tar == null) && (create)) {
+			tar = this.createTarget();
+			this.mTarget = tar;
+		}
+		return tar;
+	}
+
+	@Override
+	public Object createTarget() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean bindTarget(Object target) {
+		if ((this.mTarget == null) && (target != null)) {
+			this.mTarget = target;
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

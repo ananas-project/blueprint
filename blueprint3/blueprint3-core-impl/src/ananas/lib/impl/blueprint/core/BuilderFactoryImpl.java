@@ -13,11 +13,11 @@ import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.lang.BlueprintException;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
 import ananas.lib.blueprint.core.util.BPElementProvider;
 import ananas.lib.blueprint.core.util.BPErrorHandler;
-import ananas.lib.blueprint.core.util.BlueprintException;
 
 public class BuilderFactoryImpl implements BPBuilderFactory {
 
@@ -47,13 +47,12 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 	static class MyExceptionFactory {
 
 		public static Exception _elementNotAcceptAttr(BPElement element,
-				BPAttribute attr) {
-
-			String attrLName = attr.getType().getLocalName();
+				String uri, String localName, String value) {
 
 			return new BlueprintException(
 					"element not accept attribute : [element]=" + element
-							+ " [attr]=" + attrLName);
+							+ " [attr]=" + uri + "#" + localName + "='" + value
+							+ "'");
 		}
 
 		public static Exception _noAttr(BPElement element, String attrURI,
@@ -248,25 +247,20 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 
 				// System.out.println("        attr : " + attrLName);
 
-				if (attrURI == null) {
-					attrURI = "";
+				if (attrURI != null) {
+					if (attrURI.length() < 1) {
+						attrURI = null;
+					}
 				}
 
-				BPAttribute attr = this.mDoc.createAttribute(element, attrURI,
+				BPAttribute attr = this.mDoc.createAttribute(attrURI,
 						attrLName, attrValue);
-
-				if (attr == null) {
-					Exception e = MyExceptionFactory._noAttr(element, attrURI,
-							attrLName, attrValue);
-					this._onError(e);
-					continue;
-				}
 
 				boolean rlt = element.setAttribute(attr);
 				// rlt = true;
 				if (!rlt) {
 					Exception e = MyExceptionFactory._elementNotAcceptAttr(
-							element, attr);
+							element, attrURI, attrLName, attrValue);
 					this._onError(e);
 				}
 			}

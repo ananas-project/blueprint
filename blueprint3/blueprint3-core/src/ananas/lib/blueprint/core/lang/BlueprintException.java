@@ -1,9 +1,13 @@
-package ananas.lib.blueprint.core.util;
+package ananas.lib.blueprint.core.lang;
 
 public class BlueprintException extends RuntimeException {
 
 	public BlueprintException(String string) {
 		super(string);
+	}
+
+	public BlueprintException(Throwable e) {
+		super(e);
 	}
 
 	/**

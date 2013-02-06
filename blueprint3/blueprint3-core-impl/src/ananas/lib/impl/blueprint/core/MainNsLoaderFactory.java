@@ -1,0 +1,55 @@
+package ananas.lib.impl.blueprint.core;
+
+import ananas.lib.blueprint.core.lang.BPEnvironment;
+import ananas.lib.blueprint.core.lang.BlueprintException;
+import ananas.lib.blueprint.core.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint.core.util.nsloader.BPNamespaceLoader;
+import ananas.lib.blueprint.core.util.nsloader.BPNamespaceLoaderFactory;
+
+public class MainNsLoaderFactory implements BPNamespaceLoaderFactory {
+
+	private BPNamespaceLoader mLoader;
+
+	@Override
+	public BPNamespaceLoader getLoader() {
+		if (this.mLoader == null) {
+			this.mLoader = new MyLoader();
+		}
+		return this.mLoader;
+	}
+
+	private static class MyLoader implements BPNamespaceLoader {
+
+		@Override
+		public void load(BPEnvironment environment, BPNamespaceInfo info)
+				throws BlueprintException {
+
+			try {
+				String ldrClass = info.getProperty("loader");
+				if (ldrClass == null) {
+					throw new BlueprintException(
+							"The properties must contain a key named of 'loader' .");
+				}
+				Class<?> cls = Class.forName(ldrClass);
+				Object inst = cls.newInstance();
+				BPNamespaceLoader ldr = null;
+				if (inst instanceof BPNamespaceLoaderFactory) {
+					ldr = ((BPNamespaceLoaderFactory) inst).getLoader();
+				} else {
+					ldr = (BPNamespaceLoader) inst;
+				}
+				ldr.load(environment, info);
+
+			} catch (Exception e) {
+
+				if (e instanceof BlueprintException) {
+					throw (BlueprintException) e;
+				} else {
+					throw new BlueprintException(e);
+				}
+
+			}
+		}
+	}
+
+}
