@@ -1,11 +1,9 @@
 package ananas.lib.blueprint.loader.reflect.dom;
 
 import java.io.PrintStream;
-import java.util.Map;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
-import ananas.lib.blueprint.core.lang.BPType;
 
 public class RefElement_element extends RefElement {
 
@@ -41,7 +39,6 @@ public class RefElement_element extends RefElement {
 
 	@Override
 	public boolean appendChild(RefNode child) {
-
 		return false;
 	}
 
@@ -50,68 +47,41 @@ public class RefElement_element extends RefElement {
 		out.println("<element name='" + this.mLocalName + "' />");
 	}
 
-	public void regElement(Map<String, String> properties, BPEnvironment envi,
+	public void regElement(IRefProperties properties, BPEnvironment envi,
 			BPNamespace ns) {
 
-		properties.put(RefElement_namespace.Prop.ns_localName, this.mLocalName);
+		properties.put(IRefProperties.ns_localName, this.mLocalName);
 
 		String targetClassName = this.caleClassName(properties,
-				this.mTargetClass,
-				RefElement_namespace.Prop.ns_defaultTargetClass);
+				this.mTargetClass, IRefProperties.ns_defaultTargetClass);
 		String ctrlClassName = this.caleClassName(properties, this.mCtrlClass,
-				RefElement_namespace.Prop.ns_defaultControllerClass);
+				IRefProperties.ns_defaultControllerClass);
 
 		MyElementType.Config conf = new MyElementType.Config();
 		conf.targetClass = this.classByName(targetClassName);
 		conf.ctrlClass = this.classByName(ctrlClassName);
 		conf.ownerNS = ns;
 		conf.localName = this.mLocalName;
-		BPType elementType = new MyElementType(conf);
+		MyElementType elementType = new MyElementType(conf);
+
+		String prefixAttr = properties.get(
+				IRefProperties.ns_set_attr_method_prefix, true,
+				"set_attribute_", true);
+		String prefixChild = properties.get(
+				IRefProperties.ns_append_child_method_prefix, true,
+				"append_child_", true);
+		elementType.reflectMethods(prefixAttr, prefixChild);
 		ns.registerType(elementType);
 
 	}
 
-	private String caleClassName(Map<String, String> properties,
-			String className, String defaultClassNameKey) {
-
+	private String caleClassName(IRefProperties properties, String className,
+			String defaultClassNameKey) {
 		if (className == null) {
-			className = properties.get(defaultClassNameKey);
+			className = properties.get(defaultClassNameKey, false, null);
 		}
-		for (int i = 10; className.contains("$("); i--) {
-			if (i < 0) {
-				throw new RuntimeException(
-						"The macro reference is too deep.[text]=" + className);
-			}
-			className = this.processMacro(properties, className);
-		}
+		className = properties.processMacro(className);
 		return className;
-	}
-
-	interface Macro {
-		String begin = "$(";
-		String end = ")";
-	}
-
-	private String processMacro(Map<String, String> properties, String text) {
-
-		final int i1 = text.indexOf(Macro.begin);
-		if (i1 < 0) {
-			return text;
-		}
-
-		final int i2 = text.indexOf(Macro.end, i1);
-		if (i2 < 0) {
-			throw new RuntimeException(
-					"The macro of string not closed. [string]=" + text);
-		}
-
-		String p1 = text.substring(0, i1);
-		String p2 = text.substring(i1 + Macro.begin.length(), i2);
-		String p3 = text.substring(i2 + Macro.end.length());
-
-		p2 = properties.get(p2);
-
-		return (p1 + p2 + p3);
 	}
 
 	private Class<?> classByName(String className) {

@@ -2,16 +2,14 @@ package ananas.lib.blueprint.loader.reflect.dom;
 
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 
 public class RefElement_namespace extends RefElement {
 
-	private final Map<String, String> mProperties = new HashMap<String, String>();
+	private final IRefProperties mProperties = new MyRefProperties();
 	private final List<RefElement_element> mElements = new ArrayList<RefElement_element>();
 
 	public RefElement_namespace(RefDocument ownerDoc) {
@@ -26,7 +24,7 @@ public class RefElement_namespace extends RefElement {
 			return false;
 
 		} else if (attrLName.equals("name")) {
-			this.mProperties.put(Prop.ns_uri, attrValue);
+			this.mProperties.put(IRefProperties.ns_uri, attrValue);
 
 		} else {
 			return false;
@@ -71,9 +69,9 @@ public class RefElement_namespace extends RefElement {
 
 	public void regNamespace(BPEnvironment envi) {
 
-		String uri = this.getProperty(Prop.ns_uri, false, null);
-		String defaultPrefix = this.getProperty(Prop.ns_default_prefix, false,
-				null);
+		String uri = this.getProperty(IRefProperties.ns_uri, false, null);
+		String defaultPrefix = this.getProperty(
+				IRefProperties.ns_default_prefix, false, null);
 		BPNamespace ns = envi.getImplementation().createNamespace(envi, uri,
 				defaultPrefix);
 
@@ -83,15 +81,6 @@ public class RefElement_namespace extends RefElement {
 
 		envi.getNamespaceRegistrar().registerNamespace(ns);
 
-	}
-
-	public interface Prop {
-		String ns_default_prefix = "ns:defaultPrefix";
-		String ns_uri = "ns:namespaceURI";
-
-		String ns_defaultControllerClass = "ns:defaultControllerClass";
-		String ns_defaultTargetClass = "ns:defaultTargetClass";
-		String ns_localName = "ns:localName";
 	}
 
 	public String getProperty(String key, boolean enableNull,

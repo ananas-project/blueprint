@@ -2,9 +2,11 @@ package example.main;
 
 import java.lang.reflect.Method;
 
+import javax.swing.JFrame;
+
+import ananas.lib.blueprint.awt.AwtNamespaceInfo;
 import ananas.lib.blueprint.core.Blueprint;
 import ananas.lib.blueprint.core.dom.BPDocument;
-import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.swing.CJFrame;
 import ananas.lib.blueprint.swing.SwingNamespaceInfo;
@@ -66,12 +68,13 @@ public class Main {
 		try {
 
 			BPEnvironment bpenv = Blueprint.getInstance().defaultEnvironment();
-			// bpenv.loadNamespace(EomBootInfo.class, true);
+			bpenv.loadNamespace(AwtNamespaceInfo.class, true);
 			bpenv.loadNamespace(SwingNamespaceInfo.class, true);
 
-			BPDocument doc = Blueprint.loadDocument("resource:///test.xml");
-			BPElement element = doc.getRootElement();
-			System.out.println(element);
+			BPDocument doc = Blueprint
+					.loadDocument("resource:///test-swing.xml");
+			JFrame frame = (JFrame) doc.getRootElement().getTarget();
+			frame.setVisible(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();

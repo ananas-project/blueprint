@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <reflect xmlns="xmlns:ananas:blueprint:loader:reflect">
 
-	<namespace name="xmlns:ananas:blueprint:swing">
+	<namespace name="xmlns:ananas:blueprint:awt">
 
 
-		<property key="myCtrlPackage" value="ananas.lib.blueprint.swing" />
-		<property key="myTargetPackage" value="javax.swing" />
+		<property key="myCtrlPackage" value="ananas.lib.blueprint.awt" />
+		<property key="myTargetPackage" value="java.awt" />
 
 
-		<property key="ns:defaultPrefix" value="swing" />
+		<property key="ns:defaultPrefix" value="awt" />
 		<property key="ns:localName" value="" />
 		<property key="ns:setAttributeMethodNamePrefix" value="set_attribute_" />
 		<property key="ns:appendChildMethodNamePrefix" value="append_child_" />
@@ -16,13 +16,10 @@
 		<property key="ns:defaultTargetClass" value="$(myTargetPackage).$(ns:localName)" />
 
 
+		<element name="pos" targetClass="java.lang.String"
+			controllerClass="$(myCtrlPackage).Ctrl_pos" />
 
-		<element name="JPanel" controllerClass="$(myCtrlPackage).CJPanel"
-			targetClass="$(myTargetPackage).JPanel" />
-
-
-		<element name="JFrame" />
-		<element name="JLabel" />
+		<element name="BorderLayout" />
 
 
 	</namespace>

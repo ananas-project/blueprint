@@ -10,8 +10,8 @@
 
 		<property key="ns:defaultPrefix" value="swing" />
 		<property key="ns:localName" value="" />
-		<property key="ns:setAttributeMethodNamePrefix" value="set_attr_" />
-		<property key="ns:appendChildMethodNamePrefix" value="add_element_" />
+		<property key="ns:setAttributeMethodNamePrefix" value="set_attribute_" />
+		<property key="ns:appendChildMethodNamePrefix" value="append_child_" />
 		<property key="ns:defaultControllerClass" value="$(myCtrlPackage).C$(ns:localName)" />
 		<property key="ns:defaultTargetClass" value="$(myTargetPackage).$(ns:localName)" />
 
@@ -22,6 +22,7 @@
 
 
 		<element name="JFrame" />
+		<element name="JLabel" />
 
 
 	</namespace>

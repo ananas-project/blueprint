@@ -74,7 +74,13 @@ public class AbstractElement extends AbstractNode implements BPElement {
 
 	@Override
 	public Object createTarget() {
-		// TODO Auto-generated method stub
+		try {
+			return this.getType().getTargetClass().newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
@@ -88,4 +94,11 @@ public class AbstractElement extends AbstractNode implements BPElement {
 		}
 	}
 
+	public String getNamespaceURI() {
+		return this.getType().getOwnerNamespace().getNamespaceURI();
+	}
+
+	public String getLocalName() {
+		return this.getType().getLocalName();
+	}
 }
