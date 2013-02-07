@@ -8,5 +8,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/blueprint3-core-impl"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/blueprint3-swing"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/blueprint3-reflect"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/blueprint3-eom"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

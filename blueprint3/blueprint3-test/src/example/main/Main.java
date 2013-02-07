@@ -8,8 +8,8 @@ import ananas.lib.blueprint.awt.AwtNamespaceInfo;
 import ananas.lib.blueprint.core.Blueprint;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
+import ananas.lib.blueprint.loader.eom.EomReflectInfo;
 import ananas.lib.blueprint.swing.CJFrame;
-import ananas.lib.blueprint.swing.SwingNamespaceInfo;
 
 public class Main {
 
@@ -68,8 +68,9 @@ public class Main {
 		try {
 
 			BPEnvironment bpenv = Blueprint.getInstance().defaultEnvironment();
+			bpenv.loadNamespace(EomReflectInfo.class, true);
 			bpenv.loadNamespace(AwtNamespaceInfo.class, true);
-			bpenv.loadNamespace(SwingNamespaceInfo.class, true);
+			// bpenv.loadNamespace(SwingNamespaceInfo.class, true);
 
 			BPDocument doc = Blueprint
 					.loadDocument("resource:///test-swing.xml");

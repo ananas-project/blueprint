@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
+import ananas.lib.blueprint.core.util.IMacroProperties;
 
 public class RefElement_element extends RefElement {
 
@@ -47,15 +48,15 @@ public class RefElement_element extends RefElement {
 		out.println("<element name='" + this.mLocalName + "' />");
 	}
 
-	public void regElement(IRefProperties properties, BPEnvironment envi,
+	public void regElement(IMacroProperties properties, BPEnvironment envi,
 			BPNamespace ns) {
 
-		properties.put(IRefProperties.ns_localName, this.mLocalName);
+		properties.put(PropertyKeys.ns_localName, this.mLocalName);
 
 		String targetClassName = this.caleClassName(properties,
-				this.mTargetClass, IRefProperties.ns_defaultTargetClass);
+				this.mTargetClass, PropertyKeys.ns_defaultTargetClass);
 		String ctrlClassName = this.caleClassName(properties, this.mCtrlClass,
-				IRefProperties.ns_defaultControllerClass);
+				PropertyKeys.ns_defaultControllerClass);
 
 		MyElementType.Config conf = new MyElementType.Config();
 		conf.targetClass = this.classByName(targetClassName);
@@ -65,17 +66,17 @@ public class RefElement_element extends RefElement {
 		MyElementType elementType = new MyElementType(conf);
 
 		String prefixAttr = properties.get(
-				IRefProperties.ns_set_attr_method_prefix, true,
-				"set_attribute_", true);
+				PropertyKeys.ns_set_attr_method_prefix, true, "set_attribute_",
+				true);
 		String prefixChild = properties.get(
-				IRefProperties.ns_append_child_method_prefix, true,
+				PropertyKeys.ns_append_child_method_prefix, true,
 				"append_child_", true);
 		elementType.reflectMethods(prefixAttr, prefixChild);
 		ns.registerType(elementType);
 
 	}
 
-	private String caleClassName(IRefProperties properties, String className,
+	private String caleClassName(IMacroProperties properties, String className,
 			String defaultClassNameKey) {
 		if (className == null) {
 			className = properties.get(defaultClassNameKey, false, null);

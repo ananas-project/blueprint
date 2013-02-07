@@ -5,7 +5,7 @@ import ananas.lib.blueprint.core.util.nsloader.AbstractBPNamespaceInfo;
 public class SwingNamespaceInfo extends AbstractBPNamespaceInfo {
 
 	public SwingNamespaceInfo() {
-		super("swing.reflect.properties");
+		super("swing.eom.properties");
 	}
 
 }

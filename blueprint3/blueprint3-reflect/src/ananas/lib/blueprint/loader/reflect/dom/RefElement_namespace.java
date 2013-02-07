@@ -6,10 +6,12 @@ import java.util.List;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
+import ananas.lib.blueprint.core.util.DefaultMacroProperties;
+import ananas.lib.blueprint.core.util.IMacroProperties;
 
 public class RefElement_namespace extends RefElement {
 
-	private final IRefProperties mProperties = new MyRefProperties();
+	private final IMacroProperties mProperties = new DefaultMacroProperties();
 	private final List<RefElement_element> mElements = new ArrayList<RefElement_element>();
 
 	public RefElement_namespace(RefDocument ownerDoc) {
@@ -24,7 +26,7 @@ public class RefElement_namespace extends RefElement {
 			return false;
 
 		} else if (attrLName.equals("name")) {
-			this.mProperties.put(IRefProperties.ns_uri, attrValue);
+			this.mProperties.put(PropertyKeys.ns_uri, attrValue);
 
 		} else {
 			return false;
@@ -69,9 +71,9 @@ public class RefElement_namespace extends RefElement {
 
 	public void regNamespace(BPEnvironment envi) {
 
-		String uri = this.getProperty(IRefProperties.ns_uri, false, null);
-		String defaultPrefix = this.getProperty(
-				IRefProperties.ns_default_prefix, false, null);
+		String uri = this.getProperty(PropertyKeys.ns_uri, false, null);
+		String defaultPrefix = this.getProperty(PropertyKeys.ns_default_prefix,
+				false, null);
 		BPNamespace ns = envi.getImplementation().createNamespace(envi, uri,
 				defaultPrefix);
 

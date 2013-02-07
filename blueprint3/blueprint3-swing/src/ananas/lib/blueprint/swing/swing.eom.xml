@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eom xmlns="xmlns:ananas:blueprint:loader:eom">
+
+
+	<namespace name="xmlns:ananas:blueprint:swing2">
+
+
+		<property key="myCtrlPackage" value="ananas.lib.blueprint.swing" />
+		<property key="myTargetPackage" value="javax.swing" />
+
+
+		<property key="ns:defaultPrefix" value="swing" />
+		<property key="ns:localName" value="" />
+		<property key="ns:setAttributeMethodNamePrefix" value="set_attribute_" />
+		<property key="ns:appendChildMethodNamePrefix" value="append_child_" />
+		<property key="ns:defaultControllerClass" value="$(myCtrlPackage).C$(ns:localName)" />
+		<property key="ns:defaultTargetClass" value="$(myTargetPackage).$(ns:localName)" />
+
+	</namespace>
+
+	<namespace name="xmlns:ananas:blueprint:swing">
+
+
+		<property key="myCtrlPackage" value="ananas.lib.blueprint.swing" />
+		<property key="myTargetPackage" value="javax.swing" />
+
+
+		<property key="ns:defaultPrefix" value="swing" />
+		<property key="ns:localName" value="" />
+		<property key="ns:setAttributeMethodNamePrefix" value="set_attribute_" />
+		<property key="ns:appendChildMethodNamePrefix" value="append_child_" />
+		<property key="ns:defaultControllerClass" value="$(myCtrlPackage).C$(ns:localName)" />
+		<property key="ns:defaultTargetClass" value="$(myTargetPackage).$(ns:localName)" />
+
+
+
+
+		<class name="JFrame" isElement="true" extends="" >
+			<attribute name="" />
+			<element name="" type="" />
+		</class>
+
+
+	</namespace>
+
+</eom>
