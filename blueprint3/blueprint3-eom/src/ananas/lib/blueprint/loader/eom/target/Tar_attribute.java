@@ -8,4 +8,8 @@ public class Tar_attribute {
 		this.mName = name;
 	}
 
+	public String getName() {
+		return this.mName;
+	}
+
 }

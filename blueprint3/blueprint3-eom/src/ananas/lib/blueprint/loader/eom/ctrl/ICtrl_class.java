@@ -11,7 +11,13 @@ public interface ICtrl_class {
 
 	boolean set_attribute_name(BPAttribute attr);
 
+	boolean set_attribute_javaName(BPAttribute attr);
+
 	boolean set_attribute_extends(BPAttribute attr);
+
+	boolean set_attribute_targetClass(BPAttribute attr);
+
+	boolean set_attribute_controllerClass(BPAttribute attr);
 
 	// children
 

@@ -72,10 +72,12 @@ public class Main {
 			bpenv.loadNamespace(AwtNamespaceInfo.class, true);
 			// bpenv.loadNamespace(SwingNamespaceInfo.class, true);
 
+			/*
 			BPDocument doc = Blueprint
 					.loadDocument("resource:///test-swing.xml");
 			JFrame frame = (JFrame) doc.getRootElement().getTarget();
 			frame.setVisible(true);
+			*/
 
 		} catch (Exception e) {
 			e.printStackTrace();

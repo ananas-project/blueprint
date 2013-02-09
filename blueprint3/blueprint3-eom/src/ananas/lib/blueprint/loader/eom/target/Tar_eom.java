@@ -15,4 +15,8 @@ public class Tar_eom {
 		this.mNsList.add(ns);
 	}
 
+	public List<Tar_namespace> listNamespaces() {
+		return this.mNsList;
+	}
+
 }

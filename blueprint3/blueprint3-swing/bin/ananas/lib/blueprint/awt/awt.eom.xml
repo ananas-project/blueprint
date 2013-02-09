@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eom xmlns="xmlns:ananas:blueprint:loader:eom">
 
-	<namespace name="xmlns:ananas:blueprint:swing">
+	<namespace uri="xmlns:ananas:blueprint:swing" enableExport="true">
 
 
 		<property key="myCtrlPackage" value="ananas.lib.blueprint.awt" />
 		<property key="myTargetPackage" value="java.awt" />
 
 
-		<property key="ns:defaultPrefix" value="awt" />
-		<property key="ns:localName" value="xxx" />
-		<property key="ns:setAttributeMethodNamePrefix" value="set_attribute_" />
-		<property key="ns:appendChildMethodNamePrefix" value="append_child_" />
-		<property key="ns:defaultControllerClass" value="$(myCtrlPackage).C$(ns:localName)" />
-		<property key="ns:defaultTargetClass" value="$(myTargetPackage).$(ns:localName)" />
+		<property key="namespace:uri" value="::::awt" />
+		<property key="namespace:defaultPrefix" value="awt" />
+		<property key="class:javaName" value="xxx" />
+
+		<property key="class:controllerClass" value="$(myCtrlPackage).C$(class:javaName)" />
+		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
 
 
 
@@ -22,19 +22,22 @@
 			<element name="test" type="java.lang.Object" />
 		</class>
 
-		<class name="Container" isElement="true" extends="Component">
+		<class name="Container" isElement="true" extends="#Component">
 			<attribute name="test" />
 			<element name="test" type="java.lang.Object" />
 		</class>
 
-		<class name="Window" isElement="true" extends="Container">
+		<class name="Window" isElement="true" extends="#Container"
+			targetClass="java.awt.Window" controllerClass="ananas.lib.blueprint.awt.CWindow">
 			<attribute name="test" />
 			<element name="test" type="java.lang.Object" />
 		</class>
 
-		<class name="Frame" isElement="true" extends="Window">
+		<class name="Frame" isElement="true" extends="Window" javaName="Frame"
+			localName="Frame">
 			<attribute name="test" />
 			<element name="test" type="java.lang.Object" />
+			<element name="test2" type="#Container" />
 		</class>
 
 	</namespace>

@@ -5,7 +5,13 @@ import ananas.lib.blueprint.loader.eom.target.Tar_namespace;
 
 public interface ICtrl_namespace {
 
-	boolean set_attribute_name(BPAttribute attr);
+	// attribute
+
+	boolean set_attribute_uri(BPAttribute attr);
+
+	boolean set_attribute_enableExport(BPAttribute attr);
+
+	// child
 
 	boolean append_child_property(Ctrl_property prop);
 

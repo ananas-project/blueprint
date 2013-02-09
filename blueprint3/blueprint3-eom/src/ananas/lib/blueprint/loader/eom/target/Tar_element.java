@@ -13,4 +13,12 @@ public class Tar_element {
 		this.mName = name;
 	}
 
+	public String getName() {
+		return this.mName;
+	}
+
+	public String getType() {
+		return this.mType;
+	}
+
 }

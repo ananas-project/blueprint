@@ -21,7 +21,7 @@ public class Ctrl_class extends CtrlObject implements ICtrl_class {
 
 	@Override
 	public boolean append_child_attribute(Ctrl_attribute child) {
-		 Tar_class parent = this.getTarget_class() ;
+		Tar_class parent = this.getTarget_class();
 		Tar_attribute attr = child.getTarget_attribute();
 		parent.addElement_attribute(attr);
 		return true;
@@ -43,7 +43,25 @@ public class Ctrl_class extends CtrlObject implements ICtrl_class {
 
 	@Override
 	public boolean set_attribute_extends(BPAttribute attr) {
-		this.getTarget_class().setExtends( attr.getValue()  ) ;
+		this.getTarget_class().setExtends(attr.getValue());
+		return true;
+	}
+
+	@Override
+	public boolean set_attribute_targetClass(BPAttribute attr) {
+		this.getTarget_class().setTargetClass(attr.getValue());
+		return true;
+	}
+
+	@Override
+	public boolean set_attribute_controllerClass(BPAttribute attr) {
+		this.getTarget_class().setControllerClass(attr.getValue());
+		return true;
+	}
+
+	@Override
+	public boolean set_attribute_javaName(BPAttribute attr) {
+		this.getTarget_class().setJavaName(attr.getValue());
 		return true;
 	}
 

@@ -59,4 +59,10 @@ public class CComponent extends CObject implements IComponent {
 		return (Component) this.getTarget(true);
 	}
 
+	@Override
+	public boolean set_attribute_test(BPAttribute attr) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

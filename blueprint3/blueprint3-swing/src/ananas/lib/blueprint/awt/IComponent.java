@@ -20,6 +20,8 @@ public interface IComponent {
 
 	boolean set_attribute_width(BPAttribute attr);
 
+	boolean set_attribute_test(BPAttribute attr);
+
 	// other
 
 	Component getTargetComponent();
