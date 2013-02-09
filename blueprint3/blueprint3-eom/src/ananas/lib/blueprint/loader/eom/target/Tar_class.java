@@ -11,13 +11,12 @@ public class Tar_class {
 	private boolean mIsElement = false;
 	private String mName;
 	private String mExtends;
-	private Tar_namespace mOwnerNS;
 
 	private String mControllerClassName;
 	private String mTargetClassName;
-	private Class<?> mControllerClass;
-	private Class<?> mTargetClass;
+
 	private String mJavaName;
+	private String mLocalName;
 
 	public void setIsElement(boolean value) {
 		this.mIsElement = value;
@@ -43,8 +42,12 @@ public class Tar_class {
 		return this.mName;
 	}
 
-	public void setOwnerNamespace(Tar_namespace ownerNS) {
-		this.mOwnerNS = ownerNS;
+	public String getJavaName() {
+		return this.mJavaName;
+	}
+
+	public String getLocalName() {
+		return this.mLocalName;
 	}
 
 	public void setTargetClass(String value) {
@@ -63,15 +66,11 @@ public class Tar_class {
 		return mExtends;
 	}
 
-	public Tar_namespace getOwnerNamespace() {
-		return mOwnerNS;
-	}
-
-	public String getControllerClassName() {
+	public String getControllerClass() {
 		return mControllerClassName;
 	}
 
-	public String getTargetClassName() {
+	public String getTargetClass() {
 		return mTargetClassName;
 	}
 
@@ -83,48 +82,12 @@ public class Tar_class {
 		return this.mElementList;
 	}
 
-	interface Const {
-		String defaultTargetNameKey = "";
-		String defaultCtrlNameKey = "";
-
-	}
-
-	public Class<?> getControllerClass() {
-		Class<?> cls = this.mControllerClass;
-		if (cls == null) {
-			String clsName = this.mControllerClassName;
-			String clsNameDefault = this.mOwnerNS.getProperties().get(
-					Const.defaultCtrlNameKey);
-			this.mControllerClass = cls = this.classForName(clsName,
-					clsNameDefault);
-		}
-		return cls;
-	}
-
-	private Class<?> classForName(String clsName, String clsNameDefault) {
-
-		// this.mOwnerNS.getProperties().put( Const.ns_ , ) ;
-
-		if (clsName == null) {
-		}
-
-		return null;
-	}
-
-	public Class<?> getTargetClass() {
-		Class<?> cls = this.mTargetClass;
-		if (cls == null) {
-			String clsName = this.mTargetClassName;
-			String clsNameDefault = this.mOwnerNS.getProperties().get(
-					Const.defaultTargetNameKey);
-			this.mTargetClass = cls = this
-					.classForName(clsName, clsNameDefault);
-		}
-		return cls;
-	}
-
 	public void setJavaName(String value) {
 		this.mJavaName = value;
+	}
+
+	public void setLocalName(String value) {
+		this.mLocalName = value;
 	}
 
 }

@@ -13,6 +13,8 @@ public interface ICtrl_class {
 
 	boolean set_attribute_javaName(BPAttribute attr);
 
+	boolean set_attribute_localName(BPAttribute attr);
+
 	boolean set_attribute_extends(BPAttribute attr);
 
 	boolean set_attribute_targetClass(BPAttribute attr);

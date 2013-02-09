@@ -65,4 +65,10 @@ public class Ctrl_class extends CtrlObject implements ICtrl_class {
 		return true;
 	}
 
+	@Override
+	public boolean set_attribute_localName(BPAttribute attr) {
+		this.getTarget_class().setLocalName(attr.getValue());
+		return true;
+	}
+
 }
