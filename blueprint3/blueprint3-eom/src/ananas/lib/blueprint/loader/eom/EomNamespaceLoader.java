@@ -34,7 +34,10 @@ public class EomNamespaceLoader implements BPNamespaceLoader {
 
 			IEomNamespaceRegFactory regf = new DefaultEomNamespaceRegFactory();
 			IEomNamespaceReg reg = regf.newReg(teom);
-			reg.regNamespaces(envi);
+
+			reg.load(envi);
+			reg.register(envi);
+			reg.check(envi);
 
 		} catch (Exception e) {
 			e.printStackTrace();

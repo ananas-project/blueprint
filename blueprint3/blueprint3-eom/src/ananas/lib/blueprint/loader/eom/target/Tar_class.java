@@ -43,11 +43,40 @@ public class Tar_class {
 	}
 
 	public String getJavaName() {
-		return this.mJavaName;
+		String name = this.mJavaName;
+		if (name == null) {
+			name = this.getName();
+			name = this.toJavaName(name);
+			this.mJavaName = name;
+		}
+		return name;
+	}
+
+	private String toJavaName(String name) {
+		StringBuilder sb = new StringBuilder();
+		for (char ch : name.toCharArray()) {
+			char ch2;
+			if ('0' <= ch && ch <= '9') {
+				ch2 = ch;
+			} else if ('a' <= ch && ch <= 'z') {
+				ch2 = ch;
+			} else if ('A' <= ch && ch <= 'Z') {
+				ch2 = ch;
+			} else {
+				ch2 = '_';
+			}
+			sb.append(ch2);
+		}
+		return sb.toString();
 	}
 
 	public String getLocalName() {
-		return this.mLocalName;
+		String name = this.mLocalName;
+		if (name == null) {
+			name = this.getName();
+			this.mLocalName = name;
+		}
+		return name;
 	}
 
 	public void setTargetClass(String value) {

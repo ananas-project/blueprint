@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <eom xmlns="xmlns:ananas:blueprint:loader:eom">
 
-	<namespace uri="xmlns:ananas:blueprint:swing" enableExport="true">
+	<namespace uri="::awt" enableExport="true">
 
 
 		<property key="myCtrlPackage" value="ananas.lib.blueprint.awt" />
 		<property key="myTargetPackage" value="java.awt" />
 
 
-		<property key="namespace:uri" value="::::awt" />
+		<property key="namespace:uri" value="xmlns:ananas:blueprint:awt" />
 		<property key="namespace:defaultPrefix" value="awt" />
 		<property key="class:javaName" value="xxx" />
 

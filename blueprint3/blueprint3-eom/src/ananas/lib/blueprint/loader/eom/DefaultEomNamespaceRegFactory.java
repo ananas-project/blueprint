@@ -1,5 +1,6 @@
 package ananas.lib.blueprint.loader.eom;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import ananas.lib.blueprint.core.lang.BPEnvironment;
@@ -20,20 +21,34 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 	class MyEom implements IEomNamespaceReg {
 
 		private final Tar_eom mEom;
+		private final List<MyNs> mListNS = new ArrayList<MyNs>();
 
 		public MyEom(Tar_eom teom) {
 			this.mEom = teom;
 		}
 
 		@Override
-		public void regNamespaces(BPEnvironment envi) {
+		public void register(BPEnvironment envi) {
+			for (MyNs ns : this.mListNS) {
+				ns.register(envi);
+			}
+		}
 
+		@Override
+		public void load(BPEnvironment envi) {
 			List<Tar_namespace> tnsList = this.mEom.listNamespaces();
 			for (Tar_namespace tns : tnsList) {
 				MyNs ns = new MyNs(this, tns);
-				ns.regNamespaces(envi);
+				ns.load(envi);
+				this.mListNS.add(ns);
 			}
+		}
 
+		@Override
+		public void check(BPEnvironment envi) {
+			for (MyNs ns : this.mListNS) {
+				ns.check(envi);
+			}
 		}
 	}
 
@@ -42,6 +57,7 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 		private final MyEom mParent;
 		private final Tar_namespace mTarget;
 		private BPNamespace mBpNs;
+		private final List<MyClass> mListClasses = new ArrayList<MyClass>();
 
 		public MyNs(MyEom myEom, Tar_namespace tns) {
 			this.mParent = myEom;
@@ -49,14 +65,10 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 		}
 
 		@Override
-		public void regNamespaces(BPEnvironment envi) {
-
-			List<Tar_class> tclassList = this.mTarget.listMemberClasses();
-			for (Tar_class tcls : tclassList) {
-				MyClass cls = new MyClass(this, tcls);
-				cls.regNamespaces(envi);
+		public void register(BPEnvironment envi) {
+			for (MyClass cls : this.mListClasses) {
+				cls.register(envi);
 			}
-
 		}
 
 		public IMacroProperties getProperties() {
@@ -69,6 +81,34 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 				this.mBpNs = ns;
 			}
 			return ns;
+		}
+
+		@Override
+		public void load(BPEnvironment envi) {
+			IMacroProperties props = this.mTarget.getProperties();
+
+			// ns
+			String uri = props.get(Const.ns_uri, false, null);
+			String defaultPrefix = props.get(Const.ns_default_prefix, false,
+					null);
+			this.mBpNs = envi.getImplementation().createNamespace(envi, uri,
+					defaultPrefix);
+
+			// members
+			List<Tar_class> tclassList = this.mTarget.listMemberClasses();
+			for (Tar_class tcls : tclassList) {
+				MyClass cls = new MyClass(this, tcls);
+				cls.load(envi);
+				this.mListClasses.add(cls);
+			}
+
+		}
+
+		@Override
+		public void check(BPEnvironment envi) {
+			for (MyClass cls : this.mListClasses) {
+				cls.check(envi);
+			}
 		}
 	}
 
@@ -83,11 +123,6 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 		public MyClass(MyNs myNs, Tar_class tcls) {
 			this.mParent = myNs;
 			this.mTarget = tcls;
-		}
-
-		@Override
-		public void regNamespaces(BPEnvironment envi) {
-
 		}
 
 		public BPType getBpType() {
@@ -158,6 +193,24 @@ class DefaultEomNamespaceRegFactory implements IEomNamespaceRegFactory {
 				this.mCtrlClass = cls;
 			}
 			return cls;
+		}
+
+		@Override
+		public void register(BPEnvironment envi) {
+			BPType type = this.getBpType();
+			System.out.println("reg bp type : " + type);
+		}
+
+		@Override
+		public void load(BPEnvironment envi) {
+			BPType type = this.getBpType();
+			System.out.println("load bp type : " + type);
+		}
+
+		@Override
+		public void check(BPEnvironment envi) {
+			BPType type = this.getBpType();
+			System.out.println("check bp type : " + type);
 		}
 
 	}
