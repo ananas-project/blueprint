@@ -12,5 +12,6 @@ public interface Const {
 	String ns_local_name = "class:localName";
 	String ns_default_prefix = "namespace:defaultPrefix";
 	String ns_uri = "namespace:uri";
+	String ns_java_name = "class:javaName";
 
 }
