@@ -1,9 +1,10 @@
 package ananas.lib.blueprint.loader.eom.target;
 
-public class Tar_element {
+public class Tar_element extends TargetBase {
 
 	private String mType;
 	private String mName;
+	private Tar_class mParent;
 
 	public void setType(String type) {
 		this.mType = type;
@@ -19,6 +20,11 @@ public class Tar_element {
 
 	public String getType() {
 		return this.mType;
+	}
+
+	@Override
+	public void setParent(ITargetNode node) {
+		this.mParent = (Tar_class) node;
 	}
 
 }

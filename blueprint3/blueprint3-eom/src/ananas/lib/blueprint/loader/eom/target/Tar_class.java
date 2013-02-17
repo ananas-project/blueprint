@@ -3,7 +3,7 @@ package ananas.lib.blueprint.loader.eom.target;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tar_class {
+public class Tar_class extends TargetBase {
 
 	final List<Tar_attribute> mAttrList = new ArrayList<Tar_attribute>();
 	final List<Tar_element> mElementList = new ArrayList<Tar_element>();
@@ -17,6 +17,7 @@ public class Tar_class {
 
 	private String mJavaName;
 	private String mLocalName;
+	private Tar_namespace mParent;
 
 	public void setIsElement(boolean value) {
 		this.mIsElement = value;
@@ -117,6 +118,23 @@ public class Tar_class {
 
 	public void setLocalName(String value) {
 		this.mLocalName = value;
+	}
+
+	@Override
+	public ITargetNode[] getChildren() {
+
+		List<ITargetNode> list = new ArrayList<ITargetNode>(
+				this.mAttrList.size() + this.mElementList.size());
+
+		list.addAll(this.mAttrList);
+		list.addAll(this.mElementList);
+
+		return list.toArray(new ITargetNode[list.size()]);
+	}
+
+	@Override
+	public void setParent(ITargetNode node) {
+		this.mParent = (Tar_namespace) node;
 	}
 
 }

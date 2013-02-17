@@ -3,7 +3,7 @@ package ananas.lib.blueprint.loader.eom.target;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tar_eom {
+public class Tar_eom extends TargetBase {
 
 	private final List<Tar_namespace> mNsList;
 
@@ -17,6 +17,12 @@ public class Tar_eom {
 
 	public List<Tar_namespace> listNamespaces() {
 		return this.mNsList;
+	}
+
+	@Override
+	public ITargetNode[] getChildren() {
+		List<Tar_namespace> list = this.mNsList;
+		return list.toArray(new Tar_namespace[list.size()]);
 	}
 
 }

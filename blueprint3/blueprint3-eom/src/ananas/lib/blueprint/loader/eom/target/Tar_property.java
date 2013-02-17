@@ -1,6 +1,6 @@
 package ananas.lib.blueprint.loader.eom.target;
 
-public class Tar_property {
+public class Tar_property extends TargetBase{
 
 	private String mKey;
 	private String mValue;
