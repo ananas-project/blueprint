@@ -19,25 +19,21 @@
 
 		<class name="Component" isElement="true" extends="java.lang.Object">
 			<attribute name="test" />
-			<element name="test" type="java.lang.Object" />
+			<!-- <element name="test" type="java.lang.Object" /> -->
 		</class>
 
 		<class name="Container" isElement="true" extends="#Component">
 			<attribute name="test" />
-			<element name="test" type="java.lang.Object" />
 		</class>
 
 		<class name="Window" isElement="true" extends="#Container"
 			targetClass="java.awt.Window" controllerClass="ananas.lib.blueprint.awt.CWindow">
 			<attribute name="test" />
-			<element name="test" type="java.lang.Object" />
 		</class>
 
-		<class name="Frame" isElement="true" extends="Window" javaName="Frame"
+		<class name="Frame" isElement="true" extends="#Window" javaName="Frame"
 			localName="Frame">
 			<attribute name="test" />
-			<element name="test" type="java.lang.Object" />
-			<element name="test2" type="#Container" />
 		</class>
 
 	</namespace>

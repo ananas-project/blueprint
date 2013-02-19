@@ -18,4 +18,8 @@ public class Tar_attribute extends TargetBase {
 		this.mParent = (Tar_class) node;
 	}
 
+	public ITargetNode getParent() {
+		return this.mParent;
+	}
+
 }

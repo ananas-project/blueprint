@@ -1,6 +1,6 @@
 package ananas.lib.blueprint.loader.eom.target;
 
-public class Tar_property extends TargetBase{
+public class Tar_property extends TargetBase {
 
 	private String mKey;
 	private String mValue;
@@ -19,6 +19,15 @@ public class Tar_property extends TargetBase{
 
 	public String getValue() {
 		return this.mValue;
+	}
+
+	@Override
+	public void setParent(ITargetNode node) {
+	}
+
+	@Override
+	public ITargetNode getParent() {
+		return null;
 	}
 
 }

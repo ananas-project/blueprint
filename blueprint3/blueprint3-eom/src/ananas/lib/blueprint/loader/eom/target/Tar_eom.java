@@ -25,4 +25,13 @@ public class Tar_eom extends TargetBase {
 		return list.toArray(new Tar_namespace[list.size()]);
 	}
 
+	@Override
+	public void setParent(ITargetNode node) {
+	}
+
+	@Override
+	public ITargetNode getParent() {
+		return null;
+	}
+
 }

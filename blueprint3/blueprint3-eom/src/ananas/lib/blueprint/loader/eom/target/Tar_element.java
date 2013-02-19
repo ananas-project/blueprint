@@ -27,4 +27,9 @@ public class Tar_element extends TargetBase {
 		this.mParent = (Tar_class) node;
 	}
 
+	@Override
+	public ITargetNode getParent() {
+		return this.mParent;
+	}
+
 }

@@ -5,6 +5,7 @@ import java.util.List;
 
 import ananas.lib.blueprint.core.util.DefaultMacroProperties;
 import ananas.lib.blueprint.core.util.IMacroProperties;
+import ananas.lib.blueprint.loader.eom.Const;
 
 public class Tar_namespace extends TargetBase {
 
@@ -14,8 +15,8 @@ public class Tar_namespace extends TargetBase {
 	private boolean mEnableExport;
 	private Tar_eom mParent;
 
-	interface Const {
-		String ns_uri = "namespace:uri";
+	public String getNamespaceURI() {
+		return this.mProps.get(Const.ns_uri);
 	}
 
 	public IMacroProperties getProperties() {
@@ -57,6 +58,15 @@ public class Tar_namespace extends TargetBase {
 	@Override
 	public void setParent(ITargetNode node) {
 		this.mParent = (Tar_eom) node;
+	}
+
+	public String getDefaultPrefix() {
+		return this.mProps.get(Const.ns_default_prefix);
+	}
+
+	@Override
+	public ITargetNode getParent() {
+		return this.mParent;
 	}
 
 }

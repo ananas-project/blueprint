@@ -19,6 +19,10 @@ public class Tar_class extends TargetBase {
 	private String mLocalName;
 	private Tar_namespace mParent;
 
+	public Tar_namespace getOwnerNS() {
+		return this.mParent;
+	}
+
 	public void setIsElement(boolean value) {
 		this.mIsElement = value;
 	}
@@ -137,4 +141,7 @@ public class Tar_class extends TargetBase {
 		this.mParent = (Tar_namespace) node;
 	}
 
+	public ITargetNode getParent() {
+		return this.mParent;
+	}
 }
