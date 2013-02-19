@@ -37,9 +37,9 @@ public class ReflectNamespaceLoader implements BPNamespaceLoader {
 			rdr.parse(new InputSource(in));
 
 			RefDocument doc = builder.getDocument();
-			doc.printSelf(System.out);
+			// doc.printSelf(System.out);
 			RefElement_reflect root = doc.getRoot();
-			root.regNamespaces( envi  ) ;
+			root.regNamespaces(envi);
 
 		} catch (Exception e) {
 

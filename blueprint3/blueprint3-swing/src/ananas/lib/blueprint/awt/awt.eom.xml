@@ -17,22 +17,41 @@
 
 
 
-		<class name="Component" isElement="true" extends="java.lang.Object">
-			<attribute name="test" />
+		<!-- utils -->
+		<class name="pos" isElement="true"
+			controllerClass="$(myCtrlPackage).Ctrl_$(class:javaName)"
+			targetClass="java.lang.Object">
+		</class>
+
+
+		<!-- layout manager -->
+
+		<class name="BorderLayout" isElement="true">
+		</class>
+
+
+		<!-- components -->
+
+		<class name="Component" isElement="true">
+
+			<attribute name="x" />
+			<attribute name="y" />
+			<attribute name="width" />
+			<attribute name="height" />
+
 			<!-- <element name="test" type="java.lang.Object" /> -->
+
 		</class>
 
 		<class name="Container" isElement="true" extends="#Component">
 			<attribute name="test" />
 		</class>
 
-		<class name="Window" isElement="true" extends="#Container"
-			targetClass="java.awt.Window" controllerClass="ananas.lib.blueprint.awt.CWindow">
+		<class name="Window" isElement="true" extends="#Container">
 			<attribute name="test" />
 		</class>
 
-		<class name="Frame" isElement="true" extends="#Window" javaName="Frame"
-			localName="Frame">
+		<class name="Frame" isElement="true" extends="#Window">
 			<attribute name="test" />
 		</class>
 

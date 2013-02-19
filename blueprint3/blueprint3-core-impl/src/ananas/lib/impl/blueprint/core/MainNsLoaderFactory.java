@@ -25,8 +25,8 @@ public class MainNsLoaderFactory implements BPNamespaceLoaderFactory {
 				throws BlueprintException {
 
 			try {
-				System.out.println("Load namespace : "
-						+ info.getClass().getName());
+				// System.out.println("Load namespace : "
+				// + info.getClass().getName());
 
 				String ldrClass = info.getProperty("loader");
 				if (ldrClass == null) {

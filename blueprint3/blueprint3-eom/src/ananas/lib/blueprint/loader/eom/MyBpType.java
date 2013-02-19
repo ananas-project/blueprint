@@ -29,6 +29,12 @@ class MyBpType implements BPType {
 		this.mLocalName = localName;
 		this.mCtrlClass = ctrlClass;
 		this.mTargetClass = targetClass;
+
+		if (ctrlClass == null || targetClass == null) {
+			throw new RuntimeException("no ctrlClass|targetClass for "
+					+ ownerNS.getNamespaceURI() + "#" + localName);
+		}
+
 		this._loadMethods();
 	}
 
@@ -41,12 +47,12 @@ class MyBpType implements BPType {
 			} else if (name.startsWith(Const.add_child_method_prefix)) {
 				String prefix = Const.add_child_method_prefix;
 				String localName = name.substring(prefix.length());
-				this._add_method_for_attr(localName, method);
+				this._add_method_for_element(localName, method);
 
 			} else if (name.startsWith(Const.set_attr_method_prefix)) {
 				String prefix = Const.set_attr_method_prefix;
 				String localName = name.substring(prefix.length());
-				this._add_method_for_element(localName, method);
+				this._add_method_for_attr(localName, method);
 
 			} else {
 			}
@@ -148,6 +154,11 @@ class MyBpType implements BPType {
 	public boolean setAttributeForParent(BPElement parent, BPAttribute attr) {
 		String key = this.keyForAttr(attr.getLocalName());
 		MethodContext method = this.mMethodMap.get(key);
+		if (method == null) {
+			// String attrLName = attr.getLocalName();
+			throw new RuntimeException("cannot find method for : " + parent
+					+ "#" + key);
+		}
 		try {
 			boolean rlt = (Boolean) method.getMethod().invoke(parent, attr);
 			return rlt;

@@ -10,14 +10,28 @@ import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.loader.eom.EomReflectInfo;
 import ananas.lib.blueprint.swing.CJFrame;
+import ananas.lib.blueprint.swing.SwingNamespaceInfo;
 
 public class Main {
 
 	public static void main(String arg[]) {
 
-		Main m = new Main();
-		m.testMain();
-		// m.testReflex();
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+
+				long ms1 = System.currentTimeMillis();
+
+				Main m = new Main();
+				m.testMain();
+				// m.testReflex();
+
+				long ms2 = System.currentTimeMillis();
+				System.out.println((ms2 - ms1) + "ms");
+
+			}
+		});
 
 	}
 
@@ -70,14 +84,15 @@ public class Main {
 			BPEnvironment bpenv = Blueprint.getInstance().defaultEnvironment();
 			bpenv.loadNamespace(EomReflectInfo.class, true);
 			bpenv.loadNamespace(AwtNamespaceInfo.class, true);
-			// bpenv.loadNamespace(SwingNamespaceInfo.class, true);
+			bpenv.loadNamespace(SwingNamespaceInfo.class, true);
 
-			/*
+			System.out.println("now load a testing xml doc.");
+
 			BPDocument doc = Blueprint
 					.loadDocument("resource:///test-swing.xml");
 			JFrame frame = (JFrame) doc.getRootElement().getTarget();
+			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			frame.setVisible(true);
-			*/
 
 		} catch (Exception e) {
 			e.printStackTrace();

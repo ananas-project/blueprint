@@ -151,7 +151,11 @@ public class MyBpnsFactory {
 				if (tmpCls == null) {
 					tmpCls = MyBpnsFactory.this.mTempClassMap.get(key);
 				}
-				return tmpCls.getBPType().getControllerClass();
+				if (tmpCls == null) {
+					throw new RuntimeException("no class for ref:" + ref);
+				}
+				BPType bpType = tmpCls.getBPType();
+				return bpType.getControllerClass();
 			} else {
 
 				try {
@@ -204,7 +208,7 @@ public class MyBpnsFactory {
 				BPNamespace bpns = type.getOwnerNamespace();
 				bpns.registerType(type);
 
-				System.out.println("new type : " + type);
+				// System.out.println("new type : " + type);
 			}
 
 		}
@@ -268,7 +272,7 @@ public class MyBpnsFactory {
 				String name = tar.getNamespaceURI();
 				MyBpnsFactory.this.mTempNsMap.put(name, tmpNS);
 
-				System.out.println("new ns : " + tar);
+				// System.out.println("new ns : " + tar);
 
 			} else if (child instanceof Tar_class) {
 				Tar_class tar = (Tar_class) child;
@@ -281,7 +285,7 @@ public class MyBpnsFactory {
 				tmpNS.mTempClassMap.put(name, tmpCls);
 				MyBpnsFactory.this.mTempClassMap.put(name, tmpCls);
 
-				System.out.println("new cls : " + tar);
+				// System.out.println("new cls : " + tar);
 			}
 
 		}
@@ -378,6 +382,9 @@ public class MyBpnsFactory {
 			String cname = this.className;
 			if (cname == null) {
 				cname = this.properties.get(this.defaultKey);
+			}
+			if (cname == null) {
+				return null;
 			}
 			cname = this.properties.processMacro(cname);
 			try {
