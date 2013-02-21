@@ -84,7 +84,8 @@ public class MyBpnsFactory {
 				if (base.isAssignableFrom(ctrlClass)) {
 					// ok
 				} else {
-					throw new RuntimeException("no super class : " + base);
+					throw new RuntimeException(ctrlClass + " no super class : "
+							+ base);
 				}
 			}
 

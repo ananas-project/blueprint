@@ -17,7 +17,7 @@ public class NamespaceRegImpl implements BPNamespaceRegistrar {
 	@Override
 	public boolean registerNamespace(BPNamespace ns) {
 
-		System.out.println("reg package : " + ns.getNamespaceURI());
+		System.out.println("reg namespace - " + ns.getNamespaceURI());
 
 		String uri = ns.getNamespaceURI();
 		this.mNsTable.put(uri, ns);

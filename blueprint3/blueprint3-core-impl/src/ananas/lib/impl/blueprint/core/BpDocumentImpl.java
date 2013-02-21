@@ -160,7 +160,11 @@ public class BpDocumentImpl implements BPDocument {
 
 	@Override
 	public BPElementMap getElementRegistrar() {
-		return this.mElementReg;
+		BPElementMap reg = this.mElementReg;
+		if (reg == null) {
+			this.mElementReg = reg = new BPElementMapImpl();
+		}
+		return reg;
 	}
 
 	@Override
