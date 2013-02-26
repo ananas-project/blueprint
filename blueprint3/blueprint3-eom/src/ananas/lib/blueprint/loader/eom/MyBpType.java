@@ -133,8 +133,13 @@ class MyBpType implements BPType {
 				}
 			}
 		}
+		if (method == null) {
+			throw new RuntimeException("no method append child : " + child
+					+ " >>> " + parent);
+		}
 		try {
-			boolean rlt = (Boolean) method.getMethod().invoke(parent, child);
+			Method method2 = method.getMethod();
+			boolean rlt = (Boolean) method2.invoke(parent, child);
 			return rlt;
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
