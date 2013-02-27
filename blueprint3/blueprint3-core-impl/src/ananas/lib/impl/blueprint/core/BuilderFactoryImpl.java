@@ -13,6 +13,7 @@ import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.dom.BPText;
 import ananas.lib.blueprint.core.lang.BlueprintException;
 import ananas.lib.blueprint.core.util.BPBuilder;
 import ananas.lib.blueprint.core.util.BPBuilderFactory;
@@ -71,6 +72,12 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 				BPElement child) {
 			return new BlueprintException("parent not accept child : [parent]="
 					+ parent + "; [child]=" + child);
+		}
+
+		public static Exception _elementNotAcceptText(BPNode element, String str) {
+			return new BlueprintException(
+					"element not accept text : [element]=" + element
+							+ " [text]='" + str + "'");
 		}
 	}
 
@@ -152,8 +159,49 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 		@Override
 		public void characters(char[] ch, int start, int length)
 				throws SAXException {
-			// TODO Auto-generated method stub
 
+			boolean isEmpty = true;
+			int p1 = start;
+			int p2 = start + length - 1;
+			for (; p1 <= p2;) {
+				if (!this.isSpaceChar(ch[p1])) {
+					isEmpty = false;
+					break;
+				}
+				if (!this.isSpaceChar(ch[p2])) {
+					isEmpty = false;
+					break;
+				}
+				p1++;
+				p2--;
+			}
+			if (isEmpty) {
+				return;
+			}
+
+			if (this.mStack.size() > 0) {
+				String str = new String(ch, start, length);
+				BPNode ele = this.mStack.peek();
+				BPText txt = this.mDoc.createText(str);
+				boolean rlt = ele.appendChild(txt);
+				if (!rlt) {
+					Exception e = MyExceptionFactory._elementNotAcceptText(ele,
+							str);
+					this._onError(e);
+				}
+			}
+		}
+
+		private boolean isSpaceChar(char c) {
+			switch (c) {
+			case 0x0a:
+			case 0x0d:
+			case '\t':
+			case ' ':
+				return true;
+			default:
+				return false;
+			}
 		}
 
 		@Override
