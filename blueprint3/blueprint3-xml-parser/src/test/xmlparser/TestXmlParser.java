@@ -128,6 +128,14 @@ public class TestXmlParser implements Runnable {
 				Attributes atts) throws SAXException {
 
 			System.out.println(this + ".startElement:" + qName);
+			System.out.println("    uri:" + uri);
+			System.out.println("    localName:" + localName);
+			int len = atts.getLength();
+			for (int i = 0; i < len; i++) {
+				String attrQName = atts.getQName(i);
+				String attrValue = atts.getValue(i);
+				System.out.println("    " + attrQName + "=" + attrValue);
+			}
 		}
 
 		@Override

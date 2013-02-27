@@ -66,7 +66,7 @@ public class SAXParser implements XMLReader {
 		IBufferedReader rdr = new MyCharReader(in);
 
 		MyReaderHandler h = new MyReaderHandler();
-		h.mContentHandler = new MyContentHandlerProxy(this.mContentHandler);
+		h.mContentHandler = new TheContentHandlerProxy(this.mContentHandler);
 		h.mErrorHandler = this.mErrorHandler;
 		h.mDTDHandler = this.mDTDHandler;
 		h.mEntityResolver = this.mEntityResolver;
@@ -927,116 +927,4 @@ public class SAXParser implements XMLReader {
 		}
 	}
 
-	static class MyContentHandlerProxy implements ContentHandler {
-
-		private final ContentHandler target;
-
-		public MyContentHandlerProxy(ContentHandler target) {
-			this.target = target;
-		}
-
-		@Override
-		public void characters(char[] ch, int start, int length)
-				throws SAXException {
-
-			if (length <= 0) {
-				return;
-			}
-			boolean isok = false;
-			int p1, p2;
-			p1 = start;
-			p2 = start + length - 1;
-			for (; p1 <= p2;) {
-				char c1, c2;
-				c1 = ch[p1];
-				c2 = ch[p2];
-				if (!this.isSpaceChar(c1)) {
-					isok = true;
-					break;
-				}
-				if (!this.isSpaceChar(c2)) {
-					isok = true;
-					break;
-				}
-				p1++;
-				p2--;
-			}
-			if (isok)
-				target.characters(ch, start, length);
-		}
-
-		private boolean isSpaceChar(char ch) {
-			switch (ch) {
-			case ' ':
-			case 0x0a:
-			case 0x0d:
-			case '\t':
-				return true;
-			default:
-				return false;
-			}
-		}
-
-		@Override
-		public void endDocument() throws SAXException {
-			target.endDocument();
-		}
-
-		@Override
-		public void endElement(String uri, String localName, String qName)
-				throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void endPrefixMapping(String prefix) throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void ignorableWhitespace(char[] ch, int start, int length)
-				throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void processingInstruction(String target, String data)
-				throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void setDocumentLocator(Locator locator) {
-			target.setDocumentLocator(locator);
-		}
-
-		@Override
-		public void skippedEntity(String name) throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void startDocument() throws SAXException {
-			target.startDocument();
-		}
-
-		@Override
-		public void startElement(String uri, String localName, String qName,
-				Attributes atts) throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-
-		@Override
-		public void startPrefixMapping(String prefix, String uri)
-				throws SAXException {
-			// TODO Auto-generated method stub
-
-		}
-	}
 }
