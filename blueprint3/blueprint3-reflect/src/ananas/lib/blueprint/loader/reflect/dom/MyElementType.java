@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import ananas.lib.blueprint.core.dom.BPAttribute;
+import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.dom.BPNode;
 import ananas.lib.blueprint.core.lang.BPNamespace;
@@ -193,6 +194,11 @@ public class MyElementType implements BPType {
 		} else {
 			this.mMethodList.add(value);
 		}
+	}
+
+	@Override
+	public BPElement createElement(BPDocument doc) {
+		throw new RuntimeException("no impl");
 	}
 
 }

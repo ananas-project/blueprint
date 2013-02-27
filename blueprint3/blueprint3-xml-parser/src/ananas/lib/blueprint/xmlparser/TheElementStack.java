@@ -2,6 +2,8 @@ package ananas.lib.blueprint.xmlparser;
 
 public class TheElementStack implements INamespaceMapper {
 
+	public final static String defaultPrefix = "[default]";
+
 	public static int parseQName(String qName) {
 		return qName.indexOf(':');
 	}
@@ -38,8 +40,13 @@ public class TheElementStack implements INamespaceMapper {
 		private String mPrefix;
 
 		public void setQName(String qName) {
-			int pos = TheElementStack.parseQName(qName);
-			this.mPrefix = TheElementStack.parseQNameGetPrefix(qName, pos);
+			if (qName.equals("xmlns")) {
+				this.mPrefix = defaultPrefix;
+			} else {
+				int pos = TheElementStack.parseQName(qName);
+				this.mPrefix = TheElementStack.parseQNameGetLocalName(qName,
+						pos);
+			}
 		}
 
 		public void setURI(String uri) {
@@ -87,6 +94,14 @@ public class TheElementStack implements INamespaceMapper {
 
 	@Override
 	public String prefixToURI(String prefix) {
+
+		if (prefix == null) {
+			prefix = defaultPrefix;
+		} else {
+			if (prefix.length() <= 0) {
+				prefix = defaultPrefix;
+			}
+		}
 		ItemNS ns = this.mCurElement.pNS;
 		for (; ns != null; ns = ns.parent) {
 			if (prefix.equals(ns.mPrefix)) {

@@ -1,6 +1,5 @@
 package ananas.lib.blueprint.loader.eom;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 import ananas.lib.blueprint.core.dom.BPDocument;
@@ -28,6 +27,7 @@ public class EomNamespaceLoader implements BPNamespaceLoader {
 			BPDocumentLoader docLdr = envi.getDocumentLoaderFactory()
 					.newLoader();
 			BPDocument doc = docLdr.loadDocument(envi, in, "");
+			in.close();
 
 			Ctrl_eom eom = (Ctrl_eom) doc.getRootElement();
 			Tar_eom teom = eom.getTarget_eom();
@@ -45,16 +45,14 @@ public class EomNamespaceLoader implements BPNamespaceLoader {
 			this.loadNS(envi, teom);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			if (e instanceof BlueprintException) {
+				throw (BlueprintException) e;
+			} else if (e instanceof RuntimeException) {
+				throw (RuntimeException) e;
+			} else {
+				throw new RuntimeException(e);
+			}
 		}
-
-		try {
-			if (in != null)
-				in.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private void loadNS(BPEnvironment envi, Tar_eom teom) {

@@ -1,6 +1,7 @@
 package ananas.lib.impl.blueprint.core;
 
 import ananas.lib.blueprint.core.dom.BPAttribute;
+import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
 import ananas.lib.blueprint.core.dom.BPNode;
 import ananas.lib.blueprint.core.lang.BPNamespace;
@@ -52,6 +53,11 @@ public class BPClassImpl implements BPType {
 	public boolean setAttributeForParent(BPElement parent, BPAttribute attr) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public BPElement createElement(BPDocument doc) {
+		throw new RuntimeException("no impl");
 	}
 
 }

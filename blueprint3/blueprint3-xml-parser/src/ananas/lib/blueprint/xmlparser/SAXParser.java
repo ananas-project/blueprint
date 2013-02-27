@@ -2,7 +2,6 @@ package ananas.lib.blueprint.xmlparser;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
@@ -758,7 +757,7 @@ public class SAXParser implements XMLReader {
 		private char[] mResultBuffer;
 
 		public MyCharReader(InputStream in) {
-			this.mReader = new InputStreamReader(in);
+			this.mReader = new MyUTF8StreamReader(in);
 		}
 
 		@Override
