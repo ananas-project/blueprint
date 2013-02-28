@@ -3,7 +3,7 @@ package ananas.lib.impl.blueprint.core;
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
-import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.dom.BPText;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPType;
 
@@ -44,19 +44,22 @@ public class BPClassImpl implements BPType {
 	}
 
 	@Override
-	public boolean appendChildToParent(BPElement parent, BPNode child) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean setAttributeForParent(BPElement parent, BPAttribute attr) {
-		// TODO Auto-generated method stub
-		return false;
+		throw new RuntimeException("no impl");
 	}
 
 	@Override
 	public BPElement createElement(BPDocument doc) {
+		throw new RuntimeException("no impl");
+	}
+
+	@Override
+	public boolean appendTextToParent(BPElement parent, BPText text) {
+		throw new RuntimeException("no impl");
+	}
+
+	@Override
+	public boolean appendElementToParent(BPElement parent, BPElement child) {
 		throw new RuntimeException("no impl");
 	}
 

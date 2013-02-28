@@ -3,7 +3,7 @@ package ananas.lib.blueprint.core.lang;
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
-import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.dom.BPText;
 
 public interface BPType {
 
@@ -15,7 +15,9 @@ public interface BPType {
 
 	BPNamespace getOwnerNamespace();
 
-	boolean appendChildToParent(BPElement parent, BPNode child);
+	boolean appendElementToParent(BPElement parent, BPElement child);
+
+	boolean appendTextToParent(BPElement parent, BPText text);
 
 	boolean setAttributeForParent(BPElement parent, BPAttribute attr);
 

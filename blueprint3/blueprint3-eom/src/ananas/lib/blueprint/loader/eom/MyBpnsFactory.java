@@ -8,6 +8,7 @@ import java.util.Map;
 
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPElement;
+import ananas.lib.blueprint.core.dom.BPText;
 import ananas.lib.blueprint.core.lang.BPEnvironment;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPType;
@@ -18,6 +19,7 @@ import ananas.lib.blueprint.loader.eom.target.Tar_class;
 import ananas.lib.blueprint.loader.eom.target.Tar_element;
 import ananas.lib.blueprint.loader.eom.target.Tar_eom;
 import ananas.lib.blueprint.loader.eom.target.Tar_namespace;
+import ananas.lib.blueprint.loader.eom.target.Tar_text;
 import ananas.lib.blueprint.loader.eom.target.util.TargetTravel;
 import ananas.lib.blueprint.loader.eom.target.util.TargetTravelCallback;
 
@@ -64,11 +66,38 @@ public class MyBpnsFactory {
 				Tar_attribute attr = (Tar_attribute) child;
 				this.checkAttr(attr);
 
+			} else if (child instanceof Tar_text) {
+				Tar_text text = (Tar_text) child;
+				this.checkText(text);
+
 			} else if (child instanceof Tar_element) {
 				Tar_element elt = (Tar_element) child;
 				this.checkElement(elt);
 			}
 
+		}
+
+		private void checkText(Tar_text text) {
+
+			String tid = text.getParent().getTargetId();
+			MyTempClass tmpClass = MyBpnsFactory.this.mTempClassMap.get(tid);
+			BPType type = tmpClass.getBPType();
+			Class<?> ctrlClass = type.getControllerClass();
+
+			String mtdName = Const.add_text_method_name;
+
+			try {
+				Method mtd = ctrlClass.getMethod(mtdName, BPText.class);
+				if (mtd == null) {
+					throw new RuntimeException("no method:" + mtdName);
+				}
+			} catch (Exception e) {
+				if (e instanceof RuntimeException) {
+					throw (RuntimeException) e;
+				} else {
+					throw new RuntimeException(e);
+				}
+			}
 		}
 
 		private void checkClass(Tar_class cls) {

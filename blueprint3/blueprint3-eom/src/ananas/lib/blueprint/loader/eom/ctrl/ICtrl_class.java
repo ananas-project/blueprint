@@ -27,6 +27,8 @@ public interface ICtrl_class {
 
 	boolean append_child_element(Ctrl_element child);
 
+	boolean append_child_text(Ctrl_text child);
+
 	// other
 
 	Tar_class getTarget_class();

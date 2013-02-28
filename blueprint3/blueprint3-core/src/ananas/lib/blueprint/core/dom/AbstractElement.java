@@ -27,16 +27,12 @@ public class AbstractElement extends AbstractNode implements BPElement {
 		return this.onSetAttribute(attr);
 	}
 
-	protected boolean onAppendText(BPText text) {
-		return false;
-	}
-
 	protected boolean onAppendChild(BPNode newChild) {
 		if (newChild instanceof BPText) {
-			return this.onAppendText((BPText) newChild);
+			return this.getType().appendTextToParent(this, (BPText) newChild);
 		} else {
-			boolean rlt = this.getType().appendChildToParent(this, newChild);
-			return rlt;
+			return this.getType().appendElementToParent(this,
+					(BPElement) newChild);
 		}
 	}
 

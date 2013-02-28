@@ -10,7 +10,7 @@ import java.util.Map;
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
-import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.dom.BPText;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPType;
 
@@ -23,6 +23,7 @@ class MyBpType implements BPType {
 
 	private final List<MethodContext> mMethodList = new ArrayList<MethodContext>();
 	private final Map<String, MethodContext> mMethodMap = new HashMap<String, MethodContext>();
+	private Method mMethodForTextAppend;
 
 	public MyBpType(BPNamespace ownerNS, String localName, Class<?> ctrlClass,
 			Class<?> targetClass) {
@@ -54,6 +55,9 @@ class MyBpType implements BPType {
 				String prefix = Const.set_attr_method_prefix;
 				String localName = name.substring(prefix.length());
 				this._add_method_for_attr(localName, method);
+
+			} else if (name.equals(Const.add_text_method_name)) {
+				this.mMethodForTextAppend = method;
 
 			} else {
 			}
@@ -122,7 +126,7 @@ class MyBpType implements BPType {
 	}
 
 	@Override
-	public boolean appendChildToParent(BPElement parent, BPNode child) {
+	public boolean appendElementToParent(BPElement parent, BPElement child) {
 		String key = this.keyForElement(child.getLocalName());
 		MethodContext method = this.mMethodMap.get(key);
 		if (method == null) {
@@ -201,6 +205,25 @@ class MyBpType implements BPType {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	@Override
+	public boolean appendTextToParent(BPElement parent, BPText text) {
+		Method method = this.mMethodForTextAppend;
+		if (method == null) {
+			throw new RuntimeException(
+					"cannot find method for text append to : " + parent);
+		}
+		try {
+			return (Boolean) method.invoke(parent, text);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 }

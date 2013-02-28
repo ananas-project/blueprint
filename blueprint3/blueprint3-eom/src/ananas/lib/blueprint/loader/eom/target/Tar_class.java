@@ -7,6 +7,7 @@ public class Tar_class extends TargetBase {
 
 	final List<Tar_attribute> mAttrList = new ArrayList<Tar_attribute>();
 	final List<Tar_element> mElementList = new ArrayList<Tar_element>();
+	Tar_text mText = null;
 
 	private boolean mIsElement = false;
 	private String mName;
@@ -132,6 +133,10 @@ public class Tar_class extends TargetBase {
 
 		list.addAll(this.mAttrList);
 		list.addAll(this.mElementList);
+		Tar_text txt = this.mText;
+		if (txt != null) {
+			list.add(txt);
+		}
 
 		return list.toArray(new ITargetNode[list.size()]);
 	}
@@ -143,5 +148,9 @@ public class Tar_class extends TargetBase {
 
 	public ITargetNode getParent() {
 		return this.mParent;
+	}
+
+	public void addElement_text(Tar_text txt) {
+		this.mText = txt;
 	}
 }

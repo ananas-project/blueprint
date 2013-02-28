@@ -10,7 +10,7 @@ import java.util.Map;
 import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.core.dom.BPDocument;
 import ananas.lib.blueprint.core.dom.BPElement;
-import ananas.lib.blueprint.core.dom.BPNode;
+import ananas.lib.blueprint.core.dom.BPText;
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPType;
 
@@ -75,7 +75,7 @@ public class MyElementType implements BPType {
 	}
 
 	@Override
-	public boolean appendChildToParent(BPElement parent, BPNode child) {
+	public boolean appendElementToParent(BPElement parent, BPElement child) {
 
 		if (!(child instanceof BPElement)) {
 			return false;
@@ -198,6 +198,11 @@ public class MyElementType implements BPType {
 
 	@Override
 	public BPElement createElement(BPDocument doc) {
+		throw new RuntimeException("no impl");
+	}
+
+	@Override
+	public boolean appendTextToParent(BPElement parent, BPText text) {
 		throw new RuntimeException("no impl");
 	}
 

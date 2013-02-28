@@ -26,6 +26,7 @@
 		<element name="class" />
 		<element name="attribute" />
 		<element name="element" />
+		<element name="text" />
 
 
 	</namespace>

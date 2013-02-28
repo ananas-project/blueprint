@@ -4,6 +4,7 @@ import ananas.lib.blueprint.core.dom.BPAttribute;
 import ananas.lib.blueprint.loader.eom.target.Tar_attribute;
 import ananas.lib.blueprint.loader.eom.target.Tar_class;
 import ananas.lib.blueprint.loader.eom.target.Tar_element;
+import ananas.lib.blueprint.loader.eom.target.Tar_text;
 
 public class Ctrl_class extends CtrlObject implements ICtrl_class {
 
@@ -68,6 +69,14 @@ public class Ctrl_class extends CtrlObject implements ICtrl_class {
 	@Override
 	public boolean set_attribute_localName(BPAttribute attr) {
 		this.getTarget_class().setLocalName(attr.getValue());
+		return true;
+	}
+
+	@Override
+	public boolean append_child_text(Ctrl_text child) {
+		Tar_class parent = this.getTarget_class();
+		Tar_text txt = child.getTarget_text();
+		parent.addElement_text(txt);
 		return true;
 	}
 
