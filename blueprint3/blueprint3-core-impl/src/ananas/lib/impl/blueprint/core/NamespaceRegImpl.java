@@ -3,10 +3,16 @@ package ananas.lib.impl.blueprint.core;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPNamespaceRegistrar;
 
 public class NamespaceRegImpl implements BPNamespaceRegistrar {
+
+	final static Logger logger = LogManager.getLogger(new Object() {
+	});
 
 	private final Map<String, BPNamespace> mNsTable;
 
@@ -17,7 +23,7 @@ public class NamespaceRegImpl implements BPNamespaceRegistrar {
 	@Override
 	public boolean registerNamespace(BPNamespace ns) {
 
-		System.out.println("reg namespace - " + ns.getNamespaceURI());
+		logger.trace("reg namespace - " + ns.getNamespaceURI());
 
 		String uri = ns.getNamespaceURI();
 		this.mNsTable.put(uri, ns);

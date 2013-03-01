@@ -5,7 +5,6 @@ import ananas.lib.blueprint.loader.eom.target.Tar_text;
 public class Ctrl_text extends CtrlObject implements ICtrl_text {
 
 	public Ctrl_text() {
-		System.out.println("hw");
 	}
 
 	@Override
