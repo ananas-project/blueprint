@@ -3,16 +3,16 @@ package ananas.lib.impl.blueprint.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 
 import ananas.lib.blueprint.core.lang.BPNamespace;
 import ananas.lib.blueprint.core.lang.BPNamespaceRegistrar;
+import ananas.lib.util.log4j.AbstractLoggerFactory;
 
 public class NamespaceRegImpl implements BPNamespaceRegistrar {
 
-	final static Logger logger = LogManager.getLogger(new Object() {
-	});
+	private final static Logger logger = (new AbstractLoggerFactory() {
+	}).getLogger();
 
 	private final Map<String, BPNamespace> mNsTable;
 
