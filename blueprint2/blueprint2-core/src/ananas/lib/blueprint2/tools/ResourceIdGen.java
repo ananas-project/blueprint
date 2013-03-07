@@ -151,7 +151,11 @@ public class ResourceIdGen {
 	private void _scanFileContent(File file, ResultSet rlt) {
 		try {
 			MyXmlHandler h = new MyXmlHandler(file, rlt);
-			SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
+			SAXParserFactory pf = SAXParserFactory.newInstance();
+			pf.setNamespaceAware(true);
+			SAXParser parser = pf.newSAXParser();
+			// parser.setProperty("", "");
+
 			parser.parse(file, h);
 		} catch (Exception e) {
 			e.printStackTrace();
