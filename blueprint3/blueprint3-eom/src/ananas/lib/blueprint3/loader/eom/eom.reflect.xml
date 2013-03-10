@@ -4,8 +4,8 @@
 	<namespace name="xmlns:ananas:blueprint:loader:eom">
 
 
-		<property key="myCtrlPackage" value="ananas.lib.blueprint.loader.eom.ctrl" />
-		<property key="myTargetPackage" value="ananas.lib.blueprint.loader.eom.target" />
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.loader.eom.ctrl" />
+		<property key="myTargetPackage" value="ananas.lib.blueprint3.loader.eom.target" />
 
 
 		<property key="ns:defaultPrefix" value="eom" />
