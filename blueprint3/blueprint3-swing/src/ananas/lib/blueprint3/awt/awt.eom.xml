@@ -7,6 +7,9 @@
 		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt" />
 		<property key="myTargetPackage" value="java.awt" />
 
+		<property key="myHelperPackage" value="ananas.lib.blueprint3.awt.helper" />
+		<property key="myHelperCtrl" value="$(myHelperPackage).Ctrl_$(class:javaName)" />
+		<property key="myHelperTar" value="$(myHelperPackage).Tar_$(class:javaName)" />
 
 		<property key="namespace:uri" value="xmlns:ananas:blueprint:awt" />
 		<property key="namespace:defaultPrefix" value="awt" />
@@ -17,30 +20,41 @@
 
 
 
-		<!-- utils -->
-		<class name="pos" isElement="true"
-			controllerClass="$(myCtrlPackage).Ctrl_$(class:javaName)"
-			targetClass="java.lang.Object">
+		<!-- utils(helper) -->
+		<class name="pos" isElement="true" extends="#AWTObject"
+			controllerClass="$(myHelperCtrl)" targetClass="$(myHelperTar)">
 		</class>
 
 
-		<class name="responseChain" isElement="true"
-			controllerClass="$(myCtrlPackage).Ctrl_$(class:javaName)"
-			targetClass="java.lang.Object">
+		<class name="responseChain" isElement="true" extends="#AWTObject"
+			controllerClass="$(myHelperCtrl)" targetClass="$(myHelperTar)">
+
+			<element name="responseChainNode" type="#responseChainNode" />
 		</class>
 
+		<class name="responseChainNode" isElement="true" extends="#AWTObject"
+			controllerClass="$(myHelperCtrl)" targetClass="$(myHelperTar)">
+		</class>
+
+
+
+		<!-- this is the root base class of all awt objects -->
+		<class name="AWTObject" controllerClass="$(myHelperCtrl)"
+			targetClass="$(myHelperTar)">
+			<attribute name="id" />
+		</class>
 
 
 
 		<!-- layout manager -->
 
-		<class name="BorderLayout" isElement="true">
+		<class name="BorderLayout" isElement="true" extends="#AWTObject">
 		</class>
 
 
 		<!-- components -->
 
-		<class name="Component" isElement="true">
+		<class name="Component" isElement="true" extends="#AWTObject">
 
 			<attribute name="x" />
 			<attribute name="y" />
@@ -52,15 +66,15 @@
 		</class>
 
 		<class name="Container" isElement="true" extends="#Component">
-			<attribute name="test" />
 		</class>
 
 		<class name="Window" isElement="true" extends="#Container">
-			<attribute name="test" />
 		</class>
 
 		<class name="Frame" isElement="true" extends="#Window">
-			<attribute name="test" />
+
+			<attribute name="title" />
+
 		</class>
 
 	</namespace>

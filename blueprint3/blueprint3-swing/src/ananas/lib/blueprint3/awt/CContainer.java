@@ -14,7 +14,8 @@ public class CContainer extends CComponent {
 	public boolean append_child_(CComponent comp) {
 
 		ILayoutManager mgr = this.mLayoutMgr;
-		String pos = (this.mCurPos == null) ? null : this.mCurPos.getValue();
+		String pos = (this.mCurPos == null) ? null : this.mCurPos.target_pos()
+				.getValue();
 
 		if (mgr == null) {
 			Container cont = this.getTargetContainer();

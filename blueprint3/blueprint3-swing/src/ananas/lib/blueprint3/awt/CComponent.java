@@ -2,11 +2,11 @@ package ananas.lib.blueprint3.awt;
 
 import java.awt.Component;
 
+import ananas.lib.blueprint3.awt.helper.Ctrl_AWTObject;
 import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.lang.CObject;
 import ananas.lib.blueprint3.core.util.attribute_helper.IntegerAttr;
 
-public class CComponent extends CObject {
+public class CComponent extends Ctrl_AWTObject {
 
 	private BPAttribute m_attr_x;
 	private BPAttribute m_attr_y;
@@ -32,6 +32,26 @@ public class CComponent extends CObject {
 
 	public Component target_component() {
 		return (Component) this.getTarget(true);
+	}
+
+	public boolean set_attribute_x(BPAttribute attr) {
+		this.m_attr_x = attr;
+		return true;
+	}
+
+	public boolean set_attribute_y(BPAttribute attr) {
+		this.m_attr_y = attr;
+		return true;
+	}
+
+	public boolean set_attribute_width(BPAttribute attr) {
+		this.m_attr_width = attr;
+		return true;
+	}
+
+	public boolean set_attribute_height(BPAttribute attr) {
+		this.m_attr_height = attr;
+		return true;
 	}
 
 }

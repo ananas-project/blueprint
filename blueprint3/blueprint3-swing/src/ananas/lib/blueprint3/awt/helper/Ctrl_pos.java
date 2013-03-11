@@ -1,21 +1,16 @@
 package ananas.lib.blueprint3.awt.helper;
 
 import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.lang.CObject;
 
-public class Ctrl_pos extends CObject {
+public class Ctrl_pos extends Ctrl_AWTObject {
 
-	private String mValue;
-
-	 
 	public boolean set_attribute_value(BPAttribute attr) {
-		this.mValue = attr.getValue();
+		this.target_pos().setValue(attr.getValue());
 		return true;
 	}
 
-	 
-	public String getValue() {
-		return this.mValue;
+	public Tar_pos target_pos() {
+		return (Tar_pos) this.getTarget(true);
 	}
 
 }

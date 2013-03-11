@@ -2,28 +2,9 @@
 <eom xmlns="xmlns:ananas:blueprint:loader:eom">
 
 
-	<namespace uri="::::awt" enableExport="false">
-
-		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt" />
-		<property key="myTargetPackage" value="java.awt" />
-
-		<property key="namespace:uri" value="::::awt" />
-		<property key="namespace:defaultPrefix" value="awt" />
-		<property key="class:javaName" value="xxx" />
-
-		<property key="class:controllerClass" value="$(myCtrlPackage).C$(class:javaName)" />
-		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
-
-
-		<class name="Frame" />
-		<class name="Container" />
-
-	</namespace>
-
-
 	<namespace uri="xmlns:ananas:blueprint:swing" enableExport="true">
 
-		<property key="myCtrlPackage" value="ananas.lib.blueprint3.swing" />
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt.swing" />
 		<property key="myTargetPackage" value="javax.swing" />
 
 		<property key="namespace:uri" value="xmlns:ananas:blueprint:swing" />
@@ -48,6 +29,53 @@
 			<!-- <attribute name="" /> <element name="" type="" /> -->
 		</class>
 
+
+
+		<class name="AbstractButton" isElement="true" extends="#JComponent">
+			<attribute name="label" />
+			<attribute name="text" />
+			<attribute name="command" />
+			<attribute name="actionCommand" />
+			<!-- <element name="" type="" /> -->
+		</class>
+
+
+		<!-- JMenu(s) -->
+
+		<class name="JMenuBar" isElement="true" extends="#JComponent">
+			<attribute name="actionListener" />
+			<!-- <element name="" type="" /> -->
+		</class>
+
+		<class name="JMenuItem" isElement="true" extends="#AbstractButton">
+			<!-- <element name="" type="" /> -->
+		</class>
+
+		<class name="JMenu" isElement="true" extends="#JMenuItem">
+			<!-- <element name="" type="" /> -->
+		</class>
+
 	</namespace>
+
+	<!-- notify: this is the abstract awt ns here! -->
+
+	<namespace uri="::::awt" enableExport="false">
+
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt" />
+		<property key="myTargetPackage" value="java.awt" />
+
+		<property key="namespace:uri" value="::::awt" />
+		<property key="namespace:defaultPrefix" value="awt" />
+		<property key="class:javaName" value="xxx" />
+
+		<property key="class:controllerClass" value="$(myCtrlPackage).C$(class:javaName)" />
+		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
+
+
+		<class name="Frame" />
+		<class name="Container" />
+
+	</namespace>
+
 
 </eom>

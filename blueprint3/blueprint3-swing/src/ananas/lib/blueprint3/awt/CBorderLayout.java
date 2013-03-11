@@ -6,10 +6,10 @@ import java.awt.Container;
 import java.util.HashMap;
 import java.util.Map;
 
+import ananas.lib.blueprint3.awt.helper.Ctrl_AWTObject;
 import ananas.lib.blueprint3.awt.helper.ILayoutManager;
-import ananas.lib.blueprint3.core.lang.CObject;
 
-public class CBorderLayout extends CObject implements ILayoutManager {
+public class CBorderLayout extends Ctrl_AWTObject implements ILayoutManager {
 
 	@Override
 	public void addComponentToContainer(CContainer cont, CComponent comp,
