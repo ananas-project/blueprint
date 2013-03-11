@@ -6,17 +6,17 @@ import java.awt.Container;
 import java.util.HashMap;
 import java.util.Map;
 
+import ananas.lib.blueprint3.awt.helper.ILayoutManager;
 import ananas.lib.blueprint3.core.lang.CObject;
 
-public class CBorderLayout extends CObject implements IBorderLayout,
-		ILayoutManager {
+public class CBorderLayout extends CObject implements ILayoutManager {
 
 	@Override
 	public void addComponentToContainer(CContainer cont, CComponent comp,
 			String pos) {
 
 		Container tCont = cont.getTargetContainer();
-		Component tComp = comp.getTargetComponent();
+		Component tComp = comp.target_component();
 
 		String constr = this.getConstraintsByPos(pos);
 

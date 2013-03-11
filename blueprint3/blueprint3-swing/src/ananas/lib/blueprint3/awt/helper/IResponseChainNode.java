@@ -1,4 +1,4 @@
-package ananas.lib.blueprint3.swing.helper;
+package ananas.lib.blueprint3.awt.helper;
 
 import java.awt.event.ActionEvent;
 

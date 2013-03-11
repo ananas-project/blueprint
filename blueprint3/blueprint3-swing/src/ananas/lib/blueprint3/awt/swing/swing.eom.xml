@@ -2,12 +2,15 @@
 <eom xmlns="xmlns:ananas:blueprint:loader:eom">
 
 
-	<namespace uri="::awt" enableExport="false">
-		<property key="myCtrlPackage" value="ananas.lib.blueprint.awt" />
+	<namespace uri="::::awt" enableExport="false">
+
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt" />
 		<property key="myTargetPackage" value="java.awt" />
-		<property key="namespace:uri" value="xmlns:ananas:blueprint:awt" />
+
+		<property key="namespace:uri" value="::::awt" />
 		<property key="namespace:defaultPrefix" value="awt" />
 		<property key="class:javaName" value="xxx" />
+
 		<property key="class:controllerClass" value="$(myCtrlPackage).C$(class:javaName)" />
 		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
 
@@ -20,12 +23,13 @@
 
 	<namespace uri="xmlns:ananas:blueprint:swing" enableExport="true">
 
-		<property key="myCtrlPackage" value="ananas.lib.blueprint.swing" />
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.swing" />
 		<property key="myTargetPackage" value="javax.swing" />
 
 		<property key="namespace:uri" value="xmlns:ananas:blueprint:swing" />
 		<property key="namespace:defaultPrefix" value="swing" />
 		<property key="class:javaName" value="xxx" />
+
 		<property key="class:controllerClass" value="$(myCtrlPackage).C$(class:javaName)" />
 		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
 

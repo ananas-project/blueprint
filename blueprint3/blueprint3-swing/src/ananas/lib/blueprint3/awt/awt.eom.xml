@@ -4,7 +4,7 @@
 	<namespace uri="::awt" enableExport="true">
 
 
-		<property key="myCtrlPackage" value="ananas.lib.blueprint.awt" />
+		<property key="myCtrlPackage" value="ananas.lib.blueprint3.awt" />
 		<property key="myTargetPackage" value="java.awt" />
 
 
@@ -22,6 +22,14 @@
 			controllerClass="$(myCtrlPackage).Ctrl_$(class:javaName)"
 			targetClass="java.lang.Object">
 		</class>
+
+
+		<class name="responseChain" isElement="true"
+			controllerClass="$(myCtrlPackage).Ctrl_$(class:javaName)"
+			targetClass="java.lang.Object">
+		</class>
+
+
 
 
 		<!-- layout manager -->

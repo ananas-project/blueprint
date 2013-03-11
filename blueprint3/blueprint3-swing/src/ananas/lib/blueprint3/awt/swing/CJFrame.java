@@ -1,4 +1,4 @@
-package ananas.lib.blueprint3.swing;
+package ananas.lib.blueprint3.awt.swing;
 
 import ananas.lib.blueprint3.awt.CFrame;
 
