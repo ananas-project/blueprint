@@ -4,13 +4,13 @@ import java.lang.reflect.Method;
 
 import javax.swing.JFrame;
 
-import ananas.lib.blueprint.awt.AwtNamespaceInfo;
-import ananas.lib.blueprint.core.Blueprint;
-import ananas.lib.blueprint.core.dom.BPDocument;
-import ananas.lib.blueprint.core.lang.BPEnvironment;
-import ananas.lib.blueprint.loader.eom.EomReflectInfo;
-import ananas.lib.blueprint.swing.CJFrame;
-import ananas.lib.blueprint.swing.SwingNamespaceInfo;
+import ananas.lib.blueprint3.awt.AwtNamespaceInfo;
+import ananas.lib.blueprint3.awt.swing.CJFrame;
+import ananas.lib.blueprint3.awt.swing.SwingNamespaceInfo;
+import ananas.lib.blueprint3.core.Blueprint;
+import ananas.lib.blueprint3.core.dom.BPDocument;
+import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.loader.eom.EomReflectInfo;
 
 public class Main {
 

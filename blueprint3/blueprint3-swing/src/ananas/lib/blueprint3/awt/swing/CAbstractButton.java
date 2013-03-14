@@ -2,10 +2,9 @@ package ananas.lib.blueprint3.awt.swing;
 
 import javax.swing.AbstractButton;
 
-import org.apache.log4j.Logger;
-
 import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.util.log4j.AbstractLoggerFactory;
+import ananas.lib.util.logging.AbstractLoggerFactory;
+import ananas.lib.util.logging.Logger;
 
 public class CAbstractButton extends CJComponent {
 
