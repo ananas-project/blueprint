@@ -15,20 +15,7 @@
 		<property key="class:targetClass" value="$(myTargetPackage).$(class:javaName)" />
 
 
-
-
-		<class name="JFrame" isElement="true" extends="#Frame">
-			<!-- <attribute name="" /> <element name="" type="" /> -->
-		</class>
-
-		<class name="JLabel" isElement="true" extends="#JComponent">
-			<!-- <attribute name="" /> <element name="" type="" /> -->
-		</class>
-
-		<class name="JComponent" isElement="true" extends="#Container">
-			<!-- <attribute name="" /> <element name="" type="" /> -->
-		</class>
-
+		<!-- Component(s) -->
 
 
 		<class name="AbstractButton" isElement="true" extends="#JComponent">
@@ -37,6 +24,48 @@
 			<attribute name="command" />
 			<attribute name="actionCommand" />
 			<!-- <element name="" type="" /> -->
+		</class>
+
+		<class name="JButton" isElement="true" extends="#AbstractButton">
+		</class>
+
+		<class name="JComponent" isElement="true" extends="#Container">
+			<attribute name="preferredSizeY" />
+			<attribute name="preferredSizeX" />
+			<!-- <element name="" type="" /> -->
+		</class>
+
+
+		<class name="JFrame" isElement="true" extends="#Frame">
+			<!-- <attribute name="" /> <element name="" type="" /> -->
+		</class>
+
+
+		<class name="JLabel" isElement="true" extends="#JComponent">
+			<!-- <attribute name="" /> <element name="" type="" /> -->
+		</class>
+
+		<class name="JPanel" isElement="true" extends="#JComponent">
+			<!-- <attribute name="" /> <element name="" type="" /> -->
+		</class>
+
+		<class name="JScrollPane" isElement="true" extends="#JComponent">
+		</class>
+
+		<class name="JSplitPane" isElement="true" extends="#JComponent">
+			<attribute name="orientation" />
+			<attribute name="resizeWeight" />
+		</class>
+
+		<class name="JTextArea" isElement="true" extends="#JTextComponent">
+		</class>
+
+		<class name="JTextComponent" isElement="true" extends="#JComponent"
+			targetClass="javax.swing.text.JTextComponent">
+			<attribute name="editable" />
+		</class>
+
+		<class name="JTextField" isElement="true" extends="#JTextComponent">
 		</class>
 
 
@@ -53,6 +82,14 @@
 
 		<class name="JMenu" isElement="true" extends="#JMenuItem">
 			<!-- <element name="" type="" /> -->
+		</class>
+
+
+		<!-- util -->
+
+		<class name="position" isElement="true"
+			controllerClass="ananas.lib.blueprint3.awt.helper.Ctrl_pos"
+			targetClass="ananas.lib.blueprint3.awt.helper.Tar_pos">
 		</class>
 
 	</namespace>

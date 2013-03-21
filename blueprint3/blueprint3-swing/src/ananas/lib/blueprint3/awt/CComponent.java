@@ -1,6 +1,7 @@
 package ananas.lib.blueprint3.awt;
 
 import java.awt.Component;
+import java.awt.Dimension;
 
 import ananas.lib.blueprint3.awt.helper.Ctrl_AWTObject;
 import ananas.lib.blueprint3.core.dom.BPAttribute;
@@ -12,9 +13,11 @@ public class CComponent extends Ctrl_AWTObject {
 	private BPAttribute m_attr_y;
 	private BPAttribute m_attr_width;
 	private BPAttribute m_attr_height;
+	private Dimension m_attr_preferredSize;
 
 	public void onTagEnd() {
 		super.onTagEnd();
+
 		Component comp = (Component) this.getTarget(true);
 
 		if (this.m_attr_x != null || this.m_attr_y != null) {
@@ -27,6 +30,10 @@ public class CComponent extends Ctrl_AWTObject {
 			int w = IntegerAttr.getInt(m_attr_width);
 			int h = IntegerAttr.getInt(m_attr_height);
 			comp.setSize(w, h);
+		}
+
+		if (this.m_attr_preferredSize != null) {
+			comp.setPreferredSize(this.m_attr_preferredSize);
 		}
 	}
 
@@ -54,4 +61,29 @@ public class CComponent extends Ctrl_AWTObject {
 		return true;
 	}
 
+	public boolean set_attribute_preferredSizeX(BPAttribute attr) {
+		Dimension dim = this.m_attr_preferredSize;
+		if (dim == null) {
+			dim = new Dimension();
+			this.m_attr_preferredSize = dim;
+		}
+		double w, h;
+		h = dim.getHeight();
+		w = Double.parseDouble(attr.getValue());
+		dim.setSize(w, h);
+		return true;
+	}
+
+	public boolean set_attribute_preferredSizeY(BPAttribute attr) {
+		Dimension dim = this.m_attr_preferredSize;
+		if (dim == null) {
+			dim = new Dimension();
+			this.m_attr_preferredSize = dim;
+		}
+		double w, h;
+		w = dim.getWidth();
+		h = Double.parseDouble(attr.getValue());
+		dim.setSize(w, h);
+		return true;
+	}
 }

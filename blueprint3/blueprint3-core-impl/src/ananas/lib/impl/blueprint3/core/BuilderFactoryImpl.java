@@ -230,6 +230,7 @@ public class BuilderFactoryImpl implements BPBuilderFactory {
 			if (!rlt) {
 				Exception e = MyExceptionFactory._parentNotAcceptChild(parent,
 						child);
+				rlt = parent.appendChild(child);// for debug
 				this._onError(e);
 			}
 		}

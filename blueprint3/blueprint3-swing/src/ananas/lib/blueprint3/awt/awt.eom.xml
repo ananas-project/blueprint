@@ -66,6 +66,7 @@
 		</class>
 
 		<class name="Container" isElement="true" extends="#Component">
+			<element type="#Component" />
 		</class>
 
 		<class name="Window" isElement="true" extends="#Container">
