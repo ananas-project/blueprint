@@ -22,7 +22,7 @@ import ananas.lib.blueprint2.dom.IElement;
 import ananas.lib.blueprint2.dom.IText;
 import ananas.lib.blueprint2.dom.helper.IBlueprintContext;
 import ananas.lib.blueprint2.dom.helper.IDocumentBuilder;
-import ananas.lib.io.IInputConnection;
+import ananas.lib.io.InputConnection;
 
 final class ImplBuilder implements IDocumentBuilder {
 
@@ -62,7 +62,7 @@ final class ImplBuilder implements IDocumentBuilder {
 	@Override
 	public IDocument build(String docURI) throws IOException {
 		String uri = docURI;
-		IInputConnection conn = (IInputConnection) this.getBlueprintContext()
+		InputConnection conn = (InputConnection) this.getBlueprintContext()
 				.getConnector().open(uri);
 		InputStream is = conn.getInputStream();
 		return this._build(is, uri);

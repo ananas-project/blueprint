@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 import ananas.lib.blueprint2.awt.ObjectWrapper;
 import ananas.lib.blueprint2.dom.IAttr;
 import ananas.lib.blueprint2.dom.helper.IBlueprintContext;
-import ananas.lib.io.IInputConnection;
+import ananas.lib.io.InputConnection;
 
 public class ImageIconWrapper extends ObjectWrapper implements IconWrapper {
 
@@ -40,7 +40,7 @@ public class ImageIconWrapper extends ObjectWrapper implements IconWrapper {
 		try {
 			IBlueprintContext context = this.getOwnerDocument()
 					.getImplementation().getBlueprintContext();
-			IInputConnection conn = (IInputConnection) context.getConnector()
+			InputConnection conn = (InputConnection) context.getConnector()
 					.open(url);
 			InputStream is = conn.getInputStream();
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();

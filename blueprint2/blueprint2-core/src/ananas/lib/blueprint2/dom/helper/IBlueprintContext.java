@@ -1,10 +1,10 @@
 package ananas.lib.blueprint2.dom.helper;
 
-import ananas.lib.io.IConnector;
+import ananas.lib.io.Connector;
 
 public interface IBlueprintContext {
 
-	IConnector getConnector();
+	Connector getConnector();
 
 	IImplementation getImplementation();
 
