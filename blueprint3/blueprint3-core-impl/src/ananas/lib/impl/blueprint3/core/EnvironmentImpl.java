@@ -11,8 +11,8 @@ import ananas.lib.blueprint3.core.util.BPXMLReaderFactory;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoaderFactory;
 import ananas.lib.blueprint3.core.xml.serializer.BPXmlSerializerFactory;
-import ananas.lib.io.DefaultConnector;
-import ananas.lib.io.IConnector;
+import ananas.lib.io.Connector;
+import ananas.lib.io.impl.DefaultConnector;
 
 public class EnvironmentImpl implements BPEnvironment {
 
@@ -22,7 +22,7 @@ public class EnvironmentImpl implements BPEnvironment {
 	private BPXmlSerializerFactory mSerializerFactory;
 	private final BPBuilderFactory mBuilderFactory;
 	private BPVisitorFactory mVisitorFactory;
-	private final IConnector mConnector;
+	private final Connector mConnector;
 	private final BPDocumentLoaderFactory mDocLoaderFactory;
 	private NsLoadingManager mNsLoadingManager;
 	private final BPNamespaceLoaderFactory mNsLoaderFactory;
@@ -63,7 +63,7 @@ public class EnvironmentImpl implements BPEnvironment {
 	}
 
 	@Override
-	public IConnector getConnector() {
+	public Connector getConnector() {
 		return this.mConnector;
 	}
 

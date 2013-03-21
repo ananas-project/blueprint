@@ -15,7 +15,7 @@ import ananas.lib.blueprint3.core.lang.BlueprintException;
 import ananas.lib.blueprint3.core.util.BPBuilder;
 import ananas.lib.blueprint3.core.util.BPBuilderFactory;
 import ananas.lib.blueprint3.core.util.BPXMLReaderFactory;
-import ananas.lib.io.IInputConnection;
+import ananas.lib.io.InputConnection;
 
 public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {
 
@@ -30,13 +30,13 @@ public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {
 		public BPDocument loadDocument(BPEnvironment envi, String uri)
 				throws IOException, SAXException {
 
-			IInputConnection conn = null;
+			InputConnection conn = null;
 			InputStream in = null;
 			BPDocument doc = null;
 			Exception ioe = null;
 
 			try {
-				conn = (IInputConnection) envi.getConnector().open(uri);
+				conn = (InputConnection) envi.getConnector().open(uri);
 				in = conn.getInputStream();
 				doc = this._loadDoc(envi, in, uri);
 			} catch (SAXException e) {

@@ -7,7 +7,7 @@ import ananas.lib.blueprint3.core.util.BPXMLReaderFactory;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoaderFactory;
 import ananas.lib.blueprint3.core.xml.serializer.BPXmlSerializerFactory;
-import ananas.lib.io.IConnector;
+import ananas.lib.io.Connector;
 
 public interface BPEnvironment {
 
@@ -27,7 +27,7 @@ public interface BPEnvironment {
 
 	BPVisitorFactory getVisitorFactory();
 
-	IConnector getConnector();
+	Connector getConnector();
 
 	// ns loading
 
