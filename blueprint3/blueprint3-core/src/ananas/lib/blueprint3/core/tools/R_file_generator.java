@@ -59,17 +59,17 @@ public class R_file_generator implements Runnable {
 
 		for (Object k : prop.keySet()) {
 			String key = k.toString();
-			String value = prop.getProperty(key);
+			String value = MyHelper.valueForKey(prop, key);
 			System.out.println(key + " = " + value);
 		}
 
-		String base = prop.getProperty(Keys.base_dir);
-		String res = prop.getProperty(Keys.res_dir);
-		String gen = prop.getProperty(Keys.gen_dir);
+		String base = MyHelper.valueForKey(prop, Keys.base_dir);
+		String res = MyHelper.valueForKey(prop, Keys.res_dir);
+		String gen = MyHelper.valueForKey(prop, Keys.gen_dir);
 		File resBase = new File(base, res);
 		File genBase = new File(base, gen);
 
-		String isR = prop.getProperty(Keys.is_R);
+		String isR = MyHelper.valueForKey(prop, Keys.is_R);
 
 		if (isR == null) {
 			SigleDir sd = new SigleDir(prop);
@@ -80,6 +80,16 @@ public class R_file_generator implements Runnable {
 			sd.run();
 		} else {
 			this.findSubDirectories(resBase, resBase, genBase, 32);
+		}
+	}
+
+	private static class MyHelper {
+		static String valueForKey(Properties prop, String key) {
+			String value = prop.getProperty(key);
+			if (value == null) {
+				throw new RuntimeException("no value for key:" + key);
+			}
+			return value;
 		}
 	}
 
@@ -446,7 +456,7 @@ public class R_file_generator implements Runnable {
 		}
 
 		private Set<String> getSetByKey(String key) {
-			String value = this.mProp.getProperty(key);
+			String value = MyHelper.valueForKey(this.mProp, key);
 			String[] array = CommandLinePropertiesUtil.listToArray(value);
 			Set<String> set = new HashSet<String>();
 			for (String str : array) {

@@ -60,6 +60,7 @@
 			<attribute name="y" />
 			<attribute name="width" />
 			<attribute name="height" />
+			<attribute name="background" />
 
 			<!-- <element name="test" type="java.lang.Object" /> -->
 

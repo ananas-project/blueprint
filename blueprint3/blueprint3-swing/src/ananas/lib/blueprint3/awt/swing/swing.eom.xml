@@ -29,6 +29,9 @@
 		<class name="JButton" isElement="true" extends="#AbstractButton">
 		</class>
 
+		<class name="JComboBox" isElement="true" extends="#JComponent">
+		</class>
+
 		<class name="JComponent" isElement="true" extends="#Container">
 			<attribute name="preferredSizeY" />
 			<attribute name="preferredSizeX" />

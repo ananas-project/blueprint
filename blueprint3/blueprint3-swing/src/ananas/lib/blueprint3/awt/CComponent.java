@@ -1,5 +1,6 @@
 package ananas.lib.blueprint3.awt;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 
@@ -14,6 +15,7 @@ public class CComponent extends Ctrl_AWTObject {
 	private BPAttribute m_attr_width;
 	private BPAttribute m_attr_height;
 	private Dimension m_attr_preferredSize;
+	private Color m_attr_background;
 
 	public void onTagEnd() {
 		super.onTagEnd();
@@ -34,6 +36,10 @@ public class CComponent extends Ctrl_AWTObject {
 
 		if (this.m_attr_preferredSize != null) {
 			comp.setPreferredSize(this.m_attr_preferredSize);
+		}
+
+		if (this.m_attr_background != null) {
+			comp.setBackground(this.m_attr_background);
 		}
 	}
 
@@ -71,6 +77,17 @@ public class CComponent extends Ctrl_AWTObject {
 		h = dim.getHeight();
 		w = Double.parseDouble(attr.getValue());
 		dim.setSize(w, h);
+		return true;
+	}
+
+	public boolean set_attribute_background(BPAttribute attr) {
+		String str = attr.getValue();
+		if (str.startsWith("#")) {
+			// str = str.substring(1);
+			this.m_attr_background = Color.decode(str);
+		} else {
+			this.m_attr_background = Color.decode(str);
+		}
 		return true;
 	}
 
