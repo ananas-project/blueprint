@@ -4,34 +4,43 @@ import java.awt.event.ActionEvent;
 
 public class Tar_responseChainNode implements IResponseChainNode {
 
+	private IResponseChainNode mNext;
+	private IResponseChainNode mHook;
+
 	@Override
 	public void setHook(IResponseChainNode hook) {
-		// TODO Auto-generated method stub
-		
+		this.mHook = hook;
 	}
 
 	@Override
 	public IResponseChainNode getHook() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mHook;
 	}
 
 	@Override
 	public IResponseChainNode getNext() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.mNext;
 	}
 
 	@Override
 	public void setNext(IResponseChainNode next) {
-		// TODO Auto-generated method stub
-		
+		this.mNext = next;
 	}
 
 	@Override
 	public boolean processEvent(ActionEvent e) {
-		// TODO Auto-generated method stub
-		return false;
+		IResponseChainNode hook = this.mHook;
+		IResponseChainNode next = this.mNext;
+		boolean rlt = IResponseChainNode.GOTO_NEXT;
+		if (hook != null) {
+			rlt = hook.processEvent(e);
+			if (rlt == IResponseChainNode.DONE) {
+				return rlt;
+			}
+		}
+		if (next != null) {
+			rlt = next.processEvent(e);
+		}
+		return rlt;
 	}
-
 }

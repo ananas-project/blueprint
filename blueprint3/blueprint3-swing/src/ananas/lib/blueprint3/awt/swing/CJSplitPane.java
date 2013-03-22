@@ -1,7 +1,12 @@
 package ananas.lib.blueprint3.awt.swing;
 
+import java.awt.Component;
+
 import javax.swing.JSplitPane;
 
+import ananas.lib.blueprint3.awt.CComponent;
+import ananas.lib.blueprint3.awt.helper.Ctrl_pos;
+import ananas.lib.blueprint3.awt.helper.ILayoutManager;
 import ananas.lib.blueprint3.core.dom.BPAttribute;
 
 public class CJSplitPane extends CJComponent {
@@ -49,4 +54,46 @@ public class CJSplitPane extends CJComponent {
 		this.m_attr_resizeWeight = attr;
 		return true;
 	}
+
+	@Override
+	public boolean append_child_(CComponent comp) {
+		Component child = comp.target_component();
+		JSplitPane parent = this.target_JSplitPane();
+		if (this._isBottom()) {
+			parent.setRightComponent(child);
+		} else {
+			parent.setLeftComponent(child);
+		}
+		return true;
+	}
+
+	private boolean _isBottom() {
+		if (this.mCurPos == null) {
+		} else if ("right".equalsIgnoreCase(this.mCurPos)) {
+			return true;
+		} else if ("east".equalsIgnoreCase(this.mCurPos)) {
+			return true;
+		} else if ("bottom".equalsIgnoreCase(this.mCurPos)) {
+			return true;
+		} else if ("south".equalsIgnoreCase(this.mCurPos)) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean append_child_(ILayoutManager mgr) {
+		return false;
+		// return super.append_child_(mgr);
+	}
+
+	private String mCurPos;
+
+	@Override
+	public boolean append_child_pos(Ctrl_pos pos) {
+		this.mCurPos = pos.target_pos().getValue();
+		return true;
+		// return super.append_child_pos(pos);
+	}
+
 }

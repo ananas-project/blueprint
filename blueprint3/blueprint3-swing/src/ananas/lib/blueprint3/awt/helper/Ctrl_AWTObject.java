@@ -1,6 +1,7 @@
 package ananas.lib.blueprint3.awt.helper;
 
 import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.core.dom.BPElementMap;
 import ananas.lib.blueprint3.core.lang.CObject;
 
 public class Ctrl_AWTObject extends CObject {
@@ -15,4 +16,17 @@ public class Ctrl_AWTObject extends CObject {
 	public String getId() {
 		return this.mId;
 	}
+
+	@Override
+	public void onTagBegin() {
+
+		super.onTagBegin();
+
+		String id = this.mId;
+		if (id != null) {
+			BPElementMap reg = this.getOwnerDocument().getElementRegistrar();
+			reg.put(id, this);
+		}
+	}
+
 }

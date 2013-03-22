@@ -11,6 +11,8 @@ import ananas.lib.blueprint3.awt.helper.ILayoutManager;
 
 public class CBorderLayout extends Ctrl_AWTObject implements ILayoutManager {
 
+	private boolean mIsInit = false;
+
 	@Override
 	public void addComponentToContainer(CContainer cont, CComponent comp,
 			String pos) {
@@ -18,9 +20,20 @@ public class CBorderLayout extends Ctrl_AWTObject implements ILayoutManager {
 		Container tCont = cont.getTargetContainer();
 		Component tComp = comp.target_component();
 
+		this.initIfNot(tCont);
+
 		String constr = this.getConstraintsByPos(pos);
 
 		tCont.add(tComp, constr);
+	}
+
+	private void initIfNot(Container tCont) {
+
+		if (!this.mIsInit) {
+			this.mIsInit = true;
+			tCont.setLayout(new BorderLayout());
+		}
+
 	}
 
 	private static Map<String, String> s_constr_map = null;

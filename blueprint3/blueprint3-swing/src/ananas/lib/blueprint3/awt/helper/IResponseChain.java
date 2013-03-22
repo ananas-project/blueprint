@@ -1,6 +1,8 @@
 package ananas.lib.blueprint3.awt.helper;
 
-public interface IResponseChain {
+import java.awt.event.ActionListener;
+
+public interface IResponseChain extends ActionListener {
 
 	boolean appendNode(IResponseChainNode node);
 
