@@ -7,6 +7,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JDesktopPane;
 import javax.swing.JDialog;
@@ -117,6 +118,8 @@ public class NamespaceLoader implements INamespaceLoader {
 			h.reg("BoxLayout", BoxLayoutWrapper.class, BoxLayout.class);
 			h.reg("ImageIcon", ImageIconWrapper.class, ImageIcon.class);
 
+			h.reg("JCheckBoxMenuItem", JCheckBoxMenuItemWrapper.class,
+					JCheckBoxMenuItem.class);
 			h.reg("JMenu", JMenuWrapper.class, JMenu.class);
 			h.reg("JMenuBar", JMenuBarWrapper.class, JMenuBar.class);
 			h.reg("JMenuItem", JMenuItemWrapper.class, JMenuItem.class);
