@@ -21,7 +21,11 @@ public interface BPEnvironment {
 
 	BPXmlSerializerFactory getXmlSerializerFactory();
 
-	BPDocumentLoaderFactory getDocumentLoaderFactory();
+	BPFileNameMapper getFileNameMapper();
+
+	BPDocumentLoaderFactoryRegistrar getContentTypeRegistrar();
+
+	BPDocumentLoaderFactoryRegistrar getUriSchemeRegistrar();
 
 	BPBuilderFactory getBuilderFactory();
 

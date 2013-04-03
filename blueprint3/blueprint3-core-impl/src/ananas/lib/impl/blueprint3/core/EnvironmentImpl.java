@@ -1,8 +1,9 @@
 package ananas.lib.impl.blueprint3.core;
 
 import ananas.lib.blueprint3.core.dom.BPImplementation;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactory;
+import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactoryRegistrar;
 import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.core.lang.BPFileNameMapper;
 import ananas.lib.blueprint3.core.lang.BPNamespaceRegistrar;
 import ananas.lib.blueprint3.core.lang.BlueprintException;
 import ananas.lib.blueprint3.core.util.BPBuilderFactory;
@@ -23,9 +24,11 @@ public class EnvironmentImpl implements BPEnvironment {
 	private final BPBuilderFactory mBuilderFactory;
 	private BPVisitorFactory mVisitorFactory;
 	private final Connector mConnector;
-	private final BPDocumentLoaderFactory mDocLoaderFactory;
 	private NsLoadingManager mNsLoadingManager;
 	private final BPNamespaceLoaderFactory mNsLoaderFactory;
+	private final BPDocumentLoaderFactoryRegistrar mTypeToFactoryReg;
+	private final BPDocumentLoaderFactoryRegistrar mSchemeToFactoryReg;
+	private final BPFileNameMapper mFileNameMapper;
 
 	public EnvironmentImpl() {
 		this.mConnector = new DefaultConnector();
@@ -33,8 +36,12 @@ public class EnvironmentImpl implements BPEnvironment {
 		this.mParserFactory = new ParserFactoryImpl();
 		this.mBuilderFactory = new BuilderFactoryImpl();
 		this.mNsReg = new NamespaceRegImpl();
-		this.mDocLoaderFactory = new DocLoaderFactoryImpl();
 		this.mNsLoaderFactory = new MainNsLoaderFactory();
+		this.mSchemeToFactoryReg = new BPDocumentLoaderFactoryRegistrarImpl(
+				"scheme");
+		this.mTypeToFactoryReg = new BPDocumentLoaderFactoryRegistrarImpl(
+				"content-type");
+		this.mFileNameMapper = new BPFileNameMapperImpl();
 	}
 
 	@Override
@@ -70,11 +77,6 @@ public class EnvironmentImpl implements BPEnvironment {
 	@Override
 	public BPXMLReaderFactory getXMLReaderFactory() {
 		return this.mParserFactory;
-	}
-
-	@Override
-	public BPDocumentLoaderFactory getDocumentLoaderFactory() {
-		return this.mDocLoaderFactory;
 	}
 
 	@Override
@@ -117,6 +119,21 @@ public class EnvironmentImpl implements BPEnvironment {
 	@Override
 	public BPNamespaceLoaderFactory getNamespaceLoaderFactory() {
 		return this.mNsLoaderFactory;
+	}
+
+	@Override
+	public BPFileNameMapper getFileNameMapper() {
+		return this.mFileNameMapper;
+	}
+
+	@Override
+	public BPDocumentLoaderFactoryRegistrar getContentTypeRegistrar() {
+		return this.mTypeToFactoryReg;
+	}
+
+	@Override
+	public BPDocumentLoaderFactoryRegistrar getUriSchemeRegistrar() {
+		return this.mSchemeToFactoryReg;
 	}
 
 }

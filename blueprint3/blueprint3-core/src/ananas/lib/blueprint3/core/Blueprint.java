@@ -1,10 +1,10 @@
 package ananas.lib.blueprint3.core;
 
 import java.io.IOException;
-
-import org.xml.sax.SAXException;
+import java.net.URI;
 
 import ananas.lib.blueprint3.core.dom.BPDocument;
+import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.core.lang.BPEnvironment;
 
 public abstract class Blueprint implements IBlueprint {
@@ -20,12 +20,11 @@ public abstract class Blueprint implements IBlueprint {
 		return inst;
 	}
 
-	public static BPDocument loadDocument(String uri) throws IOException,
-			SAXException {
-
+	public static BPDocument loadDocument(String uri) throws IOException {
 		BPEnvironment envi = Blueprint.getInstance().defaultEnvironment();
-		return envi.getDocumentLoaderFactory().newLoader()
-				.loadDocument(envi, uri);
+		BPDocumentGroup group = envi.getImplementation().createDocumentGroup(
+				envi);
+		return group.openDocument(URI.create(uri), true, true);
 	}
 
 }

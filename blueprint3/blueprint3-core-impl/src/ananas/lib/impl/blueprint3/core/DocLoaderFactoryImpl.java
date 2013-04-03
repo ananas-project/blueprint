@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import ananas.lib.blueprint3.core.dom.BPDocument;
+import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.core.lang.BPDocumentLoader;
 import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactory;
 import ananas.lib.blueprint3.core.lang.BPEnvironment;
@@ -19,72 +20,22 @@ import ananas.lib.io.InputConnection;
 
 public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {
 
-	@Override
-	public BPDocumentLoader newLoader() {
-		return new MyLoader();
-	}
+	private class MyLoader implements BPDocumentLoader {
 
-	class MyLoader implements BPDocumentLoader {
+		private final BPEnvironment mEnvi;
 
-		@Override
-		public BPDocument loadDocument(BPEnvironment envi, String uri)
-				throws IOException, SAXException {
-
-			InputConnection conn = null;
-			InputStream in = null;
-			BPDocument doc = null;
-			Exception ioe = null;
-
-			try {
-				conn = (InputConnection) envi.getConnector().open(uri);
-				in = conn.getInputStream();
-				doc = this._loadDoc(envi, in, uri);
-			} catch (SAXException e) {
-				ioe = e;
-			} catch (BlueprintException e) {
-				ioe = e;
-			} catch (IOException e) {
-				ioe = e;
-			} finally {
-				if (in != null) {
-					in.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			}
-
-			if (ioe == null) {
-				return doc;
-
-			} else if (ioe instanceof IOException) {
-				throw ((IOException) ioe);
-
-			} else if (ioe instanceof BlueprintException) {
-				throw ((BlueprintException) ioe);
-
-			} else if (ioe instanceof SAXException) {
-				throw ((SAXException) ioe);
-
-			} else {
-				throw new RuntimeException(ioe);
-			}
-
+		public MyLoader(BPEnvironment envi) {
+			this.mEnvi = envi;
 		}
 
-		@Override
-		public BPDocument loadDocument(BPEnvironment envi, InputStream in,
-				String uri) throws IOException, BlueprintException,
-				SAXException {
+		
 
-			return this._loadDoc(envi, in, uri);
+		private BPDocument _loadDoc(InputStream in, String uri)
+				throws SAXException, IOException {
 
-		}
-
-		private BPDocument _loadDoc(BPEnvironment envi, InputStream in,
-				String uri) throws SAXException, IOException {
-
-			BPDocument doc = envi.getImplementation().createDocument(envi, uri);
+			BPEnvironment envi = null;
+			BPDocumentGroup onwerGroup = null;
+			BPDocument doc = null;// envi.getImplementation().createDocument(onwerGroup, uri) ;
 
 			BPXMLReaderFactory parserFactory = envi.getXMLReaderFactory();
 			XMLReader reader = parserFactory.newReader();
@@ -103,5 +54,27 @@ public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {
 			return doc;
 
 		}
+
+	 
+	 
+	 
+		@Override
+		public void loadDocument(BPDocument doc) throws IOException {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void loadDocument(BPDocument doc, InputStream in)
+				throws IOException {
+			// TODO Auto-generated method stub
+
+		}
+	}
+
+	@Override
+	public BPDocumentLoader newLoader() {
+		// return new MyLoader(envi);
+		throw new RuntimeException("this class is out of use!");
 	}
 }

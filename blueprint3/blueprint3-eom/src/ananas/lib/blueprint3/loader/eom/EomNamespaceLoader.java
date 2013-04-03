@@ -1,13 +1,14 @@
 package ananas.lib.blueprint3.loader.eom;
 
-import java.io.InputStream;
+import java.net.URI;
 
 import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoader;
+import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.core.lang.BPEnvironment;
 import ananas.lib.blueprint3.core.lang.BPNamespace;
 import ananas.lib.blueprint3.core.lang.BPNamespaceRegistrar;
 import ananas.lib.blueprint3.core.lang.BlueprintException;
+import ananas.lib.blueprint3.core.util.BPClassUriGen;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
 import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoader;
 import ananas.lib.blueprint3.loader.eom.ctrl.Ctrl_eom;
@@ -20,14 +21,13 @@ public class EomNamespaceLoader implements BPNamespaceLoader {
 			throws BlueprintException {
 
 		String xmlfile = info.getProperty("eom.xml");
-		InputStream in = info.getClass().getResourceAsStream(xmlfile);
+
+		URI uri = BPClassUriGen.getURI(info.getClass(), xmlfile);
 
 		try {
-
-			BPDocumentLoader docLdr = envi.getDocumentLoaderFactory()
-					.newLoader();
-			BPDocument doc = docLdr.loadDocument(envi, in, "");
-			in.close();
+			BPDocumentGroup group = envi.getImplementation()
+					.createDocumentGroup(envi);
+			BPDocument doc = group.openDocument(uri);
 
 			Ctrl_eom eom = (Ctrl_eom) doc.getRootElement();
 			Tar_eom teom = eom.getTarget_eom();

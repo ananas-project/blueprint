@@ -1,14 +1,18 @@
 package ananas.lib.blueprint3.core.dom;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import java.net.URI;
 
 public interface BPDocument extends BPNode {
 
 	BPElement getRootElement();
 
-	String getDocumentURI();
+	void setRootElement(BPElement root);
 
-	BPEnvironment getEnvironment();
+	URI getDocumentURI();
+
+	String getDocumentType();
+
+	void setDocumentType(String type);
 
 	BPText createText(String data);
 
@@ -19,6 +23,8 @@ public interface BPDocument extends BPNode {
 	BPElement findElementById(String id);
 
 	BPElement findElementByURI(String uri);
+
+	BPDocumentGroup getDocumentGroup();
 
 	Object findTargetById(String id);
 

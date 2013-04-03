@@ -1,7 +1,10 @@
 package ananas.lib.impl.blueprint3.core;
 
+import java.net.URI;
+
 import ananas.lib.blueprint3.core.dom.BPAttribute;
 import ananas.lib.blueprint3.core.dom.BPDocument;
+import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.core.dom.BPElement;
 import ananas.lib.blueprint3.core.dom.BPElementMap;
 import ananas.lib.blueprint3.core.dom.BPNode;
@@ -12,20 +15,23 @@ import ananas.lib.blueprint3.core.lang.BPType;
 
 public class BpDocumentImpl implements BPDocument {
 
-	private final String mDocURI;
+	private final BPDocumentGroup mGroup;
+	private final URI mDocURI;
 	private final BPEnvironment mEnvironment;
 	private BPElement mRoot;
 	private BPElementMap mElementReg;
+	private String mDocType;
 
-	public BpDocumentImpl(BPEnvironment envi, String uri) {
-		this.mEnvironment = envi;
+	public BpDocumentImpl(BPDocumentGroup group, URI uri) {
+		this.mGroup = group;
+		this.mEnvironment = group.getEnvironment();
 		this.mDocURI = uri;
 	}
 
 	@Override
 	public boolean appendChild(BPNode newChild) {
 		if (newChild instanceof BPElement) {
-			this.mRoot = (BPElement) newChild;
+			this.setRootElement((BPElement) newChild);
 			return true;
 		} else {
 			return false;
@@ -68,13 +74,8 @@ public class BpDocumentImpl implements BPDocument {
 	}
 
 	@Override
-	public String getDocumentURI() {
+	public URI getDocumentURI() {
 		return this.mDocURI;
-	}
-
-	@Override
-	public BPEnvironment getEnvironment() {
-		return this.mEnvironment;
 	}
 
 	@Override
@@ -189,6 +190,26 @@ public class BpDocumentImpl implements BPDocument {
 	@Override
 	public String getNamespaceURI() {
 		return null;
+	}
+
+	@Override
+	public void setRootElement(BPElement root) {
+		this.mRoot = root;
+	}
+
+	@Override
+	public String getDocumentType() {
+		return this.mDocType;
+	}
+
+	@Override
+	public void setDocumentType(String type) {
+		this.mDocType = type;
+	}
+
+	@Override
+	public BPDocumentGroup getDocumentGroup() {
+		return this.mGroup;
 	}
 
 }
