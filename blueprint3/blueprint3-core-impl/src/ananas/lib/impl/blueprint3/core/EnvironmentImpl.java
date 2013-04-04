@@ -1,5 +1,10 @@
 package ananas.lib.impl.blueprint3.core;
 
+import java.io.IOException;
+import java.net.URI;
+
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.dom.BPImplementation;
 import ananas.lib.blueprint3.lang.BPDocumentLoaderFactoryRegistrar;
 import ananas.lib.blueprint3.lang.BPEnvironment;
@@ -134,6 +139,14 @@ public class EnvironmentImpl implements BPEnvironment {
 	@Override
 	public BPDocumentLoaderFactoryRegistrar getUriSchemeRegistrar() {
 		return this.mSchemeToFactoryReg;
+	}
+
+	@Override
+	public BPDocument loadDocument(URI uri) throws IOException {
+		BPEnvironment envi = this;
+		BPDocumentGroup group = envi.getImplementation().createDocumentGroup(
+				envi);
+		return group.openDocument(uri, true, true);
 	}
 
 }

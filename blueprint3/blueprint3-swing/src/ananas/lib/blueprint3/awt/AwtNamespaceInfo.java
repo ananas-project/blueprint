@@ -1,6 +1,6 @@
 package ananas.lib.blueprint3.awt;
 
-import ananas.lib.blueprint3.core.util.nsloader.AbstractBPNamespaceInfo;
+import ananas.lib.blueprint3.util.nsloader.AbstractBPNamespaceInfo;
 
 public class AwtNamespaceInfo extends AbstractBPNamespaceInfo {
 

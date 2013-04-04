@@ -5,8 +5,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import ananas.lib.blueprint3.awt.helper.Ctrl_AWTObject;
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.util.attribute_helper.IntegerAttr;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.util.attribute_helper.IntegerAttr;
 
 public class CComponent extends Ctrl_AWTObject {
 

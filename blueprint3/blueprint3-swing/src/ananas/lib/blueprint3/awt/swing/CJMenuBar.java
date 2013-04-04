@@ -9,7 +9,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
 public class CJMenuBar extends CJComponent {
 

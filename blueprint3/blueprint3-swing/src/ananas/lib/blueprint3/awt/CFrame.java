@@ -2,7 +2,7 @@ package ananas.lib.blueprint3.awt;
 
 import java.awt.Frame;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
 public class CFrame extends CWindow {
 

@@ -1,7 +1,7 @@
 package ananas.lib.blueprint3.element.bpbase;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.lang.BPEnvironment;
 
 public class CtrlImport extends CtrlObject {
 
@@ -23,7 +23,8 @@ public class CtrlImport extends CtrlObject {
 		super.onTagEnd();
 
 		String nsInfoName = this.target_import().getValue();
-		BPEnvironment envi = this.getOwnerDocument().getEnvironment();
+		BPEnvironment envi = this.getOwnerDocument().getDocumentGroup()
+				.getEnvironment();
 		envi.loadNamespace(nsInfoName, true);
 
 	}

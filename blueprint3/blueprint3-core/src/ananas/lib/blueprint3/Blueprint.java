@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URI;
 
 import ananas.lib.blueprint3.dom.BPDocument;
-import ananas.lib.blueprint3.dom.BPDocumentGroup;
 import ananas.lib.blueprint3.lang.BPEnvironment;
 
 public interface Blueprint {
@@ -27,9 +26,7 @@ public interface Blueprint {
 		public static BPDocument loadDocument(String uri) throws IOException {
 			BPEnvironment envi = Blueprint.Util.getInstance()
 					.defaultEnvironment();
-			BPDocumentGroup group = envi.getImplementation()
-					.createDocumentGroup(envi);
-			return group.openDocument(URI.create(uri), true, true);
+			return envi.loadDocument(URI.create(uri));
 		}
 
 		public static BlueprintFactory getFactory(String factoryClass) {

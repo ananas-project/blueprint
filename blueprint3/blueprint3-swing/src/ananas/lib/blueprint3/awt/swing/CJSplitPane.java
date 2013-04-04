@@ -7,7 +7,7 @@ import javax.swing.JSplitPane;
 import ananas.lib.blueprint3.awt.CComponent;
 import ananas.lib.blueprint3.awt.helper.Ctrl_pos;
 import ananas.lib.blueprint3.awt.helper.ILayoutManager;
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
 public class CJSplitPane extends CJComponent {
 

@@ -1,8 +1,8 @@
 package ananas.lib.blueprint3.awt.helper;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.dom.BPElementMap;
-import ananas.lib.blueprint3.core.lang.CObject;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPElementMap;
+import ananas.lib.blueprint3.lang.CObject;
 
 public class Ctrl_AWTObject extends CObject {
 

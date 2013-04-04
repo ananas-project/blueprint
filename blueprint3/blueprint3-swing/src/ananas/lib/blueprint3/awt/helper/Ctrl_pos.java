@@ -1,6 +1,6 @@
 package ananas.lib.blueprint3.awt.helper;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
 public class Ctrl_pos extends Ctrl_AWTObject {
 

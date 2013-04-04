@@ -1,5 +1,9 @@
 package ananas.lib.blueprint3.lang;
 
+import java.io.IOException;
+import java.net.URI;
+
+import ananas.lib.blueprint3.dom.BPDocument;
 import ananas.lib.blueprint3.dom.BPImplementation;
 import ananas.lib.blueprint3.util.BPBuilderFactory;
 import ananas.lib.blueprint3.util.BPVisitorFactory;
@@ -43,4 +47,6 @@ public interface BPEnvironment {
 	void loadNamespace(BPNamespaceInfo loader, boolean lazy)
 			throws BlueprintException;
 
+	// doc loading
+	BPDocument loadDocument(URI uri) throws IOException;
 }

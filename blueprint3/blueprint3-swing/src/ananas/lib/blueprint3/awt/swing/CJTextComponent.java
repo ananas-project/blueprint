@@ -2,7 +2,7 @@ package ananas.lib.blueprint3.awt.swing;
 
 import javax.swing.text.JTextComponent;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
 public class CJTextComponent extends CJComponent {
 

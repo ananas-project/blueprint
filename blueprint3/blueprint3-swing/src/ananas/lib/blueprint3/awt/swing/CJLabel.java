@@ -2,13 +2,12 @@ package ananas.lib.blueprint3.awt.swing;
 
 import javax.swing.JLabel;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 
-public class CJLabel extends CJComponent  {
+public class CJLabel extends CJComponent {
 
 	private BPAttribute m_attr_text;
 
-	 
 	public boolean set_attribute_text(BPAttribute attr) {
 		this.m_attr_text = attr;
 		return true;
