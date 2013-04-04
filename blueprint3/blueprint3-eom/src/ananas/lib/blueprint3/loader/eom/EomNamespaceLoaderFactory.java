@@ -1,7 +1,7 @@
 package ananas.lib.blueprint3.loader.eom;
 
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoader;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoaderFactory;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoader;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoaderFactory;
 
 public class EomNamespaceLoaderFactory implements BPNamespaceLoaderFactory {
 

@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoader;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPDocumentGroup;
+import ananas.lib.blueprint3.lang.BPDocumentLoader;
+import ananas.lib.blueprint3.lang.BPEnvironment;
 
 public class BPDocumentGroupImpl implements BPDocumentGroup {
 

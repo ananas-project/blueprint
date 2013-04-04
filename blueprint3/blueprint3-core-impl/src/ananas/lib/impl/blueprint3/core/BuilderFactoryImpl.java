@@ -9,16 +9,16 @@ import org.xml.sax.Locator;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPElement;
-import ananas.lib.blueprint3.core.dom.BPNode;
-import ananas.lib.blueprint3.core.dom.BPText;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.BPBuilder;
-import ananas.lib.blueprint3.core.util.BPBuilderFactory;
-import ananas.lib.blueprint3.core.util.BPElementProvider;
-import ananas.lib.blueprint3.core.util.BPErrorHandler;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPElement;
+import ananas.lib.blueprint3.dom.BPNode;
+import ananas.lib.blueprint3.dom.BPText;
+import ananas.lib.blueprint3.lang.BlueprintException;
+import ananas.lib.blueprint3.util.BPBuilder;
+import ananas.lib.blueprint3.util.BPBuilderFactory;
+import ananas.lib.blueprint3.util.BPElementProvider;
+import ananas.lib.blueprint3.util.BPErrorHandler;
 
 public class BuilderFactoryImpl implements BPBuilderFactory {
 

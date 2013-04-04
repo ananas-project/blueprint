@@ -1,6 +1,6 @@
 package ananas.lib.blueprint3.loader.eom.ctrl;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPAttribute;
 import ananas.lib.blueprint3.loader.eom.target.Tar_attribute;
 import ananas.lib.blueprint3.loader.eom.target.Tar_class;
 import ananas.lib.blueprint3.loader.eom.target.Tar_element;

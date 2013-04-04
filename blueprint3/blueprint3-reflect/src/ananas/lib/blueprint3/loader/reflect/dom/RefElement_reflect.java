@@ -4,7 +4,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPEnvironment;
 
 public class RefElement_reflect extends RefElement {
 

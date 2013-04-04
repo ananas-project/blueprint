@@ -2,16 +2,16 @@ package ananas.lib.impl.blueprint3.core;
 
 import java.net.URI;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
-import ananas.lib.blueprint3.core.dom.BPElement;
-import ananas.lib.blueprint3.core.dom.BPElementMap;
-import ananas.lib.blueprint3.core.dom.BPNode;
-import ananas.lib.blueprint3.core.dom.BPText;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.lang.BPType;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPDocumentGroup;
+import ananas.lib.blueprint3.dom.BPElement;
+import ananas.lib.blueprint3.dom.BPElementMap;
+import ananas.lib.blueprint3.dom.BPNode;
+import ananas.lib.blueprint3.dom.BPText;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.lang.BPType;
 
 public class BpDocumentImpl implements BPDocument {
 

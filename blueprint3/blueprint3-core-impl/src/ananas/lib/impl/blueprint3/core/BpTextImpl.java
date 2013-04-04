@@ -1,8 +1,8 @@
 package ananas.lib.impl.blueprint3.core;
 
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPNode;
-import ananas.lib.blueprint3.core.dom.BPText;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPNode;
+import ananas.lib.blueprint3.dom.BPText;
 
 public class BpTextImpl implements BPText {
 

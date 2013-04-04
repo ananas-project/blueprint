@@ -1,9 +1,9 @@
 package ananas.lib.impl.blueprint3.core;
 
-import ananas.lib.blueprint3.core.Blueprint;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.Blueprint;
+import ananas.lib.blueprint3.lang.BPEnvironment;
 
-public class BlueprintImpl extends Blueprint {
+public class BlueprintImpl implements Blueprint {
 
 	private BPEnvironment mDefaultEnvironment;
 

@@ -3,8 +3,8 @@ package ananas.lib.impl.blueprint3.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.lang.BPNamespaceRegistrar;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.lang.BPNamespaceRegistrar;
 import ananas.lib.util.logging.AbstractLoggerFactory;
 import ananas.lib.util.logging.Logger;
 

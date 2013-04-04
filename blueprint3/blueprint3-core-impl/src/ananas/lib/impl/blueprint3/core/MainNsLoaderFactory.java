@@ -1,10 +1,10 @@
 package ananas.lib.impl.blueprint3.core;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoader;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoaderFactory;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BlueprintException;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoader;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoaderFactory;
 
 public class MainNsLoaderFactory implements BPNamespaceLoaderFactory {
 

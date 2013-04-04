@@ -2,17 +2,17 @@ package ananas.lib.blueprint3.loader.eom;
 
 import java.net.URI;
 
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.lang.BPNamespaceRegistrar;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.BPClassUriGen;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoader;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPDocumentGroup;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.lang.BPNamespaceRegistrar;
+import ananas.lib.blueprint3.lang.BlueprintException;
 import ananas.lib.blueprint3.loader.eom.ctrl.Ctrl_eom;
 import ananas.lib.blueprint3.loader.eom.target.Tar_eom;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoader;
+import ananas.lib.util.ClassUriGen;
 
 public class EomNamespaceLoader implements BPNamespaceLoader {
 
@@ -22,7 +22,7 @@ public class EomNamespaceLoader implements BPNamespaceLoader {
 
 		String xmlfile = info.getProperty("eom.xml");
 
-		URI uri = BPClassUriGen.getURI(info.getClass(), xmlfile);
+		URI uri = ClassUriGen.getURI(info.getClass(), xmlfile);
 
 		try {
 			BPDocumentGroup group = envi.getImplementation()

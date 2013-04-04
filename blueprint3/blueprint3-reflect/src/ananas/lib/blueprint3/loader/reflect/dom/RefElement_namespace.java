@@ -4,10 +4,10 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.util.DefaultMacroProperties;
-import ananas.lib.blueprint3.core.util.IMacroProperties;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.util.DefaultMacroProperties;
+import ananas.lib.blueprint3.util.IMacroProperties;
 
 public class RefElement_namespace extends RefElement {
 

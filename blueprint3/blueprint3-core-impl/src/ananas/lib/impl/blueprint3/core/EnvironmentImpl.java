@@ -1,17 +1,17 @@
 package ananas.lib.impl.blueprint3.core;
 
-import ananas.lib.blueprint3.core.dom.BPImplementation;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactoryRegistrar;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPFileNameMapper;
-import ananas.lib.blueprint3.core.lang.BPNamespaceRegistrar;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.BPBuilderFactory;
-import ananas.lib.blueprint3.core.util.BPVisitorFactory;
-import ananas.lib.blueprint3.core.util.BPXMLReaderFactory;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoaderFactory;
-import ananas.lib.blueprint3.core.xml.serializer.BPXmlSerializerFactory;
+import ananas.lib.blueprint3.dom.BPImplementation;
+import ananas.lib.blueprint3.lang.BPDocumentLoaderFactoryRegistrar;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPFileNameMapper;
+import ananas.lib.blueprint3.lang.BPNamespaceRegistrar;
+import ananas.lib.blueprint3.lang.BlueprintException;
+import ananas.lib.blueprint3.util.BPBuilderFactory;
+import ananas.lib.blueprint3.util.BPVisitorFactory;
+import ananas.lib.blueprint3.util.BPXMLReaderFactory;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoaderFactory;
+import ananas.lib.blueprint3.xml.serializer.BPXmlSerializerFactory;
 import ananas.lib.io.Connector;
 import ananas.lib.io.impl.DefaultConnector;
 

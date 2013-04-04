@@ -3,8 +3,8 @@ package ananas.lib.impl.blueprint3.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
 
 public class NsLoadingManager {
 

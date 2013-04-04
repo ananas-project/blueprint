@@ -7,15 +7,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.dom.BPDocumentGroup;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoader;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactory;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.BPBuilder;
-import ananas.lib.blueprint3.core.util.BPBuilderFactory;
-import ananas.lib.blueprint3.core.util.BPXMLReaderFactory;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.dom.BPDocumentGroup;
+import ananas.lib.blueprint3.lang.BPDocumentLoader;
+import ananas.lib.blueprint3.lang.BPDocumentLoaderFactory;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BlueprintException;
+import ananas.lib.blueprint3.util.BPBuilder;
+import ananas.lib.blueprint3.util.BPBuilderFactory;
+import ananas.lib.blueprint3.util.BPXMLReaderFactory;
 import ananas.lib.io.InputConnection;
 
 public class DocLoaderFactoryImpl implements BPDocumentLoaderFactory {

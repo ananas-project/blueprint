@@ -6,13 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ananas.lib.blueprint3.core.dom.BPAttribute;
-import ananas.lib.blueprint3.core.dom.BPElement;
-import ananas.lib.blueprint3.core.dom.BPText;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.lang.BPType;
-import ananas.lib.blueprint3.core.util.IMacroProperties;
+import ananas.lib.blueprint3.dom.BPAttribute;
+import ananas.lib.blueprint3.dom.BPElement;
+import ananas.lib.blueprint3.dom.BPText;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.lang.BPType;
 import ananas.lib.blueprint3.loader.eom.target.ITargetNode;
 import ananas.lib.blueprint3.loader.eom.target.Tar_attribute;
 import ananas.lib.blueprint3.loader.eom.target.Tar_class;
@@ -22,6 +21,7 @@ import ananas.lib.blueprint3.loader.eom.target.Tar_namespace;
 import ananas.lib.blueprint3.loader.eom.target.Tar_text;
 import ananas.lib.blueprint3.loader.eom.target.util.TargetTravel;
 import ananas.lib.blueprint3.loader.eom.target.util.TargetTravelCallback;
+import ananas.lib.blueprint3.util.IMacroProperties;
 
 public class MyBpnsFactory {
 

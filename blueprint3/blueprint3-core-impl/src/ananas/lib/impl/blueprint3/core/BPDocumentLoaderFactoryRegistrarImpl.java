@@ -3,8 +3,8 @@ package ananas.lib.impl.blueprint3.core;
 import java.util.HashMap;
 import java.util.Map;
 
-import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactory;
-import ananas.lib.blueprint3.core.lang.BPDocumentLoaderFactoryRegistrar;
+import ananas.lib.blueprint3.lang.BPDocumentLoaderFactory;
+import ananas.lib.blueprint3.lang.BPDocumentLoaderFactoryRegistrar;
 
 public class BPDocumentLoaderFactoryRegistrarImpl implements
 		BPDocumentLoaderFactoryRegistrar {

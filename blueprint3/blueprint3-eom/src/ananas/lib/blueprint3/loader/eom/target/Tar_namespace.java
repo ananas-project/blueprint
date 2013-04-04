@@ -3,9 +3,9 @@ package ananas.lib.blueprint3.loader.eom.target;
 import java.util.ArrayList;
 import java.util.List;
 
-import ananas.lib.blueprint3.core.util.DefaultMacroProperties;
-import ananas.lib.blueprint3.core.util.IMacroProperties;
 import ananas.lib.blueprint3.loader.eom.Const;
+import ananas.lib.blueprint3.util.DefaultMacroProperties;
+import ananas.lib.blueprint3.util.IMacroProperties;
 
 public class Tar_namespace extends TargetBase {
 

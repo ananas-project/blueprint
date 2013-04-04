@@ -2,9 +2,9 @@ package ananas.lib.blueprint3.loader.reflect.dom;
 
 import java.io.PrintStream;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BPNamespace;
-import ananas.lib.blueprint3.core.util.IMacroProperties;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BPNamespace;
+import ananas.lib.blueprint3.util.IMacroProperties;
 
 public class RefElement_element extends RefElement {
 

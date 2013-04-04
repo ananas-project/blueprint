@@ -5,12 +5,12 @@ import java.io.InputStream;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
 
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
-import ananas.lib.blueprint3.core.lang.BlueprintException;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceInfo;
-import ananas.lib.blueprint3.core.util.nsloader.BPNamespaceLoader;
+import ananas.lib.blueprint3.lang.BPEnvironment;
+import ananas.lib.blueprint3.lang.BlueprintException;
 import ananas.lib.blueprint3.loader.reflect.dom.RefDocument;
 import ananas.lib.blueprint3.loader.reflect.dom.RefElement_reflect;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
+import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoader;
 
 public class ReflectNamespaceLoader implements BPNamespaceLoader {
 
