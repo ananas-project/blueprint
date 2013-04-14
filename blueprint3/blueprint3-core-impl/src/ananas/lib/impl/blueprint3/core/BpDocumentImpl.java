@@ -134,7 +134,8 @@ public class BpDocumentImpl implements BPDocument {
 		if (ereg == null) {
 			return null;
 		} else {
-			String id = uri;
+			URI urx = URI.create(uri);
+			String id = urx.getFragment();
 			return ereg.get(id);
 		}
 	}
