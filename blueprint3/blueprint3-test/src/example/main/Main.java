@@ -4,12 +4,12 @@ import java.lang.reflect.Method;
 
 import javax.swing.JFrame;
 
+import ananas.lib.blueprint3.Blueprint;
 import ananas.lib.blueprint3.awt.AwtNamespaceInfo;
 import ananas.lib.blueprint3.awt.swing.CJFrame;
 import ananas.lib.blueprint3.awt.swing.SwingNamespaceInfo;
-import ananas.lib.blueprint3.core.Blueprint;
-import ananas.lib.blueprint3.core.dom.BPDocument;
-import ananas.lib.blueprint3.core.lang.BPEnvironment;
+import ananas.lib.blueprint3.dom.BPDocument;
+import ananas.lib.blueprint3.lang.BPEnvironment;
 import ananas.lib.blueprint3.loader.eom.EomReflectInfo;
 
 public class Main {
@@ -81,14 +81,15 @@ public class Main {
 
 		try {
 
-			BPEnvironment bpenv = Blueprint.getInstance().defaultEnvironment();
+			BPEnvironment bpenv = Blueprint.Util.getInstance()
+					.defaultEnvironment();
 			bpenv.loadNamespace(EomReflectInfo.class, true);
 			bpenv.loadNamespace(AwtNamespaceInfo.class, true);
 			bpenv.loadNamespace(SwingNamespaceInfo.class, true);
 
 			System.out.println("now load a testing xml doc.");
 
-			BPDocument doc = Blueprint
+			BPDocument doc = Blueprint.Util
 					.loadDocument("resource:///test-swing.xml");
 			JFrame frame = (JFrame) doc.getRootElement().getTarget();
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
