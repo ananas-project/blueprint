@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<JFrame xmlns:awt="xmlns:ananas:blueprint:awt" height="480"
+	width="640" x="100" xmlns="xmlns:ananas:blueprint:swing" y="100">
+
+	<awt:BorderLayout />
+
+	<awt:pos value="CENTER" />
+
+	<JLabel text="hello,world! this is center" />
+
+	<awt:pos value="SOUTH" />
+
+	<JLabel text="hello,world! this is side" />
+
+</JFrame>
