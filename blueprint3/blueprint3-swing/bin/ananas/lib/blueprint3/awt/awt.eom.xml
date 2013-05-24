@@ -51,6 +51,18 @@
 		<class name="BorderLayout" isElement="true" extends="#AWTObject">
 		</class>
 
+		<class name="FlowLayout" isElement="true" extends="#AWTObject">
+		</class>
+
+		<class name="GridLayout" isElement="true" extends="#AWTObject">
+
+			<attribute name="rows" />
+			<attribute name="cols" />
+			<attribute name="hgap" />
+			<attribute name="vgap" />
+
+		</class>
+
 
 		<!-- components -->
 
