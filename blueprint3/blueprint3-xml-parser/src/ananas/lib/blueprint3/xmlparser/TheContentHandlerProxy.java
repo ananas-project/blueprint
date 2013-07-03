@@ -142,8 +142,10 @@ public class TheContentHandlerProxy implements ContentHandler {
 			String value = atts.getValue(i);
 			if ("xmlns".equals(qname)) {
 				eleStack.pushNS(qname, value);
+				attList.addAttr(qname, value);
 			} else if (qname.startsWith("xmlns:")) {
 				eleStack.pushNS(qname, value);
+				attList.addAttr(qname, value);
 			} else {
 				attList.addAttr(qname, value);
 			}
