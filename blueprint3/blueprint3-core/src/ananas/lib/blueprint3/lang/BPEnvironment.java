@@ -49,4 +49,5 @@ public interface BPEnvironment {
 
 	// doc loading
 	BPDocument loadDocument(URI uri) throws IOException;
+
 }
