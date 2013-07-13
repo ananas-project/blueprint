@@ -25,11 +25,7 @@ public class TestBp4Swing implements Runnable {
 			BPContext envi = Blueprint.Util.getDefault().getEnvironment();
 			String systemId = "resource:///test/abc.xml";
 			{
-				InputConnection conn = (InputConnection) Connector.Factory
-						.getDefault().open(systemId);
-				InputStream is = conn.getInputStream();
-				Document doc = envi.getDocumentBuilderFactory()
-						.newDocumentBuilder().parse(is, systemId);
+				Document doc = envi.loadDOMDocument(systemId);
 			}
 			BPDocument doc = envi.loadBPDocument(systemId);
 			Object root = doc.getRootController().getTarget(true);
