@@ -4,7 +4,7 @@ import ananas.lib.util.SingletonLoader;
 
 public interface Blueprint {
 
-	BlueprintContext createContext();
+	BPEnvironment getEnvironment();
 
 	class Util {
 
