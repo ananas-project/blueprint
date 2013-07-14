@@ -71,6 +71,11 @@ public class BPContextWrapper implements BPContext {
 	@Override
 	public Document loadDOMDocument(InputStream in, String systemId)
 			throws IOException {
+		return this._loadDOMDocument(in, systemId);
+	}
+
+	private Document _loadDOMDocument(InputStream in, String systemId)
+			throws IOException {
 
 		if (in == null) {
 			Connection conn = this.getConnector().open(systemId);
@@ -88,7 +93,12 @@ public class BPContextWrapper implements BPContext {
 		try {
 			DocumentBuilderFactory domDBF = this.getDOMDocumentBuilderFactory();
 			DocumentBuilder domBuilder = domDBF.newDocumentBuilder();
-			Document dom = domBuilder.parse(in, systemId);
+			Document dom;
+			if (systemId == null)
+				dom = domBuilder.parse(in);
+			else
+				dom = domBuilder.parse(in, systemId);
+
 			return dom;
 		} catch (SAXException e) {
 			throw new RuntimeException(e);
@@ -106,5 +116,10 @@ public class BPContextWrapper implements BPContext {
 	@Override
 	public BPDocumentImplementation getBPDocumentImplementation() {
 		return this._inner.getBPDocumentImplementation();
+	}
+
+	@Override
+	public BPDocument loadBPDocument(InputStream in) throws IOException {
+		return this.loadBPDocument(in, null);
 	}
 }

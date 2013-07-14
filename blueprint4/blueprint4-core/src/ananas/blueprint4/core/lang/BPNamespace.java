@@ -10,7 +10,7 @@ public interface BPNamespace {
 
 	List<BPType> listTypes();
 
-	BPType get(String localName);
+	BPType getType(String localName);
 
 	BPXMLSchema getXMLSchema();
 

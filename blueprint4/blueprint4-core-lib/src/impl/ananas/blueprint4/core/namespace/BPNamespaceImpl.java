@@ -1,4 +1,4 @@
-package ananas.blueprint4.core.util.namespace;
+package impl.ananas.blueprint4.core.namespace;
 
 import java.util.List;
 
@@ -6,9 +6,12 @@ import ananas.blueprint4.core.lang.BPNamespace;
 import ananas.blueprint4.core.lang.BPType;
 import ananas.blueprint4.core.lang.BPXMLSchema;
 
-public class AbstractBPNamespace implements BPNamespace {
+class BPNamespaceImpl implements BPNamespace {
 
-	public AbstractBPNamespace(String configXML) {
+	public static class Context {
+	}
+
+	public BPNamespaceImpl(Context context) {
 	}
 
 	@Override
@@ -30,7 +33,7 @@ public class AbstractBPNamespace implements BPNamespace {
 	}
 
 	@Override
-	public BPType get(String localName) {
+	public BPType getType(String localName) {
 		// TODO Auto-generated method stub
 		return null;
 	}

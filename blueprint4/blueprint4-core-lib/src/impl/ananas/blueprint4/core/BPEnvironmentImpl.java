@@ -38,9 +38,10 @@ public class BPEnvironmentImpl implements BPEnvironment {
 
 	@Override
 	public DocumentBuilderFactory getDOMDocumentBuilderFactory() {
-		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		dbf.setNamespaceAware(true);
-		return dbf;
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		factory.setNamespaceAware(true);
+		factory.setValidating(false);
+		return factory;
 	}
 
 	@Override
@@ -128,5 +129,11 @@ public class BPEnvironmentImpl implements BPEnvironment {
 			}
 		}
 
+	}
+
+	@Override
+	public BPDocument loadBPDocument(InputStream in) throws IOException {
+		BPContextWrapper wrapper = this._getMyWrapper();
+		return wrapper.loadBPDocument(in);
 	}
 }

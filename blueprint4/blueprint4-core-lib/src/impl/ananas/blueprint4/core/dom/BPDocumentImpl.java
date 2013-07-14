@@ -100,8 +100,17 @@ public class BPDocumentImpl implements BPDocument {
 
 	@Override
 	public BPText createText(String data) {
-		// TODO Auto-generated method stub
+		return new BPTextImpl(data);
+	}
+
+	@Override
+	public BPType getType() {
 		return null;
+	}
+
+	@Override
+	public Node getDOMNode() {
+		return this._bindDoc;
 	}
 
 }

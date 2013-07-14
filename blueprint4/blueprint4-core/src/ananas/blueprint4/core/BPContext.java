@@ -31,6 +31,9 @@ public interface BPContext {
 	Connector getConnector();
 
 	// load
+
+	BPDocument loadBPDocument(InputStream in) throws IOException;
+
 	BPDocument loadBPDocument(InputStream in, String systemId)
 			throws IOException;
 

@@ -21,6 +21,10 @@ public interface BPNode {
 	 * */
 	BPDocument getOwnerDocument();
 
+	BPType getType();
+
+	Node getDOMNode();
+
 	// bind
 
 	boolean bind(Node node);
