@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 
 import ananas.blueprint4.core.lang.BPDocument;
@@ -14,12 +15,22 @@ import ananas.lib.io.Connector;
 
 public interface BPContext {
 
+	// types
 	BPTypeRegistrar getTypeRegistrar();
 
+	// doc builder
 	DocumentBuilderFactory getDOMDocumentBuilderFactory();
 
 	BPDocumentBuilderFactory getBPDocumentBuilderFactory();
 
+	DOMImplementation getDOMImplementation();
+
+	BPDocumentImplementation getBPDocumentImplementation();
+
+	// connector
+	Connector getConnector();
+
+	// load
 	BPDocument loadBPDocument(InputStream in, String systemId)
 			throws IOException;
 
@@ -29,7 +40,5 @@ public interface BPContext {
 
 	Document loadDOMDocument(InputStream in, String systemId)
 			throws IOException;
-
-	Connector getConnector();
 
 }

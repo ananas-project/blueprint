@@ -10,6 +10,6 @@ public interface BPType {
 
 	Class<?> getTargetClass();
 
-	BPController createController(BPDocument doc);
+	BPElement createController(BPDocument doc);
 
 }

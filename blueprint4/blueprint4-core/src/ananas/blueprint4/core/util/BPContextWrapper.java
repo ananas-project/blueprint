@@ -9,10 +9,12 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import ananas.blueprint4.core.BPContext;
+import ananas.blueprint4.core.BPDocumentImplementation;
 import ananas.blueprint4.core.lang.BPDocument;
 import ananas.blueprint4.core.lang.BPTypeRegistrar;
 import ananas.lib.io.Connection;
@@ -94,5 +96,15 @@ public class BPContextWrapper implements BPContext {
 			throw new RuntimeException(e);
 		}
 
+	}
+
+	@Override
+	public DOMImplementation getDOMImplementation() {
+		return this._inner.getDOMImplementation();
+	}
+
+	@Override
+	public BPDocumentImplementation getBPDocumentImplementation() {
+		return this._inner.getBPDocumentImplementation();
 	}
 }
