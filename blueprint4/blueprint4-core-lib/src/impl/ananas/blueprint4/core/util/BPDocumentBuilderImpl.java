@@ -65,8 +65,10 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 				break;
 			}
 			case Node.TEXT_NODE: {
-				final Text chText = (Text) chNode;
-				chBpNode = this.buildText(chText, bc);
+				final Text text = (Text) chNode;
+				String data = text.getData().trim();
+				if (data.length() > 0)
+					chBpNode = this.buildText(text, bc);
 				break;
 			}
 			case Node.ATTRIBUTE_NODE: {
@@ -93,22 +95,29 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 		return bc.getBPDocument().createText(data);
 	}
 
-	private void warning(String message, Node parent, Node child) {
+	private void warning(String message, Element parent, Node child) {
 		if (parent != null) {
 			if (child != null) {
 				String urip = this.getFullNodeURI(parent);
 				String uric = this.getFullNodeURI(child);
-				log.warn(message + "[parent:" + urip + "][child:" + uric + "]");
+
+				if (child instanceof Text) {
+					Text txt = (Text) child;
+					uric = "Text#" + txt.getData();
+				}
+
+				log.warn(this + message + "[parent:" + urip + "][child:" + uric
+						+ "]");
 			} else {
 				String uri = this.getFullNodeURI(parent);
-				log.warn(message + ": " + uri);
+				log.warn(this + message + ": " + uri);
 			}
 		} else {
 			if (child != null) {
 				String uri = this.getFullNodeURI(child);
-				log.warn(message + ": " + uri);
+				log.warn(this + message + ": " + uri);
 			} else {
-				log.warn(message);
+				log.warn(this + message);
 			}
 		}
 

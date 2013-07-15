@@ -9,8 +9,10 @@ import ananas.blueprint4.core.lang.BPType;
 
 public class BPTextImpl implements BPText {
 
+	private String _data;
+
 	public BPTextImpl(String data) {
-		// TODO Auto-generated constructor stub
+		this._data = data;
 	}
 
 	@Override
@@ -65,6 +67,11 @@ public class BPTextImpl implements BPText {
 	public boolean bind(BPType type) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getData() {
+		return this._data;
 	}
 
 }

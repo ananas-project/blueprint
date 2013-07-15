@@ -8,4 +8,8 @@ public interface BPElement extends BPNode {
 
 	Object getTarget(boolean create);
 
+	void tagBegin();
+
+	void tagEnd();
+
 }

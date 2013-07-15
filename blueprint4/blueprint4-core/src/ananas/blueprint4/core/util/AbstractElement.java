@@ -115,4 +115,20 @@ public class AbstractElement implements BPElement {
 		return this._domNode;
 	}
 
+	@Override
+	public final void tagBegin() {
+		this.onTagBegin();
+	}
+
+	private void onTagBegin() {
+	}
+
+	@Override
+	public final void tagEnd() {
+		this.onTagEnd();
+	}
+
+	private void onTagEnd() {
+	}
+
 }
