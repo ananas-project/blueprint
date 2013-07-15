@@ -131,4 +131,15 @@ public class AbstractElement implements BPElement {
 	private void onTagEnd() {
 	}
 
+	@Override
+	public boolean setAttribute(String uri, String localName, String value) {
+		if (localName == null) {
+			return false;
+		} else if (localName.equals("xmlns")) {
+		} else if (localName.equals("id")) {
+		} else {
+			return false;
+		}
+		return true;
+	}
 }

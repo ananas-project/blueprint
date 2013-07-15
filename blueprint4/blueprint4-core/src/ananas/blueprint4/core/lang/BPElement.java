@@ -12,4 +12,6 @@ public interface BPElement extends BPNode {
 
 	void tagEnd();
 
+	boolean setAttribute(String uri, String localName, String value);
+
 }

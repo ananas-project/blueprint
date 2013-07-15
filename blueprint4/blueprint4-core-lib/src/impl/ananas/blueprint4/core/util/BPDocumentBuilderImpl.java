@@ -1,7 +1,9 @@
 package impl.ananas.blueprint4.core.util;
 
+import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
@@ -29,10 +31,10 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 		MyBuildContext bc = new MyBuildContext();
 		bc._bpDocument = context.getBPDocumentImplementation().createDocument(
 				context);
-		return this.buildElement(element, bc, 64);
+		return this._buildElement(element, bc, 64);
 	}
 
-	private BPElement buildElement(Element element, BuildContext bc,
+	private BPElement _buildElement(Element element, BuildContext bc,
 			int depthLimit) {
 
 		if (depthLimit < 0) {
@@ -43,15 +45,29 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 		String uri, localName;
 		uri = element.getNamespaceURI();
 		localName = element.getLocalName();
-		final BPElement pBpEle = bpDoc.createElement(uri, localName);
+		BPElement pBpEle = bpDoc.createElement(uri, localName);
 		if (pBpEle == null) {
 			this.warning("cannot create bp-element", element, null);
 			// return null;
+			pBpEle = new TheVirtualElement();
 		}
 
 		// attributes
-		;
+		NamedNodeMap atts = element.getAttributes();
+		final int len0 = atts.getLength();
+		for (int i = 0; i < len0; i++) {
+			Attr attr = (Attr) atts.item(i);
+			String attrURI = attr.getNamespaceURI();
+			String attrLName = attr.getLocalName();
+			String attrValue = attr.getValue();
+			boolean rlt = pBpEle.setAttribute(attrURI, attrLName, attrValue);
+			if (!rlt) {
+				this.warning("cannot set attr to parent", element, attr);
+			}
+		}
 
+		// body begin
+		pBpEle.tagBegin();
 		// children
 		NodeList chs = element.getChildNodes();
 		final int len = chs.getLength();
@@ -61,7 +77,7 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 			switch (chNode.getNodeType()) {
 			case Node.ELEMENT_NODE: {
 				final Element chEle = (Element) chNode;
-				chBpNode = this.buildElement(chEle, bc, depthLimit - 1);
+				chBpNode = this._buildElement(chEle, bc, depthLimit - 1);
 				break;
 			}
 			case Node.TEXT_NODE: {
@@ -86,7 +102,8 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 			}
 
 		}
-
+		// body end
+		pBpEle.tagEnd();
 		return pBpEle;
 	}
 
