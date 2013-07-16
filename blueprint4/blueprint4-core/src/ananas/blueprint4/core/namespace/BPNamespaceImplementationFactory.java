@@ -3,7 +3,7 @@ package ananas.blueprint4.core.namespace;
 import ananas.blueprint4.core.lang.BPNamespace;
 import ananas.lib.util.SingletonLoader;
 
-public interface BPNsImplFactory {
+public interface BPNamespaceImplementationFactory {
 
 	String key_ns_scheme = "namespace.scheme";
 	String key_ns_types = "namespace.types";
@@ -12,9 +12,9 @@ public interface BPNsImplFactory {
 
 	class Agent {
 
-		public static BPNsImplFactory getInstance() {
-			return (BPNsImplFactory) SingletonLoader
-					.load(BPNsImplFactory.class);
+		public static BPNamespaceImplementationFactory getInstance() {
+			return (BPNamespaceImplementationFactory) SingletonLoader
+					.load(BPNamespaceImplementationFactory.class);
 		}
 	}
 }

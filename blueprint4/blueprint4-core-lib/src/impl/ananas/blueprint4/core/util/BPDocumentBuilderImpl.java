@@ -31,7 +31,9 @@ final class BPDocumentBuilderImpl implements BPDocumentBuilder {
 		MyBuildContext bc = new MyBuildContext();
 		bc._bpDocument = context.getBPDocumentImplementation().createDocument(
 				context);
-		return this._buildElement(element, bc, 64);
+		BPElement bpElement = this._buildElement(element, bc, 64);
+		bc._bpDocument.appendChild(bpElement);
+		return bpElement;
 	}
 
 	private BPElement _buildElement(Element element, BuildContext bc,

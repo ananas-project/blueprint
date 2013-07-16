@@ -13,7 +13,7 @@ import ananas.blueprint4.core.lang.BPType;
 import ananas.blueprint4.core.lang.BPXMLSchema;
 import ananas.lib.util.logging.Logger;
 
-public class NamespaceForTypeList implements BPNamespace {
+public class PublicNamespace2 implements BPNamespace {
 
 	static final Logger log = Logger.Agent.getLogger();
 
@@ -22,7 +22,7 @@ public class NamespaceForTypeList implements BPNamespace {
 
 	private final Map<String, BPType> _types;
 
-	public NamespaceForTypeList() {
+	public PublicNamespace2() {
 		this._types = new Hashtable<String, BPType>();
 		this._regTypes();
 	}
@@ -89,7 +89,7 @@ public class NamespaceForTypeList implements BPNamespace {
 
 		@Override
 		public BPNamespace getOwnerNamespace() {
-			return NamespaceForTypeList.this;
+			return PublicNamespace2.this;
 		}
 
 		@Override

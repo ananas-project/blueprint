@@ -6,7 +6,7 @@ import ananas.blueprint4.core.lang.BPNamespace;
 import ananas.blueprint4.core.lang.BPType;
 import ananas.blueprint4.core.lang.BPXMLSchema;
 
-public class AbstractBPNamespace implements BPNamespace {
+public class AbstractBPNamespace implements BPNamespace , NSDefine {
 
 	private final String _propFileName;
 	private BPNamespace _impl;
@@ -18,7 +18,7 @@ public class AbstractBPNamespace implements BPNamespace {
 	private BPNamespace _getImpl() {
 		BPNamespace impl = this._impl;
 		if (impl == null) {
-			BPNsImplFactory f = BPNsImplFactory.Agent.getInstance();
+			BPNamespaceImplementationFactory f = BPNamespaceImplementationFactory.Agent.getInstance();
 			impl = f.createNS(this, this._propFileName);
 			this._impl = impl;
 		}

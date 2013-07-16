@@ -13,4 +13,12 @@ public class Tar_namespace {
 		this._head = head;
 	}
 
+	public Tar_head getHead() {
+		return this._head;
+	}
+
+	public Tar_body getBody() {
+		return this._body;
+	}
+
 }

@@ -11,4 +11,8 @@ public class Tar_body {
 		this._elementList.add(element);
 	}
 
+	public List<Tar_element> listElements() {
+		return this._elementList;
+	}
+
 }

@@ -18,4 +18,16 @@ public class Tar_element {
 		this._nameTarget = value;
 	}
 
+	public String getLocalName() {
+		return this._name;
+	}
+
+	public String getTargetName() {
+		return this._nameTarget;
+	}
+
+	public String getControllerName() {
+		return this._nameController;
+	}
+
 }

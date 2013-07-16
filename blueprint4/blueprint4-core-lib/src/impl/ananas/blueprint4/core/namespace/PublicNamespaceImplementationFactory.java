@@ -6,10 +6,11 @@ import java.util.Properties;
 import ananas.blueprint4.core.Blueprint;
 import ananas.blueprint4.core.lang.BPDocument;
 import ananas.blueprint4.core.lang.BPNamespace;
-import ananas.blueprint4.core.namespace.BPNsImplFactory;
+import ananas.blueprint4.core.namespace.BPNamespaceImplementationFactory;
 import ananas.lib.util.logging.Logger;
 
-public class BPNsImplFactoryImpl implements BPNsImplFactory {
+public class PublicNamespaceImplementationFactory implements
+		BPNamespaceImplementationFactory {
 
 	static final Logger log = Logger.Agent.getLogger();
 
@@ -24,23 +25,28 @@ public class BPNsImplFactoryImpl implements BPNsImplFactory {
 				in.close();
 			}
 
-			BPDocument docTypes = null;
+			PrivateNamespaceBuilder builder = new PrivateNamespaceBuilder();
+
 			{
-				String name = prop.getProperty(BPNsImplFactory.key_ns_types);
+				// load types
+				String name = prop
+						.getProperty(BPNamespaceImplementationFactory.key_ns_types);
 				InputStream in = ref.getClass().getResourceAsStream(name);
-				docTypes = Blueprint.Util.getDefault().getEnvironment()
+				BPDocument doc = Blueprint.Util.getDefault().getEnvironment()
 						.loadBPDocument(in);
 				in.close();
+				builder.setTypesDocument(doc);
 			}
 			{
-				String name = prop.getProperty(BPNsImplFactory.key_ns_scheme);
-				MyInputProvider inProvider = new MyInputProvider(
+				// load scheme
+				String name = prop
+						.getProperty(BPNamespaceImplementationFactory.key_ns_scheme);
+				PrivateInputSource inProvider = new MyInputProvider(
 						ref.getClass(), name);
+				builder.setSchemeInputSource(inProvider);
 			}
 
-			BPNamespaceImpl.Context cont = new BPNamespaceImpl.Context();
-			BPNamespace newNS = new BPNamespaceImpl(cont);
-			return newNS;
+			return builder.buildNamespace();
 
 		} catch (Exception e) {
 			log.error(e);
@@ -48,10 +54,16 @@ public class BPNsImplFactoryImpl implements BPNsImplFactory {
 		return null;
 	}
 
-	class MyInputProvider {
+	class MyInputProvider implements PrivateInputSource {
 
 		public MyInputProvider(Class<? extends Object> class1, String name) {
 			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		public InputStream openInputStream() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 

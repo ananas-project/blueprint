@@ -12,4 +12,8 @@ public class Tar_head {
 		this._properties.setProperty(key, value);
 	}
 
+	public Properties getProperties() {
+		return this._properties;
+	}
+
 }
