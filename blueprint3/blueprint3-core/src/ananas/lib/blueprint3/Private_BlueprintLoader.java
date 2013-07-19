@@ -31,7 +31,7 @@ class Private_BlueprintLoader {
 
 			URI uri = ClassUriGen.getURI(Blueprint.class, "bp3.properties");
 			ResourceClassConnection conn = (ResourceClassConnection) Connector.Factory
-					.getConnector().open(uri.toString());
+					.getDefault().open(uri.toString());
 			ResourceConnection res = conn.getResource(null);
 			InputStream in = res.getInputStream();
 

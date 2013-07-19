@@ -18,7 +18,6 @@ import ananas.lib.blueprint3.util.nsloader.BPNamespaceInfo;
 import ananas.lib.blueprint3.util.nsloader.BPNamespaceLoaderFactory;
 import ananas.lib.blueprint3.xml.serializer.BPXmlSerializerFactory;
 import ananas.lib.io.Connector;
-import ananas.lib.io.impl.DefaultConnector;
 
 public class EnvironmentImpl implements BPEnvironment {
 
@@ -36,7 +35,7 @@ public class EnvironmentImpl implements BPEnvironment {
 	private final BPFileNameMapper mFileNameMapper;
 
 	public EnvironmentImpl() {
-		this.mConnector = new DefaultConnector();
+		this.mConnector = Connector.Factory.getDefault();
 		this.mImplementation = new ImplementationImpl();
 		this.mParserFactory = new ParserFactoryImpl();
 		this.mBuilderFactory = new BuilderFactoryImpl();

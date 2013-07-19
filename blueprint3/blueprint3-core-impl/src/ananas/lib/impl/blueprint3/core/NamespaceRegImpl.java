@@ -5,13 +5,11 @@ import java.util.Map;
 
 import ananas.lib.blueprint3.lang.BPNamespace;
 import ananas.lib.blueprint3.lang.BPNamespaceRegistrar;
-import ananas.lib.util.logging.AbstractLoggerFactory;
 import ananas.lib.util.logging.Logger;
 
 public class NamespaceRegImpl implements BPNamespaceRegistrar {
 
-	private final static Logger logger = (new AbstractLoggerFactory() {
-	}).getLogger();
+	private final static Logger logger = Logger.Agent.getLogger();
 
 	private final Map<String, BPNamespace> mNsTable;
 
