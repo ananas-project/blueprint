@@ -6,7 +6,7 @@ public class Ctr_element extends Ctr_object {
 		return (Tar_element) this.getTarget(true);
 	}
 
-	public boolean setAttribute(String uri, String localName, String value) {
+	public boolean onSetAttribute(String uri, String localName, String value) {
 		if (localName == null) {
 			return false;
 		} else if (localName.equals("name")) {
@@ -16,7 +16,7 @@ public class Ctr_element extends Ctr_object {
 		} else if (localName.equals("target")) {
 			this.target_element().setTargetClassName(value);
 		} else {
-			return super.setAttribute(uri, localName, value);
+			return super.onSetAttribute(uri, localName, value);
 		}
 		return true;
 	}

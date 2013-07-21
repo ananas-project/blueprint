@@ -20,7 +20,11 @@ public class AbstractElement implements BPElement {
 	private Node _domNode;
 
 	@Override
-	public boolean appendChild(BPNode node) {
+	public final boolean appendChild(BPNode node) {
+		return this.onAppendChild(node);
+	}
+
+	protected boolean onAppendChild(BPNode node) {
 		return false;
 	}
 
@@ -132,7 +136,11 @@ public class AbstractElement implements BPElement {
 	}
 
 	@Override
-	public boolean setAttribute(String uri, String localName, String value) {
+	public final boolean setAttribute(String uri, String localName, String value) {
+		return this.onSetAttribute(uri, localName, value);
+	}
+
+	protected boolean onSetAttribute(String uri, String localName, String value) {
 		if (localName == null) {
 			return false;
 		} else if (localName.equals("xmlns")) {

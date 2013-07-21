@@ -8,7 +8,7 @@ public class Ctr_namespace extends Ctr_object {
 		return (Tar_namespace) this.getTarget(true);
 	}
 
-	public boolean appendChild(BPNode node) {
+	public boolean onAppendChild(BPNode node) {
 		if (node == null) {
 			return false;
 		} else if (node instanceof Ctr_body) {
@@ -18,7 +18,7 @@ public class Ctr_namespace extends Ctr_object {
 			Ctr_head head = (Ctr_head) node;
 			this.target_namespace().setHead(head.target_head());
 		} else {
-			return super.appendChild(node);
+			return super.onAppendChild(node);
 		}
 		return true;
 	}

@@ -9,25 +9,25 @@ public class Ctr_property extends Ctr_object {
 		return (Tar_property) this.getTarget(true);
 	}
 
-	public boolean appendChild(BPNode child) {
+	public boolean onAppendChild(BPNode child) {
 		if (child == null) {
 			return false;
 		} else if (child instanceof BPText) {
 			String s = ((BPText) child).getData();
 			this.target_property().setValue(s);
 		} else {
-			return super.appendChild(child);
+			return super.onAppendChild(child);
 		}
 		return true;
 	}
 
-	public boolean setAttribute(String uri, String localName, String value) {
+	public boolean onSetAttribute(String uri, String localName, String value) {
 		if (localName == null) {
 			return false;
 		} else if (localName.equals("key")) {
 			this.target_property().setKey(value);
 		} else {
-			return super.setAttribute(uri, localName, value);
+			return super.onSetAttribute(uri, localName, value);
 		}
 		return true;
 	}

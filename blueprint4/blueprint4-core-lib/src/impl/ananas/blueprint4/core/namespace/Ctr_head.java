@@ -4,13 +4,13 @@ import ananas.blueprint4.core.lang.BPNode;
 
 public class Ctr_head extends Ctr_object {
 
-	public boolean appendChild(BPNode node) {
+	public boolean onAppendChild(BPNode node) {
 		if (node == null) {
 			return false;
 		} else if (node instanceof Ctr_property) {
 			this._setProperty((Ctr_property) node);
 		} else {
-			return super.appendChild(node);
+			return super.onAppendChild(node);
 		}
 		return true;
 	}
