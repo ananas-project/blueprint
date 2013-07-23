@@ -59,7 +59,7 @@ public class BPTypeRegistrarImpl implements BPTypeRegistrar {
 
 	@Override
 	public void register(String nsURI, String className) {
-		log.info("register blueprint namespace " + nsURI + " -> " + className);
+		log.debug("register blueprint namespace " + nsURI + " -> " + className);
 		this._mapUriToClass.put(nsURI, className);
 	}
 
@@ -82,12 +82,12 @@ public class BPTypeRegistrarImpl implements BPTypeRegistrar {
 				Class<?> aClass = Class.forName(className);
 				BPNamespace ns = (BPNamespace) aClass.newInstance();
 				this.register(ns);
-				log.info(info + " ... [success]");
+				log.debug(info + " ... [success]");
 				return;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		log.info(info + " ... [failed]");
+		log.debug(info + " ... [failed]");
 	}
 }
