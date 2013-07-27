@@ -146,7 +146,11 @@ public class AbstractElement implements BPElement {
 		} else if (localName.equals("xmlns")) {
 		} else if (localName.equals("id")) {
 		} else {
-			return false;
+			if ("http://www.w3.org/2000/xmlns/".equals(uri)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 		return true;
 	}
