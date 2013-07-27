@@ -3,15 +3,16 @@ package impl.ananas.blueprint4.terminal;
 public class DefaultLineParser implements LineParser {
 
 	@Override
-	public void parse(String line, LineParserHandler h) throws LineParserException {
-		CharReader rdr = new CharReader(line);
+	public void parse(String line, LineParserHandler h)
+			throws LineParserException {
+		CharReader rdr = new CharReader(line, h);
 		StringBufferStackNode node = new StringBufferStackNode();
 		for (; !rdr.isEOF();) {
 			rdr.skipSpace();
 			String part = rdr.readPart(node);
 			if (part != null) {
 				if (part.length() > 0)
-					h.onPart(this, part);
+					h.onPart(part);
 			}
 		}
 	}
@@ -23,14 +24,17 @@ public class DefaultLineParser implements LineParser {
 		private int cnt_read = 0;
 		private boolean _is_eof = false;
 		private int _next_ch = 0;
+		private final LineParserHandler _h;
 
-		public CharReader(String line) {
+		public CharReader(String line, LineParserHandler h) {
 			this.chs = line.toCharArray();
 			this.length = chs.length;
+			this._h = h;
 			this.readChar();
 		}
 
-		public String readPart(StringBufferStackNode node) throws LineParserException {
+		public String readPart(StringBufferStackNode node)
+				throws LineParserException {
 			final StringBuilder sb = node.allocBuffer();
 			node = node.nextNode();
 			for (int ch = this.getChar(); ch >= 0; ch = this.getChar()) {
@@ -51,7 +55,8 @@ public class DefaultLineParser implements LineParser {
 			return (ch == 0x09 || ch == 0x0a || ch == 0x0d || ch == ' ');
 		}
 
-		private String readCString(final int ch0, StringBufferStackNode node) throws LineParserException {
+		private String readCString(final int ch0, StringBufferStackNode node)
+				throws LineParserException {
 			final StringBuilder sb = node.allocBuffer();
 			node = node.nextNode();
 			this.readAndCheck(ch0);
@@ -67,11 +72,14 @@ public class DefaultLineParser implements LineParser {
 				}
 			}
 			this.readAndCheck(ch0);
-			return sb.toString();
+			String str = sb.toString();
+			this._h.onCString(str);
+			return str;
 		}
 
-		private int readJSONStyleStringEscape(StringBufferStackNode node) throws LineParserException {
-			final StringBuilder sb = node.allocBuffer();
+		private int readJSONStyleStringEscape(StringBufferStackNode node)
+				throws LineParserException {
+			// final StringBuilder sb = node.allocBuffer();
 			node = node.nextNode();
 			this.readAndCheck('\\');
 			final int ch1 = this.readChar();
@@ -87,7 +95,23 @@ public class DefaultLineParser implements LineParser {
 			case 't':
 				return '\t';
 			case 'u':
-				// TODO 4 hex digits
+				int nOut = 0;
+				for (int i = 4; i > 0; i--) {
+					final int u = this.readChar();
+					final int n;
+					if ('0' <= u && u <= '9') {
+						n = u - '0';
+					} else if ('a' <= u && u <= 'f') {
+						n = u - 'a' + 10;
+					} else if ('A' <= u && u <= 'F') {
+						n = u - 'A' + 10;
+					} else {
+						throw new LineParserException("need a hex here!");
+					}
+					nOut <<= 4;
+					nOut = n & 0x0f;
+				}
+				return ((char) nOut);
 			default:
 				return ch1;
 			}

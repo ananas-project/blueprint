@@ -69,15 +69,18 @@ class CmdRegImpl implements CommandRegistrar {
 				// skip
 				break;
 			case '.': {
-				String s2 = sb.toString();
+				if (sb.length() > 0) {
+					list.add(sb.toString());
+				}
 				sb.setLength(0);
-				if (s2.length() > 0)
-					list.add(s2);
 				break;
 			}
 			default:
 				sb.append(ch);
 			}
+		}
+		if (sb.length() > 0) {
+			list.add(sb.toString());
 		}
 		return list.toArray(new String[list.size()]);
 	}

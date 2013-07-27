@@ -10,5 +10,7 @@ public interface ExecuteContext {
 
 	String[] getParameters();
 
+	int countNames();
+
 	Properties getFlags();
 }

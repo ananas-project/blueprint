@@ -35,13 +35,9 @@ public class MyCmdExe implements Runnable, ExecuteContext {
 	@Override
 	public void run() {
 
-		String line = this._line;
-		Terminal terminal = this._terminal;
+		final String line = this._line;
+		final Terminal terminal = this._terminal;
 		if (line.length() <= 0) {
-			return;
-		}
-		if (line.equals("exit")) {
-			terminal.close();
 			return;
 		}
 
@@ -56,25 +52,39 @@ public class MyCmdExe implements Runnable, ExecuteContext {
 		}
 
 		int name_max = lph.getNameMax();
-		String[] stanzas = lph.getParameters();
+		String[] cmds = lph.getParameters();
 		CommandRegistrar cmdReg = terminal.getCommandRegistrar();
 		for (int cnt = name_max; cnt > 0; cnt--) {
-			String name = cmdReg.arrayToString(stanzas, 0, cnt);
-			Command cmd = cmdReg.get(name);
+			String qname = cmdReg.arrayToString(cmds, 0, cnt);
+			Command cmd = cmdReg.get(qname);
 			if (cmd == null) {
 				continue;
 			} else {
 				// got command!
-				this.__exe(cmd, name, lph);
+				this._ec_countNames = cnt;
+				this.__exe(cmd, qname, lph);
 				return;
 			}
 		}
-		return;
+		// no command match
+
+		switch (cmds.length) {
+		case 0:
+			return;
+		case 1:
+			if ("exit".equals(cmds[0])) {
+				terminal.close();
+				return;
+			}
+		default:
+		}
+		terminal.getOutput().println("Bad command.");
 	}
 
 	private Properties _ec_flags;
 	private String[] _ec_param;
 	private String _ec_cmdName;
+	private int _ec_countNames;
 
 	@Override
 	public Terminal getTerminal() {
@@ -94,6 +104,11 @@ public class MyCmdExe implements Runnable, ExecuteContext {
 	@Override
 	public String getCommandName() {
 		return this._ec_cmdName;
+	}
+
+	@Override
+	public int countNames() {
+		return this._ec_countNames;
 	}
 
 }
