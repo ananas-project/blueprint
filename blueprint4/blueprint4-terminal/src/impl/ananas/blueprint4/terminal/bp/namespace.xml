@@ -1,0 +1,23 @@
+<?xml  version='1.0'  encoding="UTF-8"  ?>
+<namespace xmlns="ananas:blueprint4:namespace">
+	<head>
+		<property key="namespace.uri">ananas:blueprint4:terminal</property>
+		<property key="namespace.default.prefix">terminal</property>
+
+		<property key="target.package">impl.ananas.blueprint4.terminal.bp</property>
+		<property key="target.classname.prefix">BPT</property>
+		<property key="target.classname.suffix"></property>
+
+		<property key="controller.package">impl.ananas.blueprint4.terminal.bp</property>
+		<property key="controller.classname.prefix">BPT</property>
+		<property key="controller.classname.suffix"></property>
+
+	</head>
+	<body>
+
+		<element name="CommandSet" />
+		<element name="Command" />
+		<element name="Property" />
+		
+	</body>
+</namespace>

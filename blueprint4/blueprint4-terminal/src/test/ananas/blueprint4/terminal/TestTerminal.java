@@ -23,11 +23,11 @@ public class TestTerminal {
 		(new EnvironmentForTesting()).init();
 		TerminalFactory tf = TerminalFactory.Agent.newInstance();
 		Terminal t = tf.newTerminal(null);
-		CommandLoader ldr = t.getCommandLoaderFactory().newLoader(t);
-		ldr.load("resource:///commands.xml");
 
 		// load commands
 		t.getCommandRegistrar().register("git.init", new MyCmdGitInit());
+		CommandLoader ldr = t.getCommandLoaderFactory().newLoader(t);
+		ldr.load("resource:///test/ananas/blueprint4/terminal/terminal-commands.xml");
 
 		// set properties for terminal
 		long now = System.currentTimeMillis();

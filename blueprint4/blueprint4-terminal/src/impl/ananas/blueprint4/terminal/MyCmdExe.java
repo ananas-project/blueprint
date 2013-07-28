@@ -56,7 +56,7 @@ public class MyCmdExe implements Runnable, ExecuteContext {
 		CommandRegistrar cmdReg = terminal.getCommandRegistrar();
 		for (int cnt = name_max; cnt > 0; cnt--) {
 			String qname = cmdReg.arrayToString(cmds, 0, cnt);
-			Command cmd = cmdReg.get(qname);
+			Command cmd = cmdReg.getCommand(qname);
 			if (cmd == null) {
 				continue;
 			} else {
