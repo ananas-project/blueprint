@@ -33,7 +33,7 @@ public class BPTProperty extends BPTObject {
 	public Locale getLocal() {
 		Locale local = this._local;
 		if (local == null) {
-
+			local = Locale.Util.fromString(this._lang + "");
 			if (local == null)
 				local = Locale.worldwide;
 			this._local = local;

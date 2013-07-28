@@ -1,4 +1,4 @@
-package ananas.blueprint4.terminal.help;
+package ananas.blueprint4.terminal.commands;
 
 import java.io.PrintStream;
 import java.util.List;
