@@ -1,6 +1,7 @@
 package test.ananas.blueprint4.terminal;
 
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Properties;
 
 import ananas.blueprint4.terminal.Command;
@@ -8,10 +9,20 @@ import ananas.blueprint4.terminal.ExecuteContext;
 import ananas.blueprint4.terminal.Terminal;
 import ananas.blueprint4.terminal.TerminalFactory;
 import ananas.blueprint4.terminal.loader.CommandLoader;
+import ananas.lib.localization.Locale;
+import ananas.lib.localization.LocalizationManager;
 
 public class TestTerminal {
 
 	public static void main(String[] arg) {
+
+		(new EnvironmentForTesting()).init();
+
+		LocalizationManager lm = LocalizationManager.Agent.getManager();
+		List<Locale> locales = lm.listAllLocales();
+		for (Locale loc : locales) {
+			System.out.println("support " + loc);
+		}
 
 		(new TestTerminal()).run();
 
@@ -20,7 +31,6 @@ public class TestTerminal {
 	private void run() {
 
 		// create terminal
-		(new EnvironmentForTesting()).init();
 		TerminalFactory tf = TerminalFactory.Agent.newInstance();
 		Terminal t = tf.newTerminal(null);
 

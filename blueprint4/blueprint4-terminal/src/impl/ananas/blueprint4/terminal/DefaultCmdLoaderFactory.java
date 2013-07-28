@@ -3,17 +3,21 @@ package impl.ananas.blueprint4.terminal;
 import impl.ananas.blueprint4.terminal.bp.BPTCommandItem;
 import impl.ananas.blueprint4.terminal.bp.BPTCommandItemListener;
 import impl.ananas.blueprint4.terminal.bp.BPTCommandSet;
+import impl.ananas.blueprint4.terminal.bp.BPTProperty;
 
 import java.io.IOException;
+import java.util.List;
 
 import ananas.blueprint4.core.BPEnvironment;
 import ananas.blueprint4.core.Blueprint;
 import ananas.blueprint4.core.lang.BPDocument;
 import ananas.blueprint4.terminal.Command;
+import ananas.blueprint4.terminal.CommandInfo;
 import ananas.blueprint4.terminal.CommandRegistrar;
 import ananas.blueprint4.terminal.Terminal;
 import ananas.blueprint4.terminal.loader.CommandLoader;
 import ananas.blueprint4.terminal.loader.CommandLoaderFactory;
+import ananas.lib.localization.Locale;
 import ananas.lib.util.logging.Logger;
 
 public class DefaultCmdLoaderFactory implements CommandLoaderFactory {
@@ -70,11 +74,23 @@ public class DefaultCmdLoaderFactory implements CommandLoaderFactory {
 		public void onItem(BPTCommandItem item) {
 			try {
 				final Class<?> cls = item.getCommandClass();
+				final Command cmd;
 				if (cls != null) {
-					String fullname = item.getFullName();
-					Command cmd = (Command) cls.newInstance();
-					_reg.register(fullname, cmd);
+					cmd = (Command) cls.newInstance();
+				} else {
+					cmd = null;
 				}
+				String fullname = item.getFullName();
+				final CommandInfo info = _reg.register(fullname, cmd);
+
+				List<BPTProperty> plist = item.listProperties();
+				for (BPTProperty p : plist) {
+					String key = p.getKey();
+					String value = p.getValue();
+					Locale local = null;
+					info.setProperty(key, value, local);
+				}
+
 			} catch (Exception e) {
 				log.error(e);
 			}

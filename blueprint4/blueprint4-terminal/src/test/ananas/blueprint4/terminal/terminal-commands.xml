@@ -4,8 +4,10 @@
 		package="test.ananas.blueprint4.terminal.commands.git">
 
 		<Command name="pull" class=".Pull">
-			<Property key="help.overview"><![CDATA[hello, help overview!]]></Property>
-			<Property key="help.detail"><![CDATA[hello, help detail!]]></Property>
+			<Property key="help.overview" lang="zh"><![CDATA[你好，帮助概述!]]></Property>
+			<Property key="help.overview" lang="en"><![CDATA[hello, help overview!]]></Property>
+			<Property key="help.detail" lang="zh"><![CDATA[你好，帮助详情!]]></Property>
+			<Property key="help.detail" lang="en"><![CDATA[hello, help detail!]]></Property>
 		</Command>
 		<Command name="clone" />
 		<Command name="init" class=".Init" />

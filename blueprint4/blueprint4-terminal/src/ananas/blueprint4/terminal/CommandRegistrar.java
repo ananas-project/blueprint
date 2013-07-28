@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CommandRegistrar {
 
-	void register(String name, Command cmd);
+	CommandInfo register(String name, Command cmd);
 
 	Command getCommand(String name);
 

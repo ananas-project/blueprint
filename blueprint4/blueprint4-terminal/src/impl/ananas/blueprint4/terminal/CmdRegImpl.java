@@ -8,6 +8,8 @@ import java.util.Map;
 import ananas.blueprint4.terminal.Command;
 import ananas.blueprint4.terminal.CommandInfo;
 import ananas.blueprint4.terminal.CommandRegistrar;
+import ananas.lib.localization.Locale;
+import ananas.lib.localization.LocalizationManager;
 
 class CmdRegImpl implements CommandRegistrar {
 
@@ -18,7 +20,7 @@ class CmdRegImpl implements CommandRegistrar {
 	}
 
 	@Override
-	public void register(String fullname, Command cmd) {
+	public CommandInfo register(String fullname, Command cmd) {
 		fullname = this.__normalizeName(fullname);
 		String[] array = this.stringToArray(fullname);
 		String shortName = "";
@@ -28,6 +30,7 @@ class CmdRegImpl implements CommandRegistrar {
 			}
 		CommandInfo info = new MyCmdInfo(shortName, fullname, cmd);
 		this._table.put(fullname, info);
+		return info;
 	}
 
 	@Override
@@ -101,6 +104,7 @@ class CmdRegImpl implements CommandRegistrar {
 		private final Command _command;
 		private final String _short_name;
 		private final String _full_name;
+		private LocalizationManager _local_man;
 
 		public MyCmdInfo(String shortName, String fullName, Command cmd) {
 			this._command = cmd;
@@ -121,6 +125,48 @@ class CmdRegImpl implements CommandRegistrar {
 		@Override
 		public Command getCommand() {
 			return this._command;
+		}
+
+		@Override
+		public void setProperty(String key, String value, Locale local) {
+			key = this.__keyForCmd(key);
+			LocalizationManager lm = this.__getLocalMan();
+			lm.setProperty(local, key, value);
+		}
+
+		private LocalizationManager __getLocalMan() {
+			LocalizationManager lm = this._local_man;
+			if (lm == null) {
+				lm = LocalizationManager.Agent.getManager();
+				this._local_man = lm;
+			}
+			return lm;
+		}
+
+		@Override
+		public void setProperty(String key, String value) {
+			key = this.__keyForCmd(key);
+			Locale local = Locale.worldwide;
+			LocalizationManager lm = this.__getLocalMan();
+			lm.setProperty(local, key, value);
+		}
+
+		@Override
+		public String getProperty(String key, Locale local) {
+			key = this.__keyForCmd(key);
+			LocalizationManager lm = this.__getLocalMan();
+			return lm.getProperty(local, key);
+		}
+
+		@Override
+		public String getProperty(String key) {
+			key = this.__keyForCmd(key);
+			LocalizationManager lm = this.__getLocalMan();
+			return lm.getProperty(key);
+		}
+
+		private String __keyForCmd(String key) {
+			return ("terminal-commands." + this.getFullName() + "." + key);
 		}
 	}
 

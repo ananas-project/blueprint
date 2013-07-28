@@ -7,7 +7,7 @@ import ananas.blueprint4.core.lang.BPNode;
 
 public class BPTCommandItem extends BPTObject {
 
-	private final List<BPTProperty> _items = new ArrayList<BPTProperty>();
+	private final List<BPTProperty> _properties = new ArrayList<BPTProperty>();
 	private String _name;// short command name
 	private BPTCommandItem _parent;
 	private String _package;
@@ -16,11 +16,15 @@ public class BPTCommandItem extends BPTObject {
 	protected boolean onAppendChild(BPNode child) {
 		if (child instanceof BPTProperty) {
 			BPTProperty prop = (BPTProperty) child;
-			_items.add(prop);
+			_properties.add(prop);
 		} else {
 			return super.onAppendChild(child);
 		}
 		return true;
+	}
+
+	public List<BPTProperty> listProperties() {
+		return this._properties;
 	}
 
 	public void setParentItem(BPTCommandItem parent) {
