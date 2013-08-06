@@ -1,6 +1,8 @@
 package ananas.blueprint4.terminal.commands;
 
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import ananas.blueprint4.terminal.Command;
@@ -19,12 +21,14 @@ public class Help implements Command {
 		CommandRegistrar cmdreg = context.getTerminal().getCommandRegistrar();
 
 		List<CommandInfo> infos = cmdreg.listAllCommandInfo();
+		List<String> cmds = new ArrayList<String>();
 		for (CommandInfo info : infos) {
-
-			String name = info.getFullName();
+			cmds.add(info.getFullName());
+		}
+		Collections.sort(cmds);
+		for (String cmd : cmds) {
+			String name = cmd;
 			out.println("cmd:" + name);
 		}
-
 	}
-
 }
