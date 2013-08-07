@@ -11,7 +11,6 @@ import ananas.lib.blueprint2.dom.helper.IDocumentSerializer;
 import ananas.lib.blueprint2.dom.helper.IDocumentSerializerFactory;
 import ananas.lib.blueprint2.dom.helper.IImplementation;
 import ananas.lib.io.Connector;
-import ananas.lib.io.impl.DefaultConnector;
 
 public class FinalBlueprintImpl extends Blueprint2 {
 
@@ -43,7 +42,7 @@ public class FinalBlueprintImpl extends Blueprint2 {
 	@Override
 	public Connector getConnector() {
 		if (this.mConnector == null) {
-			this.mConnector = DefaultConnector.getDefault();
+			this.mConnector = Connector.Factory.getDefault();
 		}
 		return this.mConnector;
 	}
